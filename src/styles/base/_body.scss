@@ -1,0 +1,19 @@
+html {
+  min-height: 100vh;
+  max-height: 100vh;
+    font-size: 100%;
+}
+
+body {
+
+    --header-height: 3.5em;
+
+    height: calc(100vh - var(--header-height));
+    margin-top: var(--header-height);
+
+    font-family: var(--font-family-primary);
+    font-size: var(--text-base);
+    line-height: var(--line-height-lg);
+    background: var(--color-body-bg);
+    color: var(--color-body-text);
+}

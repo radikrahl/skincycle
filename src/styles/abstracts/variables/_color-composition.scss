@@ -1,0 +1,39 @@
+:root {
+  // inspired by https://blog.maximeheckel.com/posts/the-power-of-composition-with-css-variables/
+  $baseColor: (
+    "primary": "339, 63%",
+    "secondary": "99, 63%",
+    // "tertiary": "219, 63%",
+  );
+
+  @each $key, $value in $baseColor {
+    --color-brand-#{$key}-base: #{$value};
+    --palette-#{$key}-10: var(--color-brand-#{$key}-base), 10%;
+    --palette-#{$key}-20: var(--color-brand-#{$key}-base), 20%;
+    --palette-#{$key}-30: var(--color-brand-#{$key}-base), 30%;
+    --palette-#{$key}-40: var(--color-brand-#{$key}-base), 40%;
+    --palette-#{$key}-50: var(--color-brand-#{$key}-base), 50%;
+    --palette-#{$key}-60: var(--color-brand-#{$key}-base), 60%;
+    --palette-#{$key}-70: var(--color-brand-#{$key}-base), 70%;
+    --palette-#{$key}-80: var(--color-brand-#{$key}-base), 80%;
+    --palette-#{$key}-90: var(--color-brand-#{$key}-base), 90%;
+    --palette-#{$key}-100: var(--color-brand-#{$key}-base), 100%;
+
+    --color-brand-#{$key}: hsla(var(--palette-#{$key}-40), 100%);
+    --color-brand-#{$key}-light: hsla(var(--palette-#{$key}-60), 100%);
+    --color-brand-#{$key}-emphasis: hsla(var(--palette-#{$key}-40), 20%);
+  }
+
+  --color-neutral-white: #fff;
+  --color-neutral-gray-02: hsla(0, 0%, 98%, 1);
+  --color-neutral-gray-07: hsla(0, 0%, 93%, 1);
+  --color-neutral-gray-13: hsla(0, 0%, 87%, 1);
+  --color-neutral-gray-27: hsla(0, 0%, 73%, 1);
+  --color-neutral-gray-34: hsla(0, 0%, 66%, 1);
+  --color-neutral-gray-50: hsla(0, 0%, 50%, 1);
+  --color-neutral-gray-60: hsla(0, 0%, 40%, 1);
+  --color-neutral-gray-73: hsla(0, 0%, 27%, 1);
+  --color-neutral-gray-87: hsla(0, 0%, 13%, 1);
+  --color-neutral-gray-93: hsla(0, 0%, 7%, 1);
+  --color-neutral-black: #000;
+}

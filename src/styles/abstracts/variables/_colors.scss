@@ -1,0 +1,65 @@
+:root {
+  --color-brand-yellow: hsla(47, 79%, 65%, 0.7);
+
+  --color-brand-green: hsl(176, 93%, 18%, 1);
+
+  --color-gradient-0: #1e1e1e;
+  --color-gradient-100: hsl(176, 93%, 18%, 1);
+
+  --color-brand-green-light: hsl(176, 93%, 21%, 1);
+
+  //  GRAY COMPOSITION
+  --color-neutral-white: #fff;
+  --color-neutral-gray-02: hsla(0, 0%, 98%, 1);
+  --color-neutral-gray-07: hsla(0, 0%, 93%, 1);
+  --color-neutral-gray-13: hsla(0, 0%, 87%, 1);
+  --color-neutral-gray-27: hsla(0, 0%, 73%, 1);
+  --color-neutral-gray-34: hsla(0, 0%, 66%, 1);
+  --color-neutral-gray-50: hsla(0, 0%, 50%, 1);
+  --color-neutral-gray-60: hsla(0, 0%, 40%, 1);
+  --color-neutral-gray-73: hsla(0, 0%, 27%, 1);
+  --color-neutral-gray-87: hsla(0, 0%, 13%, 1);
+  --color-neutral-gray-93: hsla(0, 0%, 7%, 1);
+  --color-neutral-black: #000;
+
+  // BODY
+  --color-body-text: var(--color-brand-yellow);
+
+  --color-background-gradient: linear-gradient(
+      180deg,
+      var(--color-gradient-100) 35%,
+      var(--color-gradient-0) 125.16%
+    )
+    no-repeat fixed;
+
+  --color-body-bg: var(--color-background-gradient);
+
+  // TEXT
+  --color-text-highlight: var(--color-neutral-gray-93);
+  --color-text-highlight-bg: var(--color-neutral-gray-13);
+
+  --color-links: var(--color-neutral-gray-73);
+  --color-links-hover: var(--color-brand-primary);
+  --color-links-active: var(--color-brand-tertiary);
+  --color-links-visited: var(--color-brand-tertiary);
+
+  // FORMS
+  --color-form: var(--color-neutral-gray-93);
+  --color-form-bg: var(--color-neutral-white);
+  --color-form-border: var(--color-neutral-gray-73);
+  --color-form-border-focus: var(--color-brand-primary-light);
+  --color-form-border-error: var(--color-utility-error);
+  --color-form-label: var(--color-neutral-gray-93);
+  --color-form-info: var(--color-neutral-gray-73);
+  --color-form-placeholder: var(--color-neutral-gray-50);
+  --color-form-disabled: var(--color-neutral-gray-73);
+  // UTILITY
+  --color-utility-info: #0192d0;
+  --color-utility-info-light: #d3f2ff;
+  --color-utility-error: #b12a0b;
+  --color-utility-error-light: #fdded8;
+  --color-utility-success: #03804d;
+  --color-utility-success-light: #d4f3e6;
+  --color-utility-warning: #a59b15;
+  --color-utility-warning-light: #fffecf;
+}
