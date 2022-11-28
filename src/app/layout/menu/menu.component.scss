@@ -1,4 +1,6 @@
 
+@import "../../../styles/abstracts/_mixins/m_viewport";
+
 :host {
   display: block;
   width: 100vw;
@@ -24,5 +26,11 @@
     button {
       width: 100%;
     }
+  }
+}
+
+@include medium-up {
+    sc-fixed-background {
+      display: none;
   }
 }
