@@ -4,12 +4,12 @@
   width: 100vw;
   height: calc(100vh - var(--header-height));
   position: fixed;
+  left:0;
   top: var(--header-height);
 }
 .menu {
   background-color: var(--color-brand-green);
-  display: flex;
-  flex-direction: column;
+  display: grid;
 
   width: 100%;
   height: 100%;
