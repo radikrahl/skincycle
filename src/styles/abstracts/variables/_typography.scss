@@ -36,7 +36,7 @@
     var(--text-sm) * var(--text-scale-ratio) * var(--text-scale-ratio)
   );
   --text-lg: calc(var(--text-md) * var(--text-scale-ratio));
-  --text-xl: calc(var(--text-lg) * var(--text-scale-ratio));
+  --text-xl: calc(var(--text-lg) * var(--text-scale-ratio) * (var(--text-scale-ratio) * 1.1));
   --text-xxl: calc(var(--text-xl) * var(--text-scale-ratio));
   --text-xxxl: calc(var(--text-xxl) * var(--text-scale-ratio));
 
@@ -52,14 +52,14 @@
 h1,
 .text-xxl {
   font-family: var(--font-family-secondary);
-  font-size: calc(var(--text-xxl) * (var(--text-scale-ratio) * 1.1));
+  font-size: var(--text-xxl);
   line-height: var(--line-height-lg);
 }
 
 h2,
 .text-xl {
   font-family: var(--font-family-secondary);
-  font-size: calc(var(--text-xl) * (var(--text-scale-ratio) * 1.1));
+  font-size: calc(var(--text-xl));
   line-height: var(--line-height-md);
 }
 

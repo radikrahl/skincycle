@@ -4,7 +4,7 @@
   flex-direction: column;
 
   &__list {
-    margin: var(--space-4) var(--space-6) 0;
+    margin: var(--space-4) var(--space-10) 0;
   }
 
   &__item {
@@ -13,10 +13,5 @@
     button {
       width: 100%;
     }
-  }
-
-  &__image {
-    position: absolute;
-    bottom: 0;
   }
 }

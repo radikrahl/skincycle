@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { InputBaseDirective } from './components/base/input-base.directive';
+import { FixedBackgroundComponent } from './components/fixed-background/fixed-background.component';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { InputBaseDirective } from './components/base/input-base.directive';
 
   ],
   declarations: [
-    InputBaseDirective
+    InputBaseDirective,
+    FixedBackgroundComponent
   ],
   exports: [
     CommonModule,
@@ -23,7 +25,7 @@ import { InputBaseDirective } from './components/base/input-base.directive';
     ReactiveFormsModule,
     RouterModule,
     HttpClientModule,
-
+    FixedBackgroundComponent
   ],
 })
 export class SharedModule {}
