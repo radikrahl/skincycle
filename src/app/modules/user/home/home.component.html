@@ -1,9 +1,10 @@
-  <button class="c-btn">
-    Preisliste
-  </button>
-  <button class="c-btn">
-    Kalender
-  </button>
-  <button class="c-btn">
-    Einstellungen
-  </button>
+<div class="home">
+  <ul class="home__list">
+    <li class="home__item"><button class="c-btn c-btn--large" [routerLink]="['/list']" routerLinkActive="router-link-active" >Produktliste</button></li>
+    <li class="home__item"><button class="c-btn c-btn--large">Kalender</button></li>
+    <li class="home__item"><button class="c-btn c-btn--large">Einstellungen</button></li>
+  </ul>
+  <div class="home__image">
+    <img src="../../../../assets/images/jungle.svg" alt="">
+  </div>
+</div>

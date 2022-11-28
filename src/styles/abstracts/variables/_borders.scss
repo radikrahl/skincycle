@@ -2,6 +2,7 @@
     /* #### BORDERS #### */
     --border-radius-sm: 0.25em;
     --border-radius-md: 0.625em;
+    --border-radius-lg: 1em;
     --border-radius-full: 3.125em;
 
     --border-thickness-light: 0.062em;
@@ -23,7 +24,7 @@
 
         --border-brand-primary: var(--border-style-bold) var(--color-brand-primary);
 
-        --border-brand-secondary-sm: var(--border-style-light) var(--color-brand-secondary);
+        --border-brand-sm: var(--border-style-light) var(--color-brand-yellow);
 
         --border-brand-secondary: var(--border-style) var(--color-brand-secondary);
     }

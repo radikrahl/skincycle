@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { InputBaseDirective } from './components/base/input-base.directive';
 
 @NgModule({
   imports: [
@@ -13,7 +14,9 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
 
   ],
-  declarations: [],
+  declarations: [
+    InputBaseDirective
+  ],
   exports: [
     CommonModule,
     FormsModule,
