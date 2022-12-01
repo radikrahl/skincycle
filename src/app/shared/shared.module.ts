@@ -12,8 +12,7 @@ import { FixedBackgroundComponent } from './components/fixed-background/fixed-ba
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    HttpClientModule,
-
+    HttpClientModule
   ],
   declarations: [
     InputBaseDirective,

@@ -1,0 +1,25 @@
+i {
+  display: block;
+  min-height: 16px;
+  min-width: 16px;
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  &::after {
+
+  }
+}
+
+.sc-icon-bag-check {
+  background-image: url('../../assets/icons/bag-check.svg') ;
+}
+
+.sc-icon-bag-remove {
+  background-image: url('../../assets/icons/bag-remove.svg');
+}
+
+.sc-icon-arrow {
+  background-image: url('../../assets/icons/arrow.svg');
+}

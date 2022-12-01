@@ -8,7 +8,7 @@ const routes: Routes = [
     path: '',
     component: ContentLayoutComponent,
     loadChildren: () =>
-    import('./modules/user/user.module').then((m) => m.UserModule),
+    import('./modules/frontend/frontend.module').then((m) => m.FrontendModule),
   },
   {
     path: 'login',

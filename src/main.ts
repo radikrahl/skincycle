@@ -3,10 +3,6 @@ import { enableProdMode } from '@angular/core';
 import { environment } from './environments/environments';
 import { AppModule } from './app/app.module';
 
-platformBrowserDynamic()
-  .bootstrapModule(AppModule)
-  .catch((err) => console.error(err));
-
 export function getBaseUrl() {
   return document.getElementsByTagName('base')[0].href;
 }

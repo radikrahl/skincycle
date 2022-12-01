@@ -8,14 +8,14 @@
 }
 
 @include font("Amatica-SC", "/assets/fonts/amatic-sc/AmaticaSC-Regular");
-@include font("Century Gothic", "/assets/fonts/century-gothic/CenturyGothic");
+@include font("Raleway", "/assets/fonts/raleway/Raleway-Regular");
 
 :root {
-  --font-family-primary: "Century Gothic", -apple-system, BlinkMacSystemFont,
+  --font-family-primary: "Raleway", -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol";
-  --font-family-secondary: "Amatica-SC", "Raleway", "HelveticaNeue", "Helvetica",
-    "Arial", sans-serif;
+  --font-family-secondary: "Raleway", "HelveticaNeue", "Helvetica", "Arial",
+    sans-serif;
 }
 
 :root {
@@ -32,11 +32,9 @@
   // inspired by https://codyhouse.co/blog/post/responsive-layouts-css-custom-properties-em-units
   --text-xs: calc((1.2em / var(--text-scale-ratio)) / var(--text-scale-ratio));
   --text-sm: calc(var(--text-xs) * var(--text-scale-ratio));
-  --text-md: calc(
-    var(--text-sm) * var(--text-scale-ratio) * var(--text-scale-ratio)
-  );
+  --text-md: calc(var(--text-sm) * var(--text-scale-ratio) * var(--text-scale-ratio));
   --text-lg: calc(var(--text-md) * var(--text-scale-ratio));
-  --text-xl: calc(var(--text-lg) * var(--text-scale-ratio) * (var(--text-scale-ratio) * 1.1));
+  --text-xl: calc(var(--text-lg) * var(--text-scale-ratio));
   --text-xxl: calc(var(--text-xl) * var(--text-scale-ratio));
   --text-xxxl: calc(var(--text-xxl) * var(--text-scale-ratio));
 
@@ -65,7 +63,9 @@ h2,
 
 h3,
 .text-lg {
+  font-size: calc(var(--text-lg));
   line-height: var(--line-height-lg);
+  font-weight: 400;
 }
 
 h4,

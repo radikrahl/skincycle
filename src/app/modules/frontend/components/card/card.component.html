@@ -1,0 +1,46 @@
+<div class="card">
+
+  <div class="card__meta">
+    <div>
+      <div class="text-lg">{{product.company}}</div>
+      <div class="text-xl">{{product.name}}</div>
+    </div>
+    <div>
+      <span class="text-sm">{{product.category}} </span>
+      <span class="sc-icon-arrow">
+
+      </span>
+    </div>
+  </div>
+  <div class="card__isAvailable">
+
+    <i class="sc-icon-bag-check" *ngIf="product.isAvailable; else not_available"></i>
+    <ng-template #not_available>
+      <i class="sc-icon-bag-remove"></i>
+    </ng-template>
+  </div>
+  <div class="text-sm card__properties u-hidden">
+    <div class="text-md">
+      <span>{{product.amount}}</span>
+      <span>{{product.price}}</span>
+    </div>
+    <div>
+      <span *ngFor="let item of product.ingredients">
+        {{item}}
+      </span>
+    </div>
+    <div class="">
+
+      <span *ngFor="let item of product.skinStatus">
+        {{item}}
+      </span>
+    </div>
+    <div class="">
+
+      <span *ngFor="let item of product.usages">
+        {{item}}
+      </span>
+    </div>
+
+  </div>
+</div>

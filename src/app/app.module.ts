@@ -12,7 +12,7 @@ import { ContentLayoutModule } from './layout/content-layout.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ContentLayoutModule,
+    ContentLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
