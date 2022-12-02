@@ -27,3 +27,7 @@
         grid-column: full-start / full-end;
     }
 }
+
+body.theme-green-light {
+  --color-background: var(--color-brand-green-light);
+}

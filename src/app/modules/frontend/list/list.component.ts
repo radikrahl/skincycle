@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, Renderer2 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CsvProduct } from 'src/app/models/csv/csvModels';
 import { Product } from 'src/app/models/product.model';
@@ -15,7 +15,9 @@ export class ListComponent {
   products: CsvProduct[] = [];
 
   private subscription: Subscription;
-  constructor(private service: CsvService) {
+  constructor(private service: CsvService, private renderer: Renderer2) {
+    this.renderer.addClass(document.body, 'theme-green-light');
+
     this.subscription = this.service
       .getAll()
       .subscribe({
@@ -24,5 +26,9 @@ export class ListComponent {
         },
         complete: () => this.subscription.unsubscribe(),
       });
+  }
+
+  ngOnDestroy(): void {
+    this.renderer.removeClass(document.body, 'theme-green-light');
   }
 }

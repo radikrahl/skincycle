@@ -7,16 +7,27 @@ html {
 }
 
 body {
+  --color-text: var(--color-brand-yellow);
+  --color-background: var(--color-brand-green);
 
-    --header-height: 4em;
+  --color-gradient-0: #1e1e1e;
+  --color-gradient-100: var(--color-background);
+  --color-background-gradient: linear-gradient(
+      180deg,
+      var(--color-gradient-100) 35%,
+      var(--color-gradient-0) 125.16%
+    )
+    no-repeat fixed;
 
-    height: calc(100vh - var(--header-height));
-    width: 100%;
-    margin-top: var(--header-height);
+  --header-height: 4em;
 
-    font-family: var(--font-family-secondary);
-    font-size: var(--text-base);
-    line-height: var(--line-height-lg);
-    background: var(--color-body-bg);
-    color: var(--color-body-text);
+  height: calc(100vh - var(--header-height));
+  width: 100%;
+  margin-top: var(--header-height);
+
+  font-family: var(--font-family-secondary);
+  font-size: var(--text-base);
+  line-height: var(--line-height-lg);
+  background: var(--color-background-gradient);
+  color: var(--color-text);
 }

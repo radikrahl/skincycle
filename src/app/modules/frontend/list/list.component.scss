@@ -1,4 +1,6 @@
 .products {
+  --color-background: var(--color-brand-green-light);
+
   &__list {
     display: flex;
     flex-wrap: wrap;
