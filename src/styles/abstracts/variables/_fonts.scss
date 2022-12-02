@@ -1,0 +1,18 @@
+@mixin font($font-family, $font-file, $adjust-size:null) {
+  @font-face {
+    font-family: $font-family;
+    src: url($font-file + ".ttf") format("truetype");
+    size-adjust:$adjust-size;
+  }
+}
+
+@include font("Amatica-SC", "/assets/fonts/amatic-sc/AmaticaSC-Regular", 130%);
+@include font("Raleway", "/assets/fonts/raleway/Raleway-Regular");
+
+:root {
+  --font-family-primary: "Amatica-SC", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-family-secondary: "Raleway", "HelveticaNeue", "Helvetica", "Arial",
+    sans-serif;
+}
