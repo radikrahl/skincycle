@@ -4,16 +4,15 @@ import { Product } from '../product.model';
 
 export class CsvProduct extends Product implements ICsvModel {
   constructor(private csvRow: string) {
-    super()
+    super();
     let values = this.csvRow.split(',');
     this.name = values[ProductCsvHead.Name];
     this.fullName = values[ProductCsvHead.Fullname];
     this.company = values[ProductCsvHead.Firma];
-    this.ingredients = values[ProductCsvHead.Inhaltsstoffe]
-      ?.split(';')
-      .map((x) => {
-        return new Ingredient(x);
-      });
+    this.ingredients = values[ProductCsvHead.Inhaltsstoffe]?.split(';');
+    // .map((x) => {
+    //   return new Ingredient(x);
+    // });
     this.skinStatus = values[ProductCsvHead.Hautzustand]?.split(';');
     this.usages = values[ProductCsvHead.Anwendung]?.split(';');
     this.category = values[ProductCsvHead.Kat];

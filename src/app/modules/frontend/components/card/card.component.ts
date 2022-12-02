@@ -1,9 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { Product } from 'src/app/models/product.model';
-import { CsvService } from 'src/app/services/csv.service';
-import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
   selector: 'sc-card',
@@ -11,9 +7,8 @@ import { ProductsService } from 'src/app/services/products.service';
   styleUrls: ['./card.component.scss'],
 })
 export class CardComponent {
-
+  public isOpen: boolean = false;
   @Input() product: Product = new Product();
 
-  constructor() {
-  }
+  constructor() {}
 }

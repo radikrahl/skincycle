@@ -1,4 +1,6 @@
 .card {
+  $this: &;
+
   margin-top: var(--space-5);
   &__meta {
     border-top: solid 2px var(--color-brand-yellow);
@@ -25,6 +27,23 @@
       display: block;
       width: 100%;
       height: 100%;
+    }
+  }
+  &__properties {
+    display: none;
+  }
+
+  &.open {
+    #{$this}__properties {
+      display: block;
+    }
+
+    #{$this}__isAvailable {
+      display: none;
+    }
+
+    .sc-icon-arrow {
+      transform: rotate(90deg);
     }
   }
   .sc-icon-arrow {
