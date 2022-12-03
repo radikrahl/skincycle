@@ -1,31 +1,43 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, Renderer2 } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { CsvProduct } from 'src/app/models/csv/csvModels';
+import { Category } from 'src/app/models/category.model';
 import { Product } from 'src/app/models/product.model';
-import { CsvService } from 'src/app/services/csv.service';
+import { CategoriesService } from 'src/app/services/categories.service';
+import { CsvCategoriesService } from 'src/app/services/csv/csv.categories.service';
 import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
   selector: 'sc-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  styleUrls: ['./list.component.scss'],
 })
-export class ListComponent {
-  products: CsvProduct[] = [];
-
+export class ListComponent implements OnDestroy {
+  products: Product[] = [];
+  categories: Category[] = [];
   private subscription: Subscription;
-  constructor(private service: CsvService, private renderer: Renderer2) {
+  private categoriesSubscription: Subscription;
+  constructor(
+    private service: ProductsService,
+    private categoriesService: CsvCategoriesService,
+    private renderer: Renderer2
+  ) {
     this.renderer.addClass(document.body, 'theme-green-light');
 
-    this.subscription = this.service
-      .getAll()
-      .subscribe({
-        next: (x) => {
-          return  (this.products = x);
-        },
-        complete: () => this.subscription.unsubscribe(),
-      });
+    this.subscription = this.service.getAll().subscribe({
+      next: (products) => {
+        return (this.products = products);
+      },
+      complete: () => this.subscription.unsubscribe(),
+    });
+
+    this.categoriesSubscription = this.categoriesService.getAll().subscribe({
+      next: (categories) => {
+        debugger;
+        return (this.categories = categories);
+      },
+      complete: () => this.categoriesSubscription.unsubscribe(),
+    });
   }
 
   ngOnDestroy(): void {

@@ -1,8 +1,7 @@
-import { ICsvModel } from 'src/app/services/csv.service';
-import { Ingredient } from '../ingredient.model';
+import { ICsvEntity } from 'src/app/services/csv/csv.service';
 import { Product } from '../product.model';
 
-export class CsvProduct extends Product implements ICsvModel {
+export class CsvProduct extends Product implements ICsvEntity {
   constructor(private csvRow: string) {
     super();
     let values = this.csvRow.split(',');
