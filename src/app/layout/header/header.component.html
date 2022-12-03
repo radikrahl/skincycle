@@ -1,14 +1,14 @@
 <header id="main-navigation" class="l-grid">
   <nav class="l-grid--wide navigation">
 
-    <div class="burger-menu" (click)="toggleMenu()">
-      <img src="{{menu.url}}" alt="">
-    </div>
-    <div class="page-title">
-      Produktliste
-    </div>
     <div class="logo" [routerLink]="['/']">
       <img src="{{logo.url}}" alt="">
+    </div>
+    <div class="page-title">
+      {{title}}
+    </div>
+    <div class="page-action">
+      <span class="{{iconClass}}"></span>
     </div>
   </nav>
 

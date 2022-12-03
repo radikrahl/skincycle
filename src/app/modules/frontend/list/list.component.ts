@@ -1,9 +1,7 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnDestroy, Renderer2 } from '@angular/core';
+import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Category } from 'src/app/models/category.model';
 import { Product } from 'src/app/models/product.model';
-import { CategoriesService } from 'src/app/services/categories.service';
 import { CsvCategoriesService } from 'src/app/services/csv/csv.categories.service';
 import { ProductsService } from 'src/app/services/products.service';
 
@@ -12,31 +10,31 @@ import { ProductsService } from 'src/app/services/products.service';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
-export class ListComponent implements OnDestroy {
+export class ListComponent implements OnDestroy, OnInit {
   products: Product[] = [];
   categories: Category[] = [];
-  private subscription: Subscription;
-  private categoriesSubscription: Subscription;
+  private subscription?: Subscription;
+  private categoriesSubscription?: Subscription;
   constructor(
     private service: ProductsService,
     private categoriesService: CsvCategoriesService,
     private renderer: Renderer2
   ) {
     this.renderer.addClass(document.body, 'theme-green-light');
-
+  }
+  ngOnInit(): void {
     this.subscription = this.service.getAll().subscribe({
       next: (products) => {
         return (this.products = products);
       },
-      complete: () => this.subscription.unsubscribe(),
+      complete: () => this.subscription?.unsubscribe(),
     });
 
     this.categoriesSubscription = this.categoriesService.getAll().subscribe({
       next: (categories) => {
-        debugger;
         return (this.categories = categories);
       },
-      complete: () => this.categoriesSubscription.unsubscribe(),
+      complete: () => this.categoriesSubscription?.unsubscribe(),
     });
   }
 

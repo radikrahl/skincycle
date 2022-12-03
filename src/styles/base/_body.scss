@@ -19,7 +19,7 @@ body {
     )
     no-repeat fixed;
 
-  --header-height: 4em;
+  --header-height: var(--space-22);
 
   height: calc(100vh - var(--header-height));
   width: 100%;

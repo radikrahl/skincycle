@@ -1,3 +1,5 @@
+@use "../../../styles/abstracts/_mixins/m_viewport" as viewports;
+
 header {
   position: fixed;
   width: 100%;
@@ -7,17 +9,16 @@ header {
 }
 
 .logo {
-    margin-left: auto;
-    padding-right: var(--space-0-5);
-    padding-top: var(--space-0-5);
+  padding-right: var(--space-0-5);
+  padding-top: var(--space-2);
 
-    width: var(--header-height);
-    height: var(--header-height);
+  width: var(--space-13);
+  height: var(--space-16);
 
-    img {
-      width: 100%;
-      height: 100%;
-    }
+  img {
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .burger-menu {
@@ -27,5 +28,50 @@ header {
   img {
     width: 100%;
     height: 100%;
+  }
+}
+
+.page-title {
+  font-family: var(--font-family-primary);
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+
+  &__logo {
+    margin-right: auto;
+
+    img {
+      height: var(--navigation-height);
+    }
+  }
+
+  &__item {
+    @include viewports.large-up {
+      display: inline-block;
+    }
+
+    &:not(:last-child) {
+      margin-right: var(--space-2);
+    }
+  }
+
+  &__list {
+    font-family: var(--font-family-secondary);
+  }
+
+  &__wrapper {
+    ul {
+      display: none;
+    }
+
+    @include viewports.large-up {
+      ul {
+        display: block;
+      }
+    }
   }
 }

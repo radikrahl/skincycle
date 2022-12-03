@@ -1,4 +1,5 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'sc-header',
@@ -6,7 +7,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
   styleUrls: ['./header.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   public logo = {
     url: '../../../assets/images/logo-small.svg',
   };
@@ -18,7 +19,10 @@ export class HeaderComponent {
     closeUrl: '../../../assets/icons/close-bold.svg',
   };
 
-  constructor() {}
+  @Input() title: string = '';
+  @Input() iconClass: string = '';
+  constructor(public router: Router) {}
+  ngOnInit(): void {}
 
   toggleMenu() {
     this.menu.open = !this.menu.open;

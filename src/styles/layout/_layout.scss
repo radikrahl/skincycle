@@ -1,33 +1,45 @@
 .l-grid {
-    display: grid;
-    grid-template-columns:
-        [full-start]
-        minmax(4vw, auto)
-        [wide-start]
-        minmax(auto, 240px)
-        [main-start]
-        // why capital 'M'?
-        // https://css-tricks.com/when-sass-and-new-css-features-collide/#the-solution
-        Min(786px, calc(100% - 8vw))
-        [main-end]
-        minmax(auto, 240px)
-        [wide-end]
-        minmax(4vw, auto)
-        [full-end];
+  display: grid;
+  grid-template-columns:
+    [full-start]
+    minmax(4vw, auto)
+    [wide-start]
+    minmax(auto, 240px)
+    [main-start]
+    // why capital 'M'?
+    // https://css-tricks.com/when-sass-and-new-css-features-collide/#the-solution
+    Min(786px, calc(100% - 8vw))
+    [main-end]
+    minmax(auto, 240px)
+    [wide-end]
+    minmax(4vw, auto)
+    [full-end];
 
-    > * {
-        grid-column: main-start / main-end;
-    }
+  > * {
+    grid-column: main-start / main-end;
+  }
 
-    &--wide {
-        grid-column: wide-start / wide-end;
-    }
+  &--wide {
+    grid-column: wide-start / wide-end;
+  }
 
-    &--full {
-        grid-column: full-start / full-end;
-    }
+  &--full {
+    grid-column: full-start / full-end;
+  }
 }
 
 body.theme-green-light {
   --color-background: var(--color-brand-green-light);
+}
+
+body.theme-blue {
+  --color-background: var(--color-brand-blue);
+}
+
+body.theme-red {
+  --color-background: var(--color-brand-red);
+}
+
+body.theme-orange {
+  --color-background: var(--color-brand-orange);
 }

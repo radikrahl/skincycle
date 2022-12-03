@@ -10,3 +10,32 @@
     width: 100%;
   }
 }
+
+.categories {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  &__item {
+    background-color: hsla(151, 49%, 26%, 1);
+    font-family: var(--font-family-primary);
+    font-weight: bold;
+
+    padding: var(--space-9) var(--space-9);
+    border: var(--border-brand-md);
+    border-radius: 100%;
+    position: relative;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    >div {
+      position: absolute;
+      width: 100%;
+text-align: center;
+word-wrap: break-word;
+hyphens: auto;
+    }
+  }
+}

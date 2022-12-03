@@ -1,0 +1,41 @@
+.calendar {
+  &__days {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    border-top: solid 2px var(--color-brand-yellow);
+    border-bottom: solid 3px var(--color-brand-yellow);
+  }
+
+  &__bubbles {
+    background-color: hsla(191, 46%, 37%, 1);
+    font-family: var(--font-family-primary);
+    font-weight: bold;
+    text-align: center;
+    margin: var(--space-5) var(--space-6);
+
+    padding: var(--space-2-5) var(--space-6);
+    border: var(--border-brand-md);
+    border-radius: 100%;
+  }
+
+  &__base {
+    border-bottom: solid 3px var(--color-brand-yellow);
+    margin-top: var(--space-0-5);
+    padding-bottom: var(--space-1-5);
+  }
+
+  &__card {
+    margin: var(--space-6) 0;
+  }
+  .sc-icon-arrow {
+    display: inline-block;
+
+    width: var(--space-4);
+    height: var(--space-6);
+    margin-right: var(--space-6);
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+}

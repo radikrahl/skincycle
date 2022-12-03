@@ -1,8 +1,8 @@
-@mixin font($font-family, $font-file, $adjust-size:null) {
+@mixin font($font-family, $font-file, $adjust-size: null) {
   @font-face {
     font-family: $font-family;
     src: url($font-file + ".ttf") format("truetype");
-    size-adjust:$adjust-size;
+    size-adjust: $adjust-size;
   }
 }
 
@@ -15,4 +15,12 @@
     "Segoe UI Emoji", "Segoe UI Symbol";
   --font-family-secondary: "Raleway", "HelveticaNeue", "Helvetica", "Arial",
     sans-serif;
+}
+
+.font-primary {
+  font-family: var(--font-family-primary);
+}
+
+.font-secondary {
+  font-family: var(--font-family-secondary);
 }
