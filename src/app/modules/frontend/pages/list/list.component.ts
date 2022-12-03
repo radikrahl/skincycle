@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { Category } from 'src/app/models/category.model';
 import { Product } from 'src/app/models/product.model';
 import { CsvCategoriesService } from 'src/app/services/csv/csv.categories.service';
+import { CsvProductsService } from 'src/app/services/csv/csv.products.service';
 import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class ListComponent implements OnDestroy, OnInit {
   private subscription?: Subscription;
   private categoriesSubscription?: Subscription;
   constructor(
-    private service: ProductsService,
+    private service: CsvProductsService,
     private categoriesService: CsvCategoriesService,
     private renderer: Renderer2
   ) {
