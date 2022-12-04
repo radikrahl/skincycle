@@ -16,7 +16,6 @@ export class HeaderTitleService {
   public onChange: EventEmitter<HeaderOptions> =
     new EventEmitter<HeaderOptions>();
 
-  constructor() {}
 
   setHeaderOptions(message: HeaderOptions) {
     this.messageSource.next(message);

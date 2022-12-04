@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./fixed-background.component.scss']
 })
 export class FixedBackgroundComponent {
-  public url: string = '../../../../assets/images/jungle.svg';
+  public url = '../../../../assets/images/jungle.svg';
 }

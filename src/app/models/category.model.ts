@@ -1,8 +1,8 @@
 import { BaseEntity } from './base.model';
 
 export class Category extends BaseEntity {
-  public name: string = '';
-  public label: string = '';
+  public name = '';
+  public label = '';
 
   constructor() {
     super();

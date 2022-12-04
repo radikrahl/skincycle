@@ -84,7 +84,7 @@ export class CalendarComponent
 }
 
 class Routine {
-  public base: string = '';
+  public base = '';
 
   public steps: Array<{ category: string; products: Product[] }> = [];
 }

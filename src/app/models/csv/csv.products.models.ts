@@ -4,7 +4,7 @@ import { Product } from '../product.model';
 export class CsvProduct extends Product implements ICsvEntity {
   constructor(private csvRow: string) {
     super();
-    let values = this.csvRow.split(',');
+    const values = this.csvRow.split(',');
     this.name = values[ProductCsvHead.Name];
     this.fullName = values[ProductCsvHead.Fullname];
     this.company = values[ProductCsvHead.Firma];

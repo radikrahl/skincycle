@@ -7,10 +7,7 @@ import { BaseEntity } from 'src/app/models/base.model';
 export abstract class CsvService<T extends ICsvEntity> {
   public url: string;
 
-  constructor(
-    private httpClient: HttpClient,
-    baseUrl: string = '../assets/data/'
-  ) {
+  constructor(private httpClient: HttpClient, baseUrl = '../assets/data/') {
     this.url = baseUrl;
   }
 
@@ -26,9 +23,9 @@ export abstract class CsvService<T extends ICsvEntity> {
     csvText: string,
     type: { new (row: string): T }
   ): Array<T> {
-    const propertyNames = csvText.slice(0, csvText.indexOf('\n')).split(',');
+    // const propertyNames = csvText.slice(0, csvText.indexOf('\n')).split(',');
     const dataRows = csvText.slice(csvText.indexOf('\n') + 1).split('\n');
-    let dataArray: Array<T> = [];
+    const dataArray: Array<T> = [];
     dataRows.forEach((row) => {
       dataArray.push(new type(row));
     });
@@ -36,4 +33,4 @@ export abstract class CsvService<T extends ICsvEntity> {
   }
 }
 
-export interface ICsvEntity extends BaseEntity {}
+export type ICsvEntity = BaseEntity

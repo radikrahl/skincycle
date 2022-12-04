@@ -10,7 +10,7 @@ export class Product extends BaseEntity {
   public url?: string;
   public usages: Array<string> = []; //Usage[];
   public category?: string;
-  public isAvailable: boolean = false;
+  public isAvailable = false;
   public skinStatus: Array<string> = []; //SkinStatus[];
   public amount?: string;
   constructor() {

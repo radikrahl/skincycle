@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { catchError, map, Observable, tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Product } from '../models/product.model';
 import { ApiService } from './api.service';
 

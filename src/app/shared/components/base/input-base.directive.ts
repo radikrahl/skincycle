@@ -1,10 +1,6 @@
 import { Directive } from '@angular/core';
 
 @Directive({
-  selector: '[scInputBase]'
+  selector: '[scInputBase]',
 })
-export class InputBaseDirective {
-
-  constructor() { }
-
-}
+export class InputBaseDirective {}

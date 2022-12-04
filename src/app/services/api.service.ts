@@ -1,8 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
-import { BaseEntity } from '../models/base.model';
-import { Product } from '../models/product.model';
 
 @Injectable()
 export abstract class ApiService<T> {

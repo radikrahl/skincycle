@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Product } from 'src/app/models/product.model';
 
 @Component({
@@ -7,8 +7,6 @@ import { Product } from 'src/app/models/product.model';
   styleUrls: ['./card.component.scss'],
 })
 export class CardComponent {
-  public isOpen: boolean = false;
+  public isOpen = false;
   @Input() product: Product = new Product();
-
-  constructor() {}
 }
