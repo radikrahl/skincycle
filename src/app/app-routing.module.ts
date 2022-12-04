@@ -8,21 +8,25 @@ const routes: Routes = [
     path: '',
     component: ContentLayoutComponent,
     loadChildren: () =>
-    import('./modules/frontend/frontend.module').then((m) => m.FrontendModule),
+      import('./modules/frontend/frontend.module').then(
+        (m) => m.FrontendModule
+      ),
   },
   {
     path: 'login',
     component: ContentLayoutComponent,
     loadChildren: () =>
-    import('./modules/authentication/auth.module').then((m) => m.AuthModule),
+      import('./modules/authentication/auth.module').then((m) => m.AuthModule),
   },
   { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    initialNavigation: 'enabledBlocking'
-})],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes, {
+      initialNavigation: 'enabledBlocking',
+    }),
+  ],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

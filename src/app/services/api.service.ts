@@ -4,9 +4,7 @@ import { catchError, Observable } from 'rxjs';
 import { BaseEntity } from '../models/base.model';
 import { Product } from '../models/product.model';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export abstract class ApiService<T> {
   protected url: string;
   public errorObject = null;

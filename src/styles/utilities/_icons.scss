@@ -1,4 +1,4 @@
-i {
+i, .sc-icon {
   display: block;
   min-height: 16px;
   min-width: 16px;
@@ -22,4 +22,16 @@ i {
 
 .sc-icon-arrow {
   background-image: url('../../assets/icons/arrow.svg');
+}
+
+.sc-icon-add {
+  background-image: url('../../assets/icons/add.svg');
+}
+
+.sc-icon-moon {
+  background-image: url('../../assets/icons/moon.svg');
+}
+
+.sc-icon-close {
+  background-image: url('../../assets/icons/close.svg')
 }

@@ -33,6 +33,13 @@ header {
 
 .page-title {
   font-family: var(--font-family-primary);
+  font-size: var(--text-xl);
+  font-weight: bold;
+}
+
+.sc-icon {
+  width: var(--space-13);
+  height: var(--space-13);
 }
 
 .navigation {

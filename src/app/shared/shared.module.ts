@@ -25,6 +25,6 @@ import { FixedBackgroundComponent } from './components/fixed-background/fixed-ba
     RouterModule,
     HttpClientModule,
     FixedBackgroundComponent
-  ],
+  ]
 })
 export class SharedModule {}

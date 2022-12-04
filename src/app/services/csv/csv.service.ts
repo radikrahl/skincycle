@@ -1,20 +1,20 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { map, Observable } from "rxjs";
-import { BaseEntity } from "src/app/models/base.model";
-import { ApiService } from "../api.service";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { BaseEntity } from 'src/app/models/base.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export abstract class CsvService<T extends ICsvEntity> {
-  public url: string
+  public url: string;
 
-  constructor(private httpClient: HttpClient, baseUrl: string = '../assets/data/') {
+  constructor(
+    private httpClient: HttpClient,
+    baseUrl: string = '../assets/data/'
+  ) {
     this.url = baseUrl;
   }
 
-  public httpGet(url:string) : Observable<string> {
+  public httpGet(url: string): Observable<string> {
     return this.httpClient.get(url, {
       responseType: 'text',
     });
@@ -22,7 +22,10 @@ export abstract class CsvService<T extends ICsvEntity> {
 
   public abstract getAll(): Observable<T[]>;
 
-  public importDataFromCSV<T>(csvText: string, type: {new(row: string): T}): Array<T> {
+  public importDataFromCSV<T>(
+    csvText: string,
+    type: { new (row: string): T }
+  ): Array<T> {
     const propertyNames = csvText.slice(0, csvText.indexOf('\n')).split(',');
     const dataRows = csvText.slice(csvText.indexOf('\n') + 1).split('\n');
     let dataArray: Array<T> = [];
@@ -33,6 +36,4 @@ export abstract class CsvService<T extends ICsvEntity> {
   }
 }
 
-export interface ICsvEntity extends BaseEntity {
-
-}
+export interface ICsvEntity extends BaseEntity {}

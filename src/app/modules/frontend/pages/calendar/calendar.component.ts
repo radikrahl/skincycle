@@ -1,13 +1,26 @@
 import { Component, OnDestroy, Renderer2 } from '@angular/core';
 import { Product } from 'src/app/models/product.model';
+import {
+  HeaderOptions,
+  HeaderTitleService,
+} from 'src/app/services/header-title.service';
+import { FrontendBaseComponent } from '../base.component';
 
 @Component({
   selector: 'sc-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss'],
 })
-export class CalendarComponent implements OnDestroy {
-  constructor(private renderer: Renderer2) {
+export class CalendarComponent
+  extends FrontendBaseComponent
+  implements OnDestroy
+{
+  protected override headerOptions: HeaderOptions = new HeaderOptions(
+    'Kalender',
+    'sc-icon-moon'
+  );
+  constructor(private renderer: Renderer2, titleService: HeaderTitleService) {
+    super(titleService, new HeaderOptions('Kalender', 'sc-icon-moon'));
     this.renderer.addClass(document.body, 'theme-blue');
   }
 

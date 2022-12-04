@@ -1,5 +1,9 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
+import {
+  HeaderOptions,
+  HeaderTitleService,
+} from 'src/app/services/header-title.service';
 
 @Component({
   selector: 'sc-header',
@@ -19,9 +23,14 @@ export class HeaderComponent implements OnInit {
     closeUrl: '../../../assets/icons/close-bold.svg',
   };
 
-  @Input() title: string = '';
-  @Input() iconClass: string = '';
-  constructor(public router: Router) {}
+  options?: HeaderOptions;
+  constructor(public router: Router, service: HeaderTitleService) {
+    service.optionsObservable.subscribe({
+      next: (options: HeaderOptions) => {
+        this.options = options;
+      },
+    });
+  }
   ngOnInit(): void {}
 
   toggleMenu() {

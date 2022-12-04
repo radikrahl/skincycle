@@ -4,9 +4,7 @@ import { map, Observable } from 'rxjs';
 import { CsvProduct } from 'src/app/models/csv/csv.products.models';
 import { CsvService } from './csv.service';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class CsvProductsService extends CsvService<CsvProduct> {
   constructor(httpClient: HttpClient) {
     super(httpClient, '../assets/data/products.csv');
