@@ -5,9 +5,11 @@
       <div>{{item.day}}</div>
     </div>
   </div>
-  <div class="calendar__base text-xl font-primary align-center">{{routine.base}}</div>
+  <div class="calendar__base text-xl font-primary align-center" *ngFor="let routine of routines">
+    {{routine.base}}
+  </div>
   <ul class="calendar__categories">
-    <li class="calendar__card" *ngFor="let step of routine.steps">
+    <!-- <li class="calendar__card" *ngFor="let step of routine.steps">
       <div>
         <span class="sc-icon-arrow"></span>
         <span class="text-lg font-primary">{{step.category}}</span>
@@ -15,6 +17,6 @@
       <div class="u-hidden" *ngFor="let product of step.products">
         <sc-card [product]="product"></sc-card>
       </div>
-    </li>
+    </li> -->
   </ul>
 </div>

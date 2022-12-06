@@ -1,20 +1,25 @@
+import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import {
   HeaderOptions,
   HeaderTitleService,
-} from 'src/app/services/header-title.service';
+} from 'src/app/shared/services/header-title.service';
 
-export abstract class FrontendBaseComponent {
-  protected headerOptions: HeaderOptions;
-
+@Component({
+  selector: 'sc-base',
+  template: '<div></div>'
+})
+export abstract class FrontendBaseComponent implements OnInit, OnDestroy {
+  public abstract headerOptions: HeaderOptions;
+  public abstract themeClass: string;
   constructor(
     private headerTitleService: HeaderTitleService,
-    options: HeaderOptions
-  ) {
-    this.headerOptions = options;
-    this.setHeader();
+    private renderer: Renderer2
+  ) {}
+  ngOnDestroy(): void {
+    this.renderer.removeClass(document.body, this.themeClass)
   }
-
-  private setHeader() {
+  ngOnInit(): void {
     this.headerTitleService.setHeaderOptions(this.headerOptions);
+    this.renderer.addClass(document.body, this.themeClass);
   }
 }

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import {
   HeaderOptions,
   HeaderTitleService,
-} from 'src/app/services/header-title.service';
+} from 'src/app/shared/services/header-title.service';
 
 @Component({
   selector: 'sc-header',

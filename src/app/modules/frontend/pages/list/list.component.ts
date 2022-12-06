@@ -6,7 +6,7 @@ import { CategoriesService } from 'src/app/services/categories.service';
 import {
   HeaderOptions,
   HeaderTitleService,
-} from 'src/app/services/header-title.service';
+} from 'src/app/shared/services/header-title.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { FrontendBaseComponent } from '../base.component';
 
@@ -19,26 +19,28 @@ export class ListComponent
   extends FrontendBaseComponent
   implements OnDestroy, OnInit
 {
-  products: Product[] = [];
-  categories: Category[] = [];
-
-  protected override headerOptions: HeaderOptions = {
+  public themeClass = 'theme-green-light';
+  headerOptions: HeaderOptions = {
     title: 'Produktliste',
     iconClass: 'sc-icon-add',
   };
+
+  products: Product[] = [];
+  categories: Category[] = [];
+
   private subscription?: Subscription;
   private categoriesSubscription?: Subscription;
   constructor(
     headerTitleService: HeaderTitleService,
+    renderer: Renderer2,
     private productsService: ProductsService,
-    private categoriesService: CategoriesService,
-    private renderer: Renderer2
+    private categoriesService: CategoriesService
   ) {
-    super(headerTitleService, new HeaderOptions('Produktliste', 'sc-icon-add'));
-    this.renderer.addClass(document.body, 'theme-green-light');
+    super(headerTitleService, renderer);
   }
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
+    super.ngOnInit();
     this.subscription = this.productsService.getAll().subscribe({
       next: (products) => {
         return (this.products = products);
@@ -52,9 +54,5 @@ export class ListComponent
       },
       complete: () => this.categoriesSubscription?.unsubscribe(),
     });
-  }
-
-  ngOnDestroy(): void {
-    this.renderer.removeClass(document.body, 'theme-green-light');
   }
 }

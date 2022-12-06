@@ -1,9 +1,12 @@
 import { Component, OnDestroy, Renderer2 } from '@angular/core';
 import { Product } from 'src/app/models/product.model';
+import { Routine } from 'src/app/models/routine.model';
+import { CsvRoutinesService } from 'src/app/services/csv/csv.routines.service';
 import {
   HeaderOptions,
   HeaderTitleService,
-} from 'src/app/services/header-title.service';
+} from 'src/app/shared/services/header-title.service';
+import { MomentService } from 'src/app/shared/services/moment.service';
 import { FrontendBaseComponent } from '../base.component';
 
 @Component({
@@ -15,50 +18,28 @@ export class CalendarComponent
   extends FrontendBaseComponent
   implements OnDestroy
 {
-  protected override headerOptions: HeaderOptions = new HeaderOptions(
+  public themeClass = 'theme-blue';
+  public headerOptions: HeaderOptions = new HeaderOptions(
     'Kalender',
     'sc-icon-moon'
   );
-  constructor(private renderer: Renderer2, titleService: HeaderTitleService) {
-    super(titleService, new HeaderOptions('Kalender', 'sc-icon-moon'));
-    this.renderer.addClass(document.body, 'theme-blue');
-  }
 
-  ngOnDestroy(): void {
-    this.renderer.removeClass(document.body, 'theme-blue');
-  }
+  public routines: Routine[] = [];
 
-  public routine: Routine = {
-    base: 'NIA',
-    steps: [
-      {
-        category: 'Cleanser',
-        products: [
-          {
-            name: 'Name',
-            ingredients: [],
-            isAvailable: false,
-            price: 0,
-            usages: [],
-            skinStatus: [],
-          },
-        ],
-      },
-      {
-        category: 'Peeling/Maske',
-        products: [
-          {
-            name: 'Name',
-            ingredients: [],
-            isAvailable: false,
-            price: 0,
-            usages: [],
-            skinStatus: [],
-          },
-        ],
-      },
-    ],
-  };
+  constructor(
+    renderer: Renderer2,
+    titleService: HeaderTitleService,
+    moment: MomentService,
+    service: CsvRoutinesService
+  ) {
+    super(titleService, renderer);
+
+    console.log(moment.customCalendar);
+
+    service.getAll().subscribe({
+      next: (routines) => (this.routines = routines),
+    });
+  }
 
   public calendar: {
     visibleDays: Array<{ name: string; label: string; day: number }>;
@@ -81,10 +62,4 @@ export class CalendarComponent
       },
     ],
   };
-}
-
-class Routine {
-  public base = '';
-
-  public steps: Array<{ category: string; products: Product[] }> = [];
 }

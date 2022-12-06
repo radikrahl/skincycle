@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Renderer2 } from '@angular/core';
 import {
   HeaderOptions,
   HeaderTitleService,
-} from 'src/app/services/header-title.service';
+} from 'src/app/shared/services/header-title.service';
 import { FrontendBaseComponent } from '../base.component';
 
 @Component({
@@ -11,7 +11,9 @@ import { FrontendBaseComponent } from '../base.component';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent extends FrontendBaseComponent {
-  constructor(titleService: HeaderTitleService) {
-    super(titleService, new HeaderOptions('', 'sc-icon-close'));
+  public headerOptions: HeaderOptions = new HeaderOptions('', 'sc-icon-close');
+  public themeClass = 'theme';
+  constructor(titleService: HeaderTitleService, renderer: Renderer2) {
+    super(titleService, renderer);
   }
 }

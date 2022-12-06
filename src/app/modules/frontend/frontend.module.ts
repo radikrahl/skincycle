@@ -9,6 +9,8 @@ import { ProductsService } from 'src/app/services/products.service';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { CsvCategoriesService } from 'src/app/services/csv/csv.categories.service';
 import { CsvProductsService } from 'src/app/services/csv/csv.products.service';
+import { MomentService } from 'src/app/shared/services/moment.service';
+import { CsvRoutinesService } from 'src/app/services/csv/csv.routines.service';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { CsvProductsService } from 'src/app/services/csv/csv.products.service';
   providers: [
     { provide: ProductsService, useClass: CsvProductsService },
     { provide: CategoriesService, useClass: CsvCategoriesService },
+    { provide: CsvRoutinesService, useClass: CsvRoutinesService },
+    MomentService
   ],
   exports: [],
 })

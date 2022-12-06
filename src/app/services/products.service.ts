@@ -14,7 +14,7 @@ export class ProductsService extends ApiService<Product> {
     return super.httpGet<Product[]>(this.url).pipe(
       tap((products) => {
         products.map((product) => {
-          product.price = (product.price as number).toLocaleString('de-DE', {
+          product.price = Number.parseFloat((product.price as string)).toLocaleString('de-DE', {
             style: 'currency',
             currency: 'EUR',
           });
