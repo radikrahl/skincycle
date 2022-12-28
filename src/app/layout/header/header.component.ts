@@ -1,4 +1,3 @@
-import { Element } from '@angular/compiler';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import {

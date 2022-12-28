@@ -1,13 +1,15 @@
 <div class="calendar">
   <div class="calendar__days">
-    <div class="calendar__bubbles" *ngFor="let item of calendar.visibleDays">
+    <div class="calendar__bubbles" (click)="selectDay($event, item.date)" *ngFor="let item of calendar.visibleDays">
       <div>{{item.label}}</div>
       <div>{{item.day}}</div>
     </div>
   </div>
-  <div class="calendar__base text-xl font-primary align-center">
-    {{routines?.base}}
-  </div>
+  <ng-container *ngIf="routines?.base">
+    <div class="calendar__base text-xl font-primary align-center">
+      {{routines?.base}}
+    </div>
+  </ng-container>
   <ul class="calendar__categories">
     <li class="calendar__category accordion" *ngFor="let step of steps">
       <div class="accordion__header" (click)="toggleCard($event, step)">

@@ -1,7 +1,6 @@
-import { Component, OnDestroy, Renderer2 } from '@angular/core';
-import { forkJoin, map, Observable, tap } from 'rxjs';
+import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { forkJoin } from 'rxjs';
 import { Category } from 'src/app/models/category.model';
-import { CsvRoutine } from 'src/app/models/csv/csv.routines.model';
 import { Product } from 'src/app/models/product.model';
 import { Routine } from 'src/app/models/routine.model';
 import { CategoriesService } from 'src/app/services/categories.service';
@@ -30,7 +29,7 @@ import { FrontendBaseComponent } from '../../base.component';
 })
 export class CalendarComponent
   extends FrontendBaseComponent
-  implements OnDestroy
+  implements OnDestroy, OnInit
 {
   public isEvening;
   public themeClass: string;
@@ -46,12 +45,12 @@ export class CalendarComponent
 
   constructor(
     protected override renderer: Renderer2,
-    titleService: HeaderTitleService,
-    moment: CalendarService,
-    routinesService: CsvRoutinesService,
-    ingredientRelationsService: CsvIngredientRelationsService,
-    productsService: CsvProductsService,
-    categoriesService: CsvCategoriesService
+    private titleService: HeaderTitleService,
+    private moment: CalendarService,
+    private routinesService: CsvRoutinesService,
+    private ingredientRelationsService: CsvIngredientRelationsService,
+    private productsService: CsvProductsService,
+    private categoriesService: CsvCategoriesService
   ) {
     super(titleService, renderer);
 
@@ -61,50 +60,74 @@ export class CalendarComponent
     this.headerOptions = new HeaderOptions('Kalender', iconClass, [
       this.themeClass,
     ]);
+  }
 
-    this.calendar.visibleDays = moment.getVisibleDays();
-
-    titleService.onClick.subscribe((x) => {
+  override ngOnInit(): void {
+    super.ngOnInit();
+    this.titleService.onClick.subscribe((x) => {
       this.renderer.removeClass(document.body, this.themeClass);
       this.isEvening = !this.isEvening;
       this.themeClass = this.isEvening ? 'theme-blue' : 'theme-orange';
       const iconClass = this.isEvening ? 'sc-icon-moon' : 'sc-icon-sun';
-      titleService.setHeaderOptions(new HeaderOptions('Kalender', iconClass));
+      this.titleService.setHeaderOptions(
+        new HeaderOptions('Kalender', iconClass)
+      );
       this.renderer.addClass(document.body, this.themeClass);
+
+      this.updateView();
     });
 
-    categoriesService.getAll().subscribe((categories) => {
-      for (let index = 0; index < categories.length; index++) {
-        const category = categories[index];
+    this.calendar.visibleDays = this.moment
+      .getVisibleDays(new Date())
+      .map((x) => new VisisibleDay(x));
 
-        productsService
-          .getProductsByCategory(category.label)
-          .subscribe((products) => {
-            if (products && products.length > 0) {
-              this.steps.push({
-                category: category,
-                products: products,
-                isOpen: false,
-              });
-            }
+    this.updateView();
+  }
+
+  updateView(): void {
+    this.routinesService
+      .getRoutine(this.isEvening, this.calendar.visibleDays[1].date)
+      .subscribe({
+        next: (routine) => {
+          this.routines = routine;
+
+          forkJoin([
+            this.categoriesService.getAll(),
+            this.productsService.getAll(),
+            this.ingredientRelationsService.getByLabel(routine?.base),
+          ]).subscribe({
+            next: (values) => {
+              const categories = values[0];
+              let products = values[1];
+              const relations = values[2];
+
+              this.steps = [];
+
+              for (let index = 0; index < categories.length; index++) {
+                const category = categories[index];
+                products = this.productsService.getProductsByCategory(
+                  values[1],
+                  category.name
+                );
+
+                if (relations) {
+                  products = this.productsService.getProductsForWirkstoff(
+                    products,
+                    relations
+                  );
+                }
+                if (products.length > 0) {
+                  this.steps.push({
+                    category: category,
+                    products: products,
+                    isOpen: false,
+                  });
+                }
+              }
+            },
           });
-      }
-    });
-
-    routinesService
-      .getRoutine(this.isEvening)
-      .subscribe((routine) => (this.routines = routine));
-
-    // if (routine == undefined || routine.base == undefined) {
-    //   return;
-    // } else {
-    //   this.routines = routine;
-    //   return ingredientRelationsService.getByLabel(routine.base).subscribe({
-    //     next: (relation) => {
-
-    //     },
-    //   });
-    // }
+        },
+      });
   }
 
   public toggleCard(
@@ -133,6 +156,12 @@ export class CalendarComponent
         : 0 + 'px';
   }
 
+  selectDay(event: MouseEvent, date: Date) {
+    this.calendar.visibleDays = this.moment
+      .getVisibleDays(date)
+      .map((x) => new VisisibleDay(x));
+    this.updateView();
+  }
   public calendar: {
     visibleDays: VisisibleDay[];
   } = { visibleDays: [] };

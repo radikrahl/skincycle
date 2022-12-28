@@ -23,9 +23,8 @@ export class CsvCategoriesService extends CsvService<CsvCategory> {
   public getAll(): Observable<CsvCategory[]> {
     if (this.items) return of(this.items);
 
-    return super.httpGet(this.url).pipe(
-      map((x) => this.importDataFromCSV(x, CsvCategory)),
-      tap((x) => (this.items = x))
-    );
+    return super
+      .httpGet(this.url)
+      .pipe(map((x) => this.importDataFromCSV(x, CsvCategory)));
   }
 }

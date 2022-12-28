@@ -29,8 +29,12 @@ export class CsvIngredientRelationsService extends CsvService<CsvIngredientRelat
   }
 
   public getByLabel(
-    label: string
+    label: string | undefined
   ): Observable<CsvIngredientRelations | undefined> {
-    return of(this.items?.find((y) => y.label === label));
+    return this.getAll().pipe(
+      map((relations) =>
+        relations?.find((relation) => relation.label === label)
+      )
+    );
   }
 }

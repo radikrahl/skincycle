@@ -1,13 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, of, tap } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { CsvRoutine } from 'src/app/models/csv/csv.routines.model';
-import { Routine } from 'src/app/models/routine.model';
 import { CsvService } from './csv.service';
 
 @Injectable()
 export class CsvRoutinesService extends CsvService<CsvRoutine> {
-  public items?: CsvRoutine[] = [];
+  public items?: CsvRoutine[];
   protected url: string;
   constructor(httpClient: HttpClient) {
     super(httpClient);
@@ -32,19 +31,22 @@ export class CsvRoutinesService extends CsvService<CsvRoutine> {
     );
   }
 
-  public getRoutine(isEvening: boolean): Observable<CsvRoutine | undefined> {
+  public getRoutine(
+    isEvening: boolean,
+    date: Date
+  ): Observable<CsvRoutine | undefined> {
     return this.getAll().pipe(
-      map((routines) =>
-        routines.find((routine) => {
+      map((routines) => {
+        return routines?.find((routine) => {
           return (
             routine.day ===
-              new Date().toLocaleDateString('de-DE', { weekday: 'long' }) &&
+              date.toLocaleDateString('de-DE', { weekday: 'long' }) &&
             (isEvening
               ? routine.daytime == 'abends'
               : routine.daytime == 'morgens')
           );
-        })
-      )
+        });
+      })
     );
   }
 

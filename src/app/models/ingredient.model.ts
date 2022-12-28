@@ -1,9 +1,3 @@
 export class Ingredient {
-  constructor(public name: string) {
-
-  }
-}
-
-enum IngredientCsvNames {
-
+  constructor(public name: string) {}
 }

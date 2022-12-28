@@ -14,10 +14,14 @@
     font-weight: bold;
     text-align: center;
     margin: var(--space-5) var(--space-6);
-
     padding: var(--space-2-5) var(--space-6);
     border: var(--border-brand-md);
     border-radius: 100%;
+
+    > * {
+      user-select: none;
+      pointer-events: none;
+    }
   }
 
   &__base {
