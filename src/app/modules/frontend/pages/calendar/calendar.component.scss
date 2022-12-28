@@ -26,9 +26,11 @@
     padding-bottom: var(--space-1-5);
   }
 
-  &__card {
+  &__category {
     margin: var(--space-6) 0;
+    overflow: hidden;
   }
+
   .sc-icon-arrow {
     display: inline-block;
 
@@ -37,5 +39,22 @@
     margin-right: var(--space-6);
     background-repeat: no-repeat;
     background-size: contain;
+  }
+}
+
+.accordion {
+  &__header {
+    > * {
+      pointer-events: none;
+      user-select: none;
+    }
+  }
+
+  &__items {
+    transition: all 0.5s ease-in-out;
+    &.u-hidden {
+      height: 0;
+      overflow: hidden;
+    }
   }
 }

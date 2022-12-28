@@ -33,6 +33,14 @@ export class CsvProductsService extends CsvService<CsvProduct> {
       );
   }
 
+  public getProductsByCategory(category: string): Observable<CsvProduct[]> {
+    return this.getAll().pipe(
+      map((products) =>
+        products.filter((product) => product.category === category)
+      )
+    );
+  }
+
   public getProductsForWirkstoff(
     categoryName: string,
     relations?: IngredientRelations
@@ -41,9 +49,9 @@ export class CsvProductsService extends CsvService<CsvProduct> {
       map((products) => {
         return products.filter((product) => {
           if (product.category !== categoryName) return;
-            return product.ingredients.some((r) =>
-              relations?.ingredients.some((tN) => tN.name === r.name)
-            );
+          return product.ingredients.some((r) =>
+            relations?.ingredients.some((tN) => tN.name === r.name)
+          );
         });
       })
     );

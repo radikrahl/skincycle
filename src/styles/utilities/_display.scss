@@ -9,6 +9,10 @@
 }
 
 .u-hidden {
+    visibility: hidden;
+}
+
+.u-hide {
     display: none;
 
     &-sm {

@@ -9,13 +9,15 @@
     {{routines?.base}}
   </div>
   <ul class="calendar__categories">
-    <li class="calendar__card" (click)="toggleCard(step)"  *ngFor="let step of steps">
-      <div>
+    <li class="calendar__category accordion" *ngFor="let step of steps">
+      <div class="accordion__header" (click)="toggleCard($event, step)">
         <span class="sc-icon-arrow"></span>
         <span class="text-lg font-primary">{{step.category.label}}</span>
       </div>
-      <div [class.u-hidden]="!step.isOpen" *ngFor="let product of step.products">
-        <sc-card [product]="product"></sc-card>
+      <div class="accordion__items" [class.u-hidden]="!step.isOpen">
+        <div class="calendar__products">
+          <sc-card [product]="product" *ngFor="let product of step.products"></sc-card>
+        </div>
       </div>
     </li>
   </ul>

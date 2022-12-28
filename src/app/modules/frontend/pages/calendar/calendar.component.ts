@@ -74,46 +74,64 @@ export class CalendarComponent
       titleService.setHeaderOptions(this.headerOptions);
     });
 
-    routinesService.getRoutine(this.isEvening).subscribe({
-      next: (routine) => {
-        if (routine == undefined || routine.base == undefined) {
-          return;
-        } else {
-          this.routines = routine;
-          return ingredientRelationsService.getByLabel(routine.base).subscribe({
-            next: (relation) => {
-              categoriesService.getAll().subscribe({
-                next: (categories) => {
-                  categories.forEach((category) => {
-                    productsService
-                      .getProductsForWirkstoff(category.label, relation)
-                      .subscribe((products) => {
-                        if (products.length > 0) {
-                          this.steps.push({
-                            category: category,
-                            products: products,
-                            isOpen: false,
-                          });
-                        }
-                      });
-                  });
-                },
-              });
-            },
-          });
-        }
+    categoriesService.getAll().subscribe({
+      next: (categories) => {
+        categories.forEach((category) => {
+          productsService
+            .getProductsByCategory(category.label)
+            .subscribe((products) => {
+              if (products.length > 0) {
+                this.steps.push({
+                  category: category,
+                  products: products,
+                  isOpen: false,
+                });
+              }
+            });
+        });
       },
     });
+
+    // routinesService.getRoutine(this.isEvening).subscribe({
+    //   next: (routine) => {
+    //     // if (routine == undefined || routine.base == undefined) {
+    //     //   return;
+    //     // } else {
+    //     //   this.routines = routine;
+    //     //   return ingredientRelationsService.getByLabel(routine.base).subscribe({
+    //     //     next: (relation) => {
+
+    //     //     },
+    //     //   });
+    //     // }
+    //   },
+    // });
   }
 
-  public toggleCard(step: {
-    category: Category;
-    products: Product[];
-    isOpen: boolean;
-  }) {
-    if (!step.isOpen) this.steps.forEach((x) => (x.isOpen = false));
+  public toggleCard(
+    event: MouseEvent,
+    step: {
+      category: Category;
+      products: Product[];
+      isOpen: boolean;
+    }
+  ) {
+    if (!step.isOpen) this.steps.forEach((step) => (step.isOpen = false));
 
     step.isOpen = !step.isOpen;
+    const productslistElement: HTMLElement | null = <HTMLElement>(
+      (event.target as HTMLElement).nextElementSibling?.firstElementChild
+    );
+    const categorylistHeader: HTMLElement | null = event.target as HTMLElement;
+    const accordion: HTMLElement | null = categorylistHeader.parentElement;
+    const accordionItems: HTMLElement | null = <HTMLElement>(
+      accordion?.lastElementChild
+    );
+
+    if (productslistElement && accordionItems)
+      accordionItems.style.height = step.isOpen
+        ? productslistElement.offsetHeight + 'px'
+        : 0 + 'px';
   }
 
   public calendar: {
