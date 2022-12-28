@@ -5,11 +5,9 @@ import { BaseEntity } from 'src/app/models/base.model';
 
 @Injectable()
 export abstract class CsvService<T extends ICsvEntity> {
-  public url: string;
-
-  constructor(private httpClient: HttpClient, baseUrl = '../assets/data/') {
-    this.url = baseUrl;
-  }
+  protected abstract url: string;
+  public abstract items?: T[];
+  constructor(private httpClient: HttpClient) {}
 
   public httpGet(url: string): Observable<string> {
     return this.httpClient.get(url, {
@@ -33,4 +31,4 @@ export abstract class CsvService<T extends ICsvEntity> {
   }
 }
 
-export type ICsvEntity = BaseEntity
+export type ICsvEntity = BaseEntity;

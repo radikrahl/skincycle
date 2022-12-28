@@ -9,13 +9,11 @@ import { CategoriesService } from 'src/app/services/categories.service';
 import { CsvCategoriesService } from 'src/app/services/csv/csv.categories.service';
 import { CsvProductsService } from 'src/app/services/csv/csv.products.service';
 import { CsvRoutinesService } from 'src/app/services/csv/csv.routines.service';
-import {
-  CsvIngredientRelationsService,
-  IngredientRelationsService,
-} from 'src/app/services/ingredient-relations.service';
+import { IngredientRelationsService } from 'src/app/services/ingredient-relations.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { ApiService } from 'src/app/services/api.service';
 import { RoutineService } from 'src/app/services/routines.service';
+import { CsvIngredientRelationsService } from 'src/app/services/csv/csv.ingredient-relations.service';
 
 @NgModule({
   declarations: [

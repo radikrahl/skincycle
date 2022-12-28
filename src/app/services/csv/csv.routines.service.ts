@@ -1,23 +1,32 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, tap } from 'rxjs';
+import { map, Observable, of, tap } from 'rxjs';
 import { CsvRoutine } from 'src/app/models/csv/csv.routines.model';
 import { Routine } from 'src/app/models/routine.model';
 import { CsvService } from './csv.service';
 
 @Injectable()
 export class CsvRoutinesService extends CsvService<CsvRoutine> {
-  public routines: CsvRoutine[] = [];
-
+  public items?: CsvRoutine[] = [];
+  protected url: string;
   constructor(httpClient: HttpClient) {
-    super(httpClient, '../assets/data/routinen.csv');
-    this.getAll();
+    super(httpClient);
+    this.url = '../assets/data/routinen.csv';
+    this.getAll().subscribe({
+      next: (x) => (this.items = x),
+      error: (err) => console.log(err),
+      complete: () => {
+        console.log('finished with routinen.csv');
+      },
+    });
   }
   public getAll(): Observable<CsvRoutine[]> {
+    if (this.items) return of(this.items);
+
     return super.httpGet(this.url).pipe(
       map((x) => {
         const routinesCsv = this.importDataFromCSV(x, CsvRoutine);
-        this.routines = routinesCsv;
+        this.items = routinesCsv;
         return routinesCsv;
       })
     );
@@ -39,7 +48,7 @@ export class CsvRoutinesService extends CsvService<CsvRoutine> {
     );
   }
 
-  public getByBase(label: string): CsvRoutine[] {
-    return this.routines.filter((x) => x.base === label);
+  public getByBase(label: string): Observable<CsvRoutine[] | undefined> {
+    return of(this.items?.filter((x) => x.base === label));
   }
 }

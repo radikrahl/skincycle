@@ -17,6 +17,12 @@ export class VisisibleDay {
 
 @Injectable()
 export class CalendarService {
+
+  isEvening() {
+    const today = new Date();
+    return today.getHours() > 13;
+  }
+
   getVisibleDays() {
     const vDays: Array<VisisibleDay> = [];
     const today = new Date();

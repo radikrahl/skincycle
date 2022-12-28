@@ -16,11 +16,10 @@ export class HeaderTitleService {
   public onChange: EventEmitter<HeaderOptions> =
     new EventEmitter<HeaderOptions>();
 
-    public onClick: EventEmitter<string> = new EventEmitter<string>();
+    public onClick: EventEmitter<HeaderOptions> = new EventEmitter<HeaderOptions>();
 
   public iconClick() {
-    debugger;
-    this.onClick.emit(this.messageSource.value.iconClass + "clicked!");
+    this.onClick.emit(this.messageSource.value);
   }
 
   setHeaderOptions(message: HeaderOptions) {
