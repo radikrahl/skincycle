@@ -8,7 +8,9 @@ import {
   HeaderTitleService,
 } from 'src/app/shared/services/header-title.service';
 import { ProductsService } from 'src/app/services/products.service';
-import { FrontendBaseComponent } from '../base.component';
+import { FrontendBaseComponent } from '../../base.component';
+import { CsvCategoriesService } from 'src/app/services/csv/csv.categories.service';
+import { CsvProductsService } from 'src/app/services/csv/csv.products.service';
 
 @Component({
   selector: 'sc-list',
@@ -33,8 +35,8 @@ export class ListComponent
   constructor(
     headerTitleService: HeaderTitleService,
     renderer: Renderer2,
-    private productsService: ProductsService,
-    private categoriesService: CategoriesService
+    private productsService: CsvProductsService,
+    private categoriesService: CsvCategoriesService
   ) {
     super(headerTitleService, renderer);
   }

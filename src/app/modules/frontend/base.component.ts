@@ -14,7 +14,11 @@ export abstract class FrontendBaseComponent implements OnInit, OnDestroy {
   constructor(
     private headerTitleService: HeaderTitleService,
     private renderer: Renderer2
-  ) {}
+  ) {
+    headerTitleService.onChange.subscribe(x => {
+      this.headerOptions = x;
+    })
+  }
   ngOnDestroy(): void {
     this.renderer.removeClass(document.body, this.themeClass)
   }

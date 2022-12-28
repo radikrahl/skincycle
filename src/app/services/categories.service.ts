@@ -9,8 +9,4 @@ export class CategoriesService extends ApiService<Category> {
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     super(http, baseUrl + 'api/categories');
   }
-
-  public getAll(): Observable<Category[]> {
-    return super.httpGet<Category[]>(this.url);
-  }
 }

@@ -1,4 +1,6 @@
 import { ICsvEntity } from 'src/app/services/csv/csv.service';
+import { Category } from '../category.model';
+import { Ingredient } from '../ingredient.model';
 import { Product } from '../product.model';
 
 export class CsvProduct extends Product implements ICsvEntity {
@@ -8,12 +10,11 @@ export class CsvProduct extends Product implements ICsvEntity {
     this.name = values[ProductCsvHead.Name];
     this.fullName = values[ProductCsvHead.Fullname];
     this.company = values[ProductCsvHead.Firma];
-    this.ingredients = values[ProductCsvHead.Inhaltsstoffe]?.split(';');
-    // .map((x) => {
-    //   return new Ingredient(x);
-    // });
-    this.skinStatus = values[ProductCsvHead.Hautzustand]?.split(';');
-    this.usages = values[ProductCsvHead.Anwendung]?.split(';');
+    this.ingredients = values[ProductCsvHead.Inhaltsstoffe]
+      ?.split('; ')
+      .map((x) => new Ingredient(x));
+    this.skinStatus = values[ProductCsvHead.Hautzustand]?.split('; ');
+    this.usages = values[ProductCsvHead.Anwendung]?.split('; ');
     this.category = values[ProductCsvHead.Kat];
     this.isAvailable = values[ProductCsvHead.Da] == IsAvailableEnum.True;
     this.price = values[ProductCsvHead.Preis];
@@ -26,6 +27,7 @@ enum IsAvailableEnum {
   True = 'Ja',
   False = 'Nein',
 }
+
 enum ProductCsvHead {
   Firma,
   Name,

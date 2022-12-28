@@ -1,10 +1,11 @@
 import { BaseEntity } from './base.model';
+import { Ingredient } from './ingredient.model';
 
 export class Product extends BaseEntity {
   public name?: string;
   public fullName?: string;
   public company?: string;
-  public ingredients: string[] = [];
+  public ingredients: Ingredient[] = [];
   public price: string | number = 0;
 
   public url?: string;

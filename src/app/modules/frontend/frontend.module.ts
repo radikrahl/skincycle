@@ -5,12 +5,17 @@ import { FrontendRoutingModule } from './frontend.routing';
 import { CardComponent } from './components/card/card.component';
 import { HomeComponent } from './pages/home/home.component';
 import { CalendarComponent } from './pages/calendar/calendar.component';
-import { ProductsService } from 'src/app/services/products.service';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { CsvCategoriesService } from 'src/app/services/csv/csv.categories.service';
 import { CsvProductsService } from 'src/app/services/csv/csv.products.service';
-import { MomentService } from 'src/app/shared/services/moment.service';
 import { CsvRoutinesService } from 'src/app/services/csv/csv.routines.service';
+import {
+  CsvIngredientRelationsService,
+  IngredientRelationsService,
+} from 'src/app/services/ingredient-relations.service';
+import { ProductsService } from 'src/app/services/products.service';
+import { ApiService } from 'src/app/services/api.service';
+import { RoutineService } from 'src/app/services/routines.service';
 
 @NgModule({
   declarations: [
@@ -21,10 +26,13 @@ import { CsvRoutinesService } from 'src/app/services/csv/csv.routines.service';
   ],
   imports: [FrontendRoutingModule, SharedModule],
   providers: [
-    { provide: ProductsService, useClass: CsvProductsService },
-    { provide: CategoriesService, useClass: CsvCategoriesService },
+    { provide: CsvProductsService, useClass: CsvProductsService },
+    { provide: CsvCategoriesService, useClass: CsvCategoriesService },
     { provide: CsvRoutinesService, useClass: CsvRoutinesService },
-    MomentService
+    {
+      provide: CsvIngredientRelationsService,
+      useClass: CsvIngredientRelationsService,
+    },
   ],
   exports: [],
 })

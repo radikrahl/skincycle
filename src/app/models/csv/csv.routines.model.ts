@@ -6,7 +6,7 @@ export class CsvRoutine extends Routine implements ICsvEntity {
     super();
     const values = this.csvRow.split(',');
     this.day = values[CsvHead.Tag];
-    this.dayTime = values[CsvHead.Tageszeit];
+    this.daytime = values[CsvHead.Tageszeit];
     this.base = values[CsvHead.Basis];
   }
 }

@@ -1,6 +1,6 @@
 export class Routine {
   public day?: string;
-  public dayTime?: string;
+  public daytime?: string;
 
   public base?: string;
 }

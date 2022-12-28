@@ -3,7 +3,7 @@ import {
   HeaderOptions,
   HeaderTitleService,
 } from 'src/app/shared/services/header-title.service';
-import { FrontendBaseComponent } from '../base.component';
+import { FrontendBaseComponent } from '../../base.component';
 
 @Component({
   selector: 'sc-home',

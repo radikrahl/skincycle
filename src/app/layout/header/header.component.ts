@@ -1,3 +1,4 @@
+import { Element } from '@angular/compiler';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import {
@@ -24,8 +25,8 @@ export class HeaderComponent {
   };
 
   options?: HeaderOptions;
-  constructor(public router: Router, service: HeaderTitleService) {
-    service.optionsObservable.subscribe({
+  constructor(public router: Router, private service: HeaderTitleService) {
+    this.service.optionsObservable.subscribe({
       next: (options: HeaderOptions) => {
         this.options = options;
       },
@@ -35,5 +36,9 @@ export class HeaderComponent {
   toggleMenu() {
     this.menu.open = !this.menu.open;
     this.menu.url = this.menu.open ? this.menu.closeUrl : this.menu.burgerUrl;
+  }
+
+  iconClick() {
+    this.service.iconClick();
   }
 }
