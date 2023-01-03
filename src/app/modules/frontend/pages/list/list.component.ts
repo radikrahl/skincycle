@@ -25,6 +25,7 @@ export class ListComponent
   headerOptions: HeaderOptions = {
     title: 'Produktliste',
     iconClass: 'sc-icon-add',
+    callback: this.headerCallback,
   };
 
   products: Product[] = [];
@@ -57,4 +58,6 @@ export class ListComponent
       complete: () => this.categoriesSubscription?.unsubscribe(),
     });
   }
+
+  headerCallback() {}
 }

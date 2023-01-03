@@ -1,4 +1,38 @@
-:host {
+.sc-accordion {
+  &__header {
+    padding: var(--space-6) 0;
+    > * {
+      pointer-events: none;
+      user-select: none;
+    }
 
+    .sc-icon-arrow {
+      display: inline-block;
 
+      width: var(--space-4);
+      height: var(--space-6);
+      margin-right: var(--space-6);
+      margin-left: var(--space-2);
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+  }
+
+  &__item {
+    &.open {
+      .sc-accordion__header {
+        .sc-icon-arrow {
+          transform: rotate(90deg);
+        }
+      }
+    }
+  }
+
+  &__content {
+    transition: all 0.5s ease-in-out;
+    &.u-hidden {
+      height: 0;
+      overflow: hidden;
+    }
+  }
 }

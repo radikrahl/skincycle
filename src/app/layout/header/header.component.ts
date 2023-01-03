@@ -32,11 +32,6 @@ export class HeaderComponent {
     });
   }
 
-  toggleMenu() {
-    this.menu.open = !this.menu.open;
-    this.menu.url = this.menu.open ? this.menu.closeUrl : this.menu.burgerUrl;
-  }
-
   iconClick() {
     this.service.iconClick();
   }

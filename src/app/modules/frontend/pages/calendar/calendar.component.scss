@@ -31,7 +31,6 @@
   }
 
   &__category {
-    margin: var(--space-6) 0;
     overflow: hidden;
   }
 
@@ -44,33 +43,6 @@
       &:not(:first-child) {
         margin-left: var(--space-4);
       }
-    }
-  }
-
-  .sc-icon-arrow {
-    display: inline-block;
-
-    width: var(--space-4);
-    height: var(--space-6);
-    margin-right: var(--space-6);
-    background-repeat: no-repeat;
-    background-size: contain;
-  }
-}
-
-.sc-accordion {
-  &__header {
-    > * {
-      pointer-events: none;
-      user-select: none;
-    }
-  }
-
-  &__content {
-    transition: all 0.5s ease-in-out;
-    &.u-hidden {
-      height: 0;
-      overflow: hidden;
     }
   }
 }

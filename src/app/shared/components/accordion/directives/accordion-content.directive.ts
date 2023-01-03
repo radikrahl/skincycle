@@ -1,8 +1,7 @@
 import {
   Directive,
-  ElementRef,
+  HostListener,
   OnInit,
-  TemplateRef,
   ViewContainerRef,
 } from '@angular/core';
 
@@ -10,36 +9,38 @@ import {
   selector: '[scAccordionContent]',
 })
 export class AccordionContentDirective implements OnInit {
-  private readonly element: ElementRef;
+  private readonly element: HTMLElement;
   private isOpen = false;
   constructor(templateRef: ViewContainerRef) {
-    this.element = templateRef.element;
+    this.element = templateRef.element.nativeElement;
   }
   ngOnInit(): void {
-    const element = this.element.nativeElement as HTMLElement;
-    element.style.height = 0 + 'px';
+    this.element.style.height = 0 + 'px';
+  }
+
+  @HostListener('click', ['$event']) adjust() {
+    const productslistElement = <HTMLElement>this.element.querySelector('div');
+    this.element.style.height = productslistElement.offsetHeight + 'px';
   }
 
   toggle() {
-    const element = <HTMLElement>this.element.nativeElement;
     const hiddenClass = 'u-hidden';
-    const productslistElement = <HTMLElement>element.querySelector('div');
+    const productslistElement = <HTMLElement>this.element.querySelector('div');
     this.isOpen = !this.isOpen;
 
     if (this.isOpen) {
-      element.classList.remove(hiddenClass);
-      element.style.height = productslistElement.offsetHeight + 'px';
+      this.element.classList.remove(hiddenClass);
+      this.element.style.height = productslistElement.offsetHeight + 'px';
     } else {
-      element.classList.add(hiddenClass);
-      element.style.height = 0 + 'px';
+      this.element.classList.add(hiddenClass);
+      this.element.style.height = 0 + 'px';
     }
   }
 
   close() {
-    const element = <HTMLElement>this.element.nativeElement;
     const hiddenClass = 'u-hidden';
 
-    element.classList.add(hiddenClass);
-      element.style.height = 0 + 'px';
+    this.element.classList.add(hiddenClass);
+    this.element.style.height = 0 + 'px';
   }
 }

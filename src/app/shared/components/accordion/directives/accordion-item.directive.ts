@@ -2,12 +2,11 @@ import {
   AfterContentInit,
   ContentChild,
   Directive,
+  ElementRef,
   Input,
   OnDestroy,
-  OnInit,
-  TemplateRef,
 } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { AccordionContentDirective } from './accordion-content.directive';
 import { AccordionHeaderDirective } from './accordion-header.directive';
 
@@ -15,7 +14,6 @@ import { AccordionHeaderDirective } from './accordion-header.directive';
   selector: '[scAccordionItem]',
 })
 export class AccordionItemDirective implements OnDestroy, AfterContentInit {
-
   @Input() title = '';
   @Input() disabled = false;
 
@@ -24,10 +22,16 @@ export class AccordionItemDirective implements OnDestroy, AfterContentInit {
   @ContentChild(AccordionContentDirective) content?: AccordionContentDirective;
   @ContentChild(AccordionHeaderDirective) header?: AccordionHeaderDirective;
 
+  private element: HTMLElement;
+  constructor(element: ElementRef) {
+    this.element = element.nativeElement;
+  }
+
   ngAfterContentInit(): void {
     this.header?.clicked.subscribe((x) => {
       this.isOpenSubject.next(x);
       this.content?.toggle();
+      this.element.classList.toggle('open');
     });
   }
   ngOnDestroy(): void {

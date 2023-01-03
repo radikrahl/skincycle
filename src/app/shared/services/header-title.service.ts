@@ -1,29 +1,38 @@
 import { EventEmitter, Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 
 export class HeaderOptions {
-  constructor(public title: string, public iconClass: string, public params?: Array<any>) {}
+  constructor(
+    public title: string,
+    public iconClass: string,
+    public callback: () => void
+  ) {}
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class HeaderTitleService {
-  private messageSource = new BehaviorSubject<HeaderOptions>(
-    new HeaderOptions('', '')
+  private optionsSubject = new BehaviorSubject<HeaderOptions>(
+    new HeaderOptions('', '', this.defaultCallback)
   );
-  optionsObservable = this.messageSource.asObservable();
+  optionsObservable = this.optionsSubject.asObservable();
   public onChange: EventEmitter<HeaderOptions> =
     new EventEmitter<HeaderOptions>();
 
-    public onClick: EventEmitter<HeaderOptions> = new EventEmitter<HeaderOptions>();
+  constructor(private router: Router) {}
 
   public iconClick() {
-    this.onClick.emit(this.messageSource.value);
+    this.optionsSubject.value.callback();
   }
 
   setHeaderOptions(message: HeaderOptions) {
-    this.messageSource.next(message);
+    this.optionsSubject.next(message);
     this.onChange.emit(message);
+  }
+
+  defaultCallback() {
+    this.router.navigateByUrl('/');
   }
 }

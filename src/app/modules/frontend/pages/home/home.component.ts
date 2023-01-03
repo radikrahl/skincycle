@@ -1,4 +1,5 @@
 import { Component, Renderer2 } from '@angular/core';
+import { Location } from '@angular/common';
 import {
   HeaderOptions,
   HeaderTitleService,
@@ -11,9 +12,21 @@ import { FrontendBaseComponent } from '../../base.component';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent extends FrontendBaseComponent {
-  public headerOptions: HeaderOptions = new HeaderOptions('', 'sc-icon-close');
+  public headerOptions: HeaderOptions = new HeaderOptions(
+    '',
+    'sc-icon-close',
+    this.headerCallback.bind(this)
+  );
   public themeClass = 'theme';
-  constructor(titleService: HeaderTitleService, renderer: Renderer2) {
+  constructor(
+    private location: Location,
+    titleService: HeaderTitleService,
+    renderer: Renderer2
+  ) {
     super(titleService, renderer);
+  }
+
+  headerCallback() {
+    this.location.back();
   }
 }

@@ -1,42 +1,50 @@
-import { Component, ChangeDetectionStrategy, ContentChildren, Input, QueryList, AfterContentInit, AfterViewInit, AfterContentChecked, OnDestroy } from "@angular/core";
-import { Subscription } from "rxjs";
-import { AccordionItemDirective } from "./directives/accordion-item.directive";
+import {
+  Component,
+  ChangeDetectionStrategy,
+  ContentChildren,
+  Input,
+  QueryList,
+  AfterContentChecked,
+  OnDestroy,
+  ViewEncapsulation,
+} from '@angular/core';
+import { Subscription } from 'rxjs';
+import { AccordionItemDirective } from './directives/accordion-item.directive';
 
 @Component({
-  selector: "sc-accordion",
-  templateUrl: "./accordion.component.html",
-  styleUrls: ["./accordion.component.scss"],
+  selector: 'sc-accordion',
+  templateUrl: './accordion.component.html',
+  styleUrls: ['./accordion.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
-export class AccordionComponent implements AfterContentChecked, OnDestroy{
+export class AccordionComponent implements AfterContentChecked, OnDestroy {
   ngOnDestroy(): void {
-    this.subjects.forEach(x => x.unsubscribe())
+    this.subjects.forEach((x) => x.unsubscribe());
   }
- private subjects: Subscription[] = [];
+  private subjects: Subscription[] = [];
 
   ngAfterContentChecked(): void {
-   if (this.collapsing && this.subjects.length <= 0) {
-     this.items?.forEach(x => {
-       this.subjects.push(x.isOpenSubject.subscribe(() => this.closeAll()));
-     });
+    if (this.collapsing && this.subjects.length <= 0) {
+      this.items?.forEach((x) => {
+        this.subjects.push(x.isOpenSubject.subscribe(() => this.closeAll()));
+      });
     }
   }
 
   /**
    * Decides if the single item will be open at once or not.
    * In collapsing mode, toggling one would collapse others
-  */
- @Input() collapsing = true;
+   */
+  @Input() collapsing = true;
 
- @ContentChildren(AccordionItemDirective) items?: QueryList<AccordionItemDirective>;
+  @ContentChildren(AccordionItemDirective)
+  items?: QueryList<AccordionItemDirective>;
 
-
- closeAll() {
-  if (this.collapsing) {
-    this.items?.forEach(x => {
+  closeAll() {
+    this.items?.forEach((x) => {
       x.content?.close();
-      // x.header?.close();
+      x.header?.close();
     });
-   }
- }
+  }
 }
