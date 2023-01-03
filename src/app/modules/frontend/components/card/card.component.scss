@@ -6,6 +6,7 @@
     border-top: solid 2px var(--color-brand-yellow);
     border-bottom: solid 3px var(--color-brand-yellow);
     position: relative;
+    user-select: none;
 
     > div:first-child {
       padding: var(--space-1-5) 0;

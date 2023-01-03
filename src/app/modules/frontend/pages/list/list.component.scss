@@ -1,6 +1,6 @@
 .products {
   --color-background: var(--color-brand-green-light);
-
+  margin-bottom: var(--space-20);
   &__list {
     display: flex;
     flex-wrap: wrap;
@@ -16,6 +16,9 @@
   flex-direction: row;
   justify-content: space-between;
   &__item {
+    > * {
+      user-select: none;
+    }
     background-color: hsla(151, 49%, 26%, 1);
     font-family: var(--font-family-primary);
     font-weight: bold;
@@ -30,12 +33,12 @@
     justify-content: center;
     align-items: center;
 
-    >div {
+    > div {
       position: absolute;
       width: 100%;
-text-align: center;
-word-wrap: break-word;
-hyphens: auto;
+      text-align: center;
+      word-wrap: break-word;
+      hyphens: auto;
     }
   }
 }
