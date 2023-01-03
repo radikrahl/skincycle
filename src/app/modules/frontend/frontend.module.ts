@@ -14,6 +14,7 @@ import { ProductsService } from 'src/app/services/products.service';
 import { ApiService } from 'src/app/services/api.service';
 import { RoutineService } from 'src/app/services/routines.service';
 import { CsvIngredientRelationsService } from 'src/app/services/csv/csv.ingredient-relations.service';
+import { AccordionModule } from 'src/app/shared/components/accordion/accordion.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { CsvIngredientRelationsService } from 'src/app/services/csv/csv.ingredie
     CardComponent,
     CalendarComponent,
   ],
-  imports: [FrontendRoutingModule, SharedModule],
+  imports: [FrontendRoutingModule, SharedModule, AccordionModule],
   providers: [
     { provide: CsvProductsService, useClass: CsvProductsService },
     { provide: CsvCategoriesService, useClass: CsvCategoriesService },

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { Category } from 'src/app/models/category.model';
 import { Product } from 'src/app/models/product.model';
@@ -11,15 +11,39 @@ import { CsvRoutinesService } from 'src/app/services/csv/csv.routines.service';
 import { IngredientRelationsService } from 'src/app/services/ingredient-relations.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { RoutineService } from 'src/app/services/routines.service';
-import {
-  CalendarService,
-  VisisibleDay,
-} from 'src/app/shared/services/calendar.service';
+import { CalendarService } from 'src/app/shared/services/calendar.service';
 import {
   HeaderOptions,
   HeaderTitleService,
 } from 'src/app/shared/services/header-title.service';
 import { FrontendBaseComponent } from '../../base.component';
+
+export class VisibleDay {
+  public name: string;
+  public label: string;
+
+  public day: number;
+  public date: Date;
+  constructor(date: Date) {
+    const locale = 'de-De';
+    this.date = date;
+    this.name = date.toLocaleDateString(locale, { weekday: 'long' });
+    this.label = date
+      .toLocaleDateString(locale, { weekday: 'short' })
+      .toLocaleUpperCase();
+    this.day = date.getDate();
+  }
+}
+
+export class CalendarModel {
+  public visibleDays: VisibleDay[];
+  public today: Date;
+
+  constructor(visibleDays: VisibleDay[]) {
+    this.visibleDays = visibleDays;
+    this.today = new Date();
+  }
+}
 
 @Component({
   selector: 'sc-calendar',
@@ -35,14 +59,18 @@ export class CalendarComponent
   public themeClass: string;
   public headerOptions: HeaderOptions;
 
-  public routines?: Routine = new Routine();
-
+  public routine?: Routine;
+  public calendar: CalendarModel;
   public steps: {
     category: Category;
     products: Product[];
     isOpen: boolean;
   }[] = [];
-
+  selectedStep: {
+    category: Category;
+    products: Product[];
+    isOpen: boolean;
+  } | undefined;
   constructor(
     protected override renderer: Renderer2,
     private titleService: HeaderTitleService,
@@ -57,18 +85,24 @@ export class CalendarComponent
     this.isEvening = moment.isEvening();
     this.themeClass = this.isEvening ? 'theme-blue' : 'theme-orange';
     const iconClass = this.isEvening ? 'sc-icon-moon' : 'sc-icon-sun';
-    this.headerOptions = new HeaderOptions('Kalender', iconClass, [
-      this.themeClass,
-    ]);
+    this.headerOptions = new HeaderOptions('Kalender', iconClass);
+
+    const visibleDays = this.moment
+      .getVisibleDays(new Date())
+      .map((x) => new VisibleDay(x));
+
+    this.calendar = new CalendarModel(visibleDays);
   }
 
   override ngOnInit(): void {
     super.ngOnInit();
+
     this.titleService.onClick.subscribe((x) => {
       this.renderer.removeClass(document.body, this.themeClass);
       this.isEvening = !this.isEvening;
       this.themeClass = this.isEvening ? 'theme-blue' : 'theme-orange';
       const iconClass = this.isEvening ? 'sc-icon-moon' : 'sc-icon-sun';
+
       this.titleService.setHeaderOptions(
         new HeaderOptions('Kalender', iconClass)
       );
@@ -77,19 +111,32 @@ export class CalendarComponent
       this.updateView();
     });
 
-    this.calendar.visibleDays = this.moment
-      .getVisibleDays(new Date())
-      .map((x) => new VisisibleDay(x));
-
     this.updateView();
   }
 
-  updateView(): void {
+  selectDay(event: MouseEvent, date: Date) {
+    this.calendar.visibleDays = this.moment
+      .getVisibleDays(date)
+      .map((x) => new VisibleDay(x));
+    this.updateView();
+  }
+
+  apply() {
+    this.updateView({ byRelation: true });
+  }
+
+  clear() {
+    this.updateView();
+  }
+
+  private updateView(
+    filter: { byRelation: boolean } = { byRelation: false }
+  ): void {
     this.routinesService
       .getRoutine(this.isEvening, this.calendar.visibleDays[1].date)
       .subscribe({
         next: (routine) => {
-          this.routines = routine;
+          this.routine = routine;
 
           forkJoin([
             this.categoriesService.getAll(),
@@ -110,12 +157,13 @@ export class CalendarComponent
                   category.name
                 );
 
-                if (relations) {
+                if (relations && filter.byRelation) {
                   products = this.productsService.getProductsForWirkstoff(
                     products,
                     relations
                   );
                 }
+
                 if (products.length > 0) {
                   this.steps.push({
                     category: category,
@@ -129,40 +177,4 @@ export class CalendarComponent
         },
       });
   }
-
-  public toggleCard(
-    event: MouseEvent,
-    step: {
-      category: Category;
-      products: Product[];
-      isOpen: boolean;
-    }
-  ) {
-    if (!step.isOpen) this.steps.forEach((step) => (step.isOpen = false));
-
-    step.isOpen = !step.isOpen;
-    const productslistElement: HTMLElement | null = <HTMLElement>(
-      (event.target as HTMLElement).nextElementSibling?.firstElementChild
-    );
-    const categorylistHeader: HTMLElement | null = event.target as HTMLElement;
-    const accordion: HTMLElement | null = categorylistHeader.parentElement;
-    const accordionItems: HTMLElement | null = <HTMLElement>(
-      accordion?.lastElementChild
-    );
-
-    if (productslistElement && accordionItems)
-      accordionItems.style.height = step.isOpen
-        ? productslistElement.offsetHeight + 'px'
-        : 0 + 'px';
-  }
-
-  selectDay(event: MouseEvent, date: Date) {
-    this.calendar.visibleDays = this.moment
-      .getVisibleDays(date)
-      .map((x) => new VisisibleDay(x));
-    this.updateView();
-  }
-  public calendar: {
-    visibleDays: VisisibleDay[];
-  } = { visibleDays: [] };
 }

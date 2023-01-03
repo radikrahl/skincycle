@@ -35,6 +35,18 @@
     overflow: hidden;
   }
 
+  &__filter {
+    display: flex;
+    margin-top: var(--space-6);
+    .c-btn {
+      flex: 1 1 50%;
+
+      &:not(:first-child) {
+        margin-left: var(--space-4);
+      }
+    }
+  }
+
   .sc-icon-arrow {
     display: inline-block;
 
@@ -46,7 +58,7 @@
   }
 }
 
-.accordion {
+.sc-accordion {
   &__header {
     > * {
       pointer-events: none;
@@ -54,7 +66,7 @@
     }
   }
 
-  &__items {
+  &__content {
     transition: all 0.5s ease-in-out;
     &.u-hidden {
       height: 0;

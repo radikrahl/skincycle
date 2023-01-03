@@ -5,22 +5,28 @@
       <div>{{item.day}}</div>
     </div>
   </div>
-  <ng-container *ngIf="routines?.base">
+  <ng-container *ngIf="routine?.base">
     <div class="calendar__base text-xl font-primary align-center">
-      {{routines?.base}}
+      {{routine?.base}}
     </div>
   </ng-container>
-  <ul class="calendar__categories">
-    <li class="calendar__category accordion" *ngFor="let step of steps">
-      <div class="accordion__header" (click)="toggleCard($event, step)">
+  <ng-container >
+    <div class="calendar__filter">
+      <button (click)="clear()" class="c-btn">Clear</button>
+      <button (click)="apply()" class="c-btn">Apply</button>
+    </div>
+  </ng-container>
+  <sc-accordion class="calendar__categories">
+    <div class="calendar__category sc-accordion__item" scAccordionItem *ngFor="let step of steps">
+      <div class="sc-accordion__header" scAccordionHeader>
         <span class="sc-icon-arrow"></span>
         <span class="text-lg font-primary">{{step.category.label}}</span>
       </div>
-      <div class="accordion__items" [class.u-hidden]="!step.isOpen">
-        <div class="calendar__products">
+      <div class="sc-accordion__content u-hidden" scAccordionContent>
+        <div class="">
           <sc-card [product]="product" *ngFor="let product of step.products"></sc-card>
         </div>
       </div>
-    </li>
-  </ul>
+    </div>
+  </sc-accordion>
 </div>
