@@ -15,10 +15,11 @@ export class CsvProduct extends Product implements ICsvEntity {
     this.skinStatus = values[ProductCsvHead.Hautzustand]?.split('; ');
     this.usages = values[ProductCsvHead.Anwendung]?.split('; ');
     this.category = values[ProductCsvHead.Kat];
-    this.isAvailable = values[ProductCsvHead.Da] == IsAvailableEnum.True;
+    this.isAvailable = values[ProductCsvHead.Inventar] == IsAvailableEnum.True;
     this.price = values[ProductCsvHead.Preis];
     this.url = values[ProductCsvHead.Link];
     this.amount = values[ProductCsvHead.Menge];
+    this.hint = values[ProductCsvHead.Hinweis]?.split('; ');
   }
 }
 
@@ -34,8 +35,9 @@ enum ProductCsvHead {
   Inhaltsstoffe,
   Hautzustand,
   Anwendung,
+  Hinweis,
   Kat,
-  Da,
+  Inventar,
   Menge,
   Preis,
   Link,

@@ -1,5 +1,5 @@
-import { ICsvEntity } from "src/app/services/csv/csv.service";
-import { Category } from "../category.model";
+import { ICsvEntity } from 'src/app/services/csv/csv.service';
+import { Category } from '../category.model';
 
 export class CsvCategory extends Category implements ICsvEntity {
   constructor(private csvRow: string) {
@@ -11,6 +11,6 @@ export class CsvCategory extends Category implements ICsvEntity {
 }
 
 enum CategoryCsvHead {
+  Label,
   Name,
-  Label
 }

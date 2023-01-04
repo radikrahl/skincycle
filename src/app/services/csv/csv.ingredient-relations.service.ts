@@ -14,7 +14,7 @@ export class CsvIngredientRelationsService extends CsvService<CsvIngredientRelat
     this.url = '../assets/data/wirkstoffe.csv';
     this.getAll().subscribe({
       next: (x) => (this.items = x),
-      error: (err) => console.error("failed with wirkstoffe",err),
+      error: (err) => console.error('failed with wirkstoffe', err),
       complete: () => {
         console.debug('finished with wirkstoffe.csv');
       },
@@ -32,9 +32,9 @@ export class CsvIngredientRelationsService extends CsvService<CsvIngredientRelat
     label: string | undefined
   ): Observable<CsvIngredientRelations | undefined> {
     return this.getAll().pipe(
-      map((relations) =>
-        relations?.find((relation) => relation.label === label)
-      )
+      map((relations) => {
+        return relations?.find((relation) => relation.label === label);
+      })
     );
   }
 }

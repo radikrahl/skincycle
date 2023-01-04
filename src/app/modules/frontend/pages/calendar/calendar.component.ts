@@ -144,7 +144,7 @@ export class CalendarComponent
       if (category) {
         products = this.productsService.getProductsByCategory(
           values[1],
-          category.name
+          category.label
         );
       }
 

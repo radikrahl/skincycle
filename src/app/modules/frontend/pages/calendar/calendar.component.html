@@ -10,7 +10,7 @@
       {{routine?.base}}
     </div>
   </ng-container>
-  <ng-container >
+  <ng-container>
     <div class="calendar__filter">
       <button (click)="clear()" class="c-btn">Clear</button>
       <button (click)="apply()" class="c-btn">Apply</button>
@@ -20,7 +20,8 @@
     <div class="calendar__category sc-accordion__item" scAccordionItem *ngFor="let step of steps">
       <div class="sc-accordion__header" scAccordionHeader>
         <span class="sc-icon-arrow"></span>
-        <span class="text-lg font-primary">{{step.category.label}}</span>
+        <span class="text-lg font-primary">{{step.category.name}}</span>
+        <span class="text-lg font-primary" style="margin-left: var(--space-4)">{{step.products.length}}</span>
       </div>
       <div class="sc-accordion__content u-hidden" scAccordionContent>
         <div class="">
