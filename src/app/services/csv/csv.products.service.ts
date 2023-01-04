@@ -17,9 +17,9 @@ export class CsvProductsService extends CsvService<CsvProduct> {
     this.url = '../assets/data/products.csv';
     this.getAll().subscribe({
       next: (x) => (this.items = x),
-      error: (err) => console.log(err),
+      error: (err) => console.error('failed getting products', err),
       complete: () => {
-        console.log('finished with products.csv');
+        console.debug('finished with products.csv');
       },
     });
   }

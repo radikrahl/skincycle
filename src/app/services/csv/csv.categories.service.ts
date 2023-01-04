@@ -14,9 +14,9 @@ export class CsvCategoriesService extends CsvService<CsvCategory> {
 
     this.getAll().subscribe({
       next: (x) => (this.items = x),
-      error: (err) => console.log(err),
+      error: (err) => console.error(err),
       complete: () => {
-        console.log('finished with categories.csv');
+        console.debug('finished with categories.csv');
       },
     });
   }
