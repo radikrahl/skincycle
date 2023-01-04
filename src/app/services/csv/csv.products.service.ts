@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { map, Observable, of, tap } from 'rxjs';
 import { CsvProduct } from 'src/app/models/csv/csv.products.model';
 import { IngredientRelations } from 'src/app/models/ingredient-relations.model';
-import { Product } from 'src/app/models/product.model';
 import { CsvService } from './csv.service';
 
 @Injectable()

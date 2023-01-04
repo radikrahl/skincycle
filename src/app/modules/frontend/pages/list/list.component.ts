@@ -2,12 +2,10 @@ import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Category } from 'src/app/models/category.model';
 import { Product } from 'src/app/models/product.model';
-import { CategoriesService } from 'src/app/services/categories.service';
 import {
   HeaderOptions,
   HeaderTitleService,
 } from 'src/app/shared/services/header-title.service';
-import { ProductsService } from 'src/app/services/products.service';
 import { FrontendBaseComponent } from '../../base.component';
 import { CsvCategoriesService } from 'src/app/services/csv/csv.categories.service';
 import { CsvProductsService } from 'src/app/services/csv/csv.products.service';
@@ -59,5 +57,9 @@ export class ListComponent
     });
   }
 
-  headerCallback() {}
+  headerCallback() {
+    const error = new Error("not implemented;");
+    console.error("notimplemented", error)
+    throw new Error("not implemented;");
+  }
 }
