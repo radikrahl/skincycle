@@ -14,6 +14,8 @@ export class Product extends BaseEntity {
   public isAvailable = false;
   public skinStatus: Array<string> = []; //SkinStatus[];
   public amount?: string;
+
+  public hint?: Array<string> = [];
   constructor() {
     super();
   }

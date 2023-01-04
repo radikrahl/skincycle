@@ -1,19 +1,19 @@
-﻿Label,Prio,Wichtige Wirkstoffe,Wirkung,Gut kombinierbar mit
-AHA,1,Lactic Acid; Glycolic Acid; Mandelic Acid; Malic Acid; Tartaric Acid; Citric Acid,pH-Regulierend; Feuchtigkeitsspendend; Kollagenproduktion; Zellerneuerung,BHA; PHA; Vit. C; Hyaloronsäure
-Azelainsäure,1,"Azelaic Acid; Azelainsäure; Nonandisäure; 1.7-Heptandicarbonsäure; Acidum azelaicum",pH-Regulierend; antioxidativ; antibakteriell; Entzündungshemmend; Talgregulierend; Pigmentierung,NIA; BHA
-BHA,1,Salicylic Acid,Porenreinigend; Entzündungshemmend; Zellerneuerung,AHA; PHA; Vit. C; Hyaloronsäure
+﻿Label,Prio,Wirkstoffname,Wirkung,Kombinierbar
+AHA,1,Lactic Acid; Glycolic Acid; Mandelic Acid; Malic Acid; Tartaric Acid; Citric Acid,pH-Regulierend; Feuchtigkeitsspendend; Kollagenproduktion; Zellerneuerung,BHA; PHA; Vit. C; Hyaloron
+Azelainsäure,1,Azelaic Acid; Azelainsäure; Nonandisäure, 1.7-Heptandicarbonsäure; Acidum azelaicum,pH-Regulierend; antioxidativ; antibakteriell; Entzündungshemmend; Talgregulierend; Pigmentierung,NIA; BHA
+BHA,1,Salicylic Acid,Porenreinigend; Entzündungshemmend; Zellerneuerung,AHA; PHA; Vit. C; Hyaloron
 Ceramide,1,Ceramide EOS; Ceramide NS; Ceramide NP; Ceramide EOH; Ceramide AS; Ceramide AP; Ceramide AH; Ceramide NH;Ceramide EOP,Feuchtigkeitsbindend; Hautschutzbarriere; beruhigend,
 CICA,1,Madecassoside; Madecassic Acid; Asiatic Acid; Asitaticoside,beruhigend,
 Ectoin,1,Ectoin,Irritationen; Entzündungshemmend; Hautalterung; Zellstabilisierend; regenerierend,
 Hyaloron,1,Sodium Hyaluronate; Hyaluronic Acid; Hydrolyzed Sodium Hyaluronate,Feuchtigkeitsspendend; Feuchtigkeitsbindend; Zellstabilisierend; Zellregeneration; antioxidativ; heilend; Elastizität,
 Kollagen,1,Collagen; Soluble Collagen; Hydrolyzed Collagen; AMP-Isostearoyl Hydrolyzed Collagen,Feuchtigkeitsbindend; Zellregeneration; Hautbild,
-NIA,1,Niacinamide,antioxidativ; Porenverfeinernd; Hautschutzbarriere; Rötungen,Vit. A; Azelainsäure; Hyaloronsäure
+NIA,1,Niacinamide,antioxidativ; Porenverfeinernd; Hautschutzbarriere; Rötungen,Vit. A; Azelainsäure; Hyaloron
 PCA,1,Sodium PCA,Feuchtigkeitsbindend; Irritationen,
 Peptide,1,Palmitoyl Tripeptide-1; Palmitoyl Tetrapeptide-7; Palmitoyl Tripeptide-38; Acetyl Dipeptide-1 Cetyl; Acetyl Hexapeptide-8 ; Palmitoyl Tripeptide-38;,folgt,
-PHA,1,Gluconolactone; Lactobionic Acid; Maltobionic Acid,Feuchtigkeitsspendend; Hautschutzbarriere; Rötungen; Irritationen; Porenverfeinernd,AHA; BHA; Vit. C.; Hyaloronsäure
-Vit. A,1,Retinol; Retinal; Hydroxypinacolone Retinoate,Zellerneuerung; Kollagenproduktion; Feuchtigkeitbindend; Hautalterung,NIA; Hyaloronsäure; Vit. C 
-Vit. C,1,Ascorbic Acid; Ascorbyl Tetraisopalmitate; Ascorbyl Glucoside; Ascorbyl Methylsilanol Pectinate; Sodium Ascorbyl Phosphat,freie Radikale; Hautbild,Vit. E; AHA; BHA; PHA; Hyaloronsäure
-Vit. E,1,Tocopheryl Acetate; Tocopherol,antioxidativ; Zellstabilisierend,
+PHA,1,Gluconolactone; Lactobionic Acid; Maltobionic Acid,Feuchtigkeitsspendend; Hautschutzbarriere; Rötungen; Irritationen; Porenverfeinernd,AHA; BHA; Vit. C.; Hyaloron
+Vit. A,1,Retinol; Retinal; Hydroxypinacolone Retinoate,Zellerneuerung; Kollagenproduktion; Feuchtigkeitbindend; Hautalterung,NIA; Hyaloron; Vit. C 
+Vit. C,1,Ascorbic Acid; Ascorbyl Tetraisopalmitate; Ascorbyl Glucoside; Ascorbyl Methylsilanol Pectinate; Sodium Ascorbyl Phosphat,freie Radikale; Hautbild; Kollagenproduktion; Hautschutzbarriere,Vit. E; AHA; BHA; PHA; Hyaloron
+Vit. E,1,Tocopheryl Acetate; Tocopherol,antioxidativ; Zellstabilisierend; Feuchtigkeitsspendend; Hautbild; beruhigend; Elastizität,
 Allantoin,2,Allantoin,folgt,
 Arganöl,2,Argania Spinosa Kernel Oil,Öl; pflegend; antioxidativ,
 Bakuchiol,2,Bakuchiol,antioxidativ; Irritationen; beruhigend; Hautalterung; Feuchtigkeitsbindend; freie Radikale,
