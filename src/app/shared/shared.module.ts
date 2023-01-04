@@ -5,11 +5,9 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { InputBaseDirective } from './components/base/input-base.directive';
 import { FixedBackgroundComponent } from './components/fixed-background/fixed-background.component';
-import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   imports: [
-    BrowserModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
@@ -21,7 +19,6 @@ import { BrowserModule } from '@angular/platform-browser';
     FixedBackgroundComponent
   ],
   exports: [
-    BrowserModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,

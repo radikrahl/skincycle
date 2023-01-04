@@ -1,0 +1,12 @@
+# Ignore everything
+**
+
+# Allow App files and directories
+!src/
+!package.json
+!package-lock.json
+!angular.json
+!tsconfig*
+# Allow Config files and directories
+!nginx/
+!Dockerfile
