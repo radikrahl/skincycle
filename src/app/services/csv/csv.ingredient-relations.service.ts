@@ -14,9 +14,9 @@ export class CsvIngredientRelationsService extends CsvService<CsvIngredientRelat
     this.url = '../assets/data/wirkstoffe.csv';
     this.getAll().subscribe({
       next: (x) => (this.items = x),
-      error: (err) => console.log(err),
+      error: (err) => console.error("failed with wirkstoffe",err),
       complete: () => {
-        console.log('finished with wirkstoffe.csv');
+        console.debug('finished with wirkstoffe.csv');
       },
     });
   }

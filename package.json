@@ -6,8 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "lint": "ng lint"
+    "test": "ng test --watch=false",
+    "lint": "ng lint",
+    "prerelease": "npm run test && npm run lint"
   },
   "private": true,
   "dependencies": {

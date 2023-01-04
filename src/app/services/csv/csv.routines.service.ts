@@ -13,9 +13,9 @@ export class CsvRoutinesService extends CsvService<CsvRoutine> {
     this.url = '../assets/data/routinen.csv';
     this.getAll().subscribe({
       next: (x) => (this.items = x),
-      error: (err) => console.log(err),
+      error: (err) => console.error("failed with routinen", err),
       complete: () => {
-        console.log('finished with routinen.csv');
+        console.debug('finished with routinen.csv');
       },
     });
   }

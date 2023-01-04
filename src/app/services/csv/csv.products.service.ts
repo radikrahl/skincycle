@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { map, Observable, of, tap } from 'rxjs';
 import { CsvProduct } from 'src/app/models/csv/csv.products.model';
 import { IngredientRelations } from 'src/app/models/ingredient-relations.model';
-import { Product } from 'src/app/models/product.model';
 import { CsvService } from './csv.service';
 
 @Injectable()
@@ -17,9 +16,9 @@ export class CsvProductsService extends CsvService<CsvProduct> {
     this.url = '../assets/data/products.csv';
     this.getAll().subscribe({
       next: (x) => (this.items = x),
-      error: (err) => console.log(err),
+      error: (err) => console.error('failed getting products', err),
       complete: () => {
-        console.log('finished with products.csv');
+        console.debug('finished with products.csv');
       },
     });
   }

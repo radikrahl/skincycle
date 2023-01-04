@@ -17,11 +17,10 @@ export abstract class CsvService<T extends ICsvEntity> {
 
   public abstract getAll(): Observable<T[]>;
 
-  public importDataFromCSV<T>(
+  public importDataFromCSV(
     csvText: string,
     type: { new (row: string): T }
   ): Array<T> {
-    // const propertyNames = csvText.slice(0, csvText.indexOf('\n')).split(',');
     const dataRows = csvText.slice(csvText.indexOf('\n') + 1).split('\n');
     const dataArray: Array<T> = [];
     dataRows.forEach((row) => {

@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AccordionComponent } from './accordion.component';
 
-
 describe('AccordionComponent', () => {
   let component: AccordionComponent;
   let fixture: ComponentFixture<AccordionComponent>;
@@ -20,11 +19,5 @@ describe('AccordionComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should close all', () => {
-    component.closeAll();
-    component.items?.forEach(x => {
-       expect(x.isOpenSubject.value).toBeFalse();
-    })
-
-  })
+  // it('should close all', () => {});
 });

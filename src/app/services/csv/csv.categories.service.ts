@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, of, tap } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { CsvCategory } from 'src/app/models/csv/csv.categories.model';
 import { CsvService } from './csv.service';
 
@@ -14,9 +14,9 @@ export class CsvCategoriesService extends CsvService<CsvCategory> {
 
     this.getAll().subscribe({
       next: (x) => (this.items = x),
-      error: (err) => console.log(err),
+      error: (err) => console.error(err),
       complete: () => {
-        console.log('finished with categories.csv');
+        console.debug('finished with categories.csv');
       },
     });
   }
