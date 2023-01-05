@@ -1,7 +1,14 @@
+:host {
+  &:last-child {
+    margin-bottom: var(--space-20);
+  }
+}
+
 .card {
   $this: &;
 
   margin-top: var(--space-5);
+
   &__meta {
     border-top: solid 2px var(--color-brand-yellow);
     border-bottom: solid 3px var(--color-brand-yellow);

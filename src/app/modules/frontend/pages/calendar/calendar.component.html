@@ -6,8 +6,10 @@
     </div>
   </div>
   <ng-container *ngIf="routine?.base">
-    <div class="calendar__base text-xl font-primary align-center">
-      {{routine?.base}}
+    <div class="calendar__base">
+      <div class="text-lg font-primary--bold align-center">
+        {{routine?.base}}
+      </div>
     </div>
   </ng-container>
   <ng-container>
@@ -18,10 +20,10 @@
   </ng-container>
   <sc-accordion class="calendar__categories">
     <div class="calendar__category sc-accordion__item" scAccordionItem *ngFor="let step of steps">
-      <div class="sc-accordion__header" scAccordionHeader>
+      <div class="sc-accordion__header text-xl font-primary--bold" scAccordionHeader>
         <span class="sc-icon-arrow"></span>
-        <span class="text-lg font-primary">{{step.category.name}}</span>
-        <span class="text-lg font-primary" style="margin-left: var(--space-4)">{{step.products.length}}</span>
+        <span>{{step.category.name}}</span>
+        <span style="margin-left: var(--space-2)">{{step.products.length}}</span>
       </div>
       <div class="sc-accordion__content u-hidden" scAccordionContent>
         <div class="">

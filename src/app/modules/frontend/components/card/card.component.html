@@ -18,34 +18,40 @@
       <i class="sc-icon-bag-remove"></i>
     </ng-template>
   </div>
-  <div class="text-sm card__properties">
+  <div class="card__properties">
     <div class="text-sm">
       <span>{{product.amount}}, </span>
       <span>{{product.price}}</span>
     </div>
     <div class="">
-      <div class="text-md" style="font-weight:bold">
+      <h4>
         Hautzustand
-      </div>
-      <span *ngFor="let item of product.usages">
-        {{item}}
-      </span>
+      </h4>
+      <p>
+        <ng-container *ngFor="let skinstatus of product.skinStatus">
+          {{skinstatus}}
+        </ng-container>
+      </p>
     </div>
     <div class="">
-      <div class="text-md" style="font-weight:bold">
+      <h4>
         Anwendung
-      </div>
-      <span *ngFor="let item of product.skinStatus">
-        {{item}}
-      </span>
+      </h4>
+      <p>
+        <ng-container *ngFor="let usage of product.usages">
+          {{usage}}
+        </ng-container>
+      </p>
     </div>
     <div>
-      <div class="text-md" style="font-weight:bold">
+      <h4>
         Inhaltsstoffe
-      </div>
-      <span *ngFor="let item of product.ingredients">
-        {{item.name}};
-      </span>
+      </h4>
+      <p>
+        <ng-container *ngFor="let ingredient of product.ingredients">
+          {{ingredient.name}};
+        </ng-container>
+      </p>
     </div>
 
   </div>

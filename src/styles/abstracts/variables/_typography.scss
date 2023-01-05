@@ -47,7 +47,6 @@ h3,
 .text-lg {
   font-size: calc(var(--text-lg));
   line-height: var(--line-height-lg);
-  font-weight: 400;
 }
 
 h4,
@@ -55,6 +54,11 @@ h5,
 h6,
 .text-md {
   font-size: var(--text-md);
+  line-height: var(--line-height-md);
+}
+
+.text-sm {
+  font-size: var(--text-sm);
   line-height: var(--line-height-md);
 }
 
