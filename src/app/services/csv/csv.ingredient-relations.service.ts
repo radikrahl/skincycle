@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map, of } from 'rxjs';
-import { CsvIngredientRelations } from 'src/app/models/ingredient-relations.model';
+import { CsvIngredientRelations } from 'src/app/models/csv/csv.ingredient-relations.model';
 import { CsvService } from './csv.service';
 
 @Injectable()
@@ -29,7 +29,7 @@ export class CsvIngredientRelationsService extends CsvService<CsvIngredientRelat
   }
 
   public getByLabel(
-    label: string | undefined
+    label: string
   ): Observable<CsvIngredientRelations | undefined> {
     return this.getAll().pipe(
       map((relations) => {
