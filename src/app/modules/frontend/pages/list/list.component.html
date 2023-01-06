@@ -9,7 +9,33 @@
 <div class="products">
   <ul class="products__list">
     <li class="products__card" *ngFor="let product of products">
-      <sc-card [product]="product"></sc-card>
+      <sc-card [showCategory]="true" [product]="product">
+        <span>{{product.amount}}, {{product.price}}</span>
+        <h4>Hautzustand</h4>
+        <p>
+          <ng-container *ngFor="let skinstatus of product.skinStatus">
+            {{skinstatus}}
+          </ng-container>
+        </p>
+        <h4>Anwendung</h4>
+        <p>
+          <ng-container *ngFor="let usage of product.usages">
+            {{usage}}
+          </ng-container>
+        </p>
+        <h4>Inhaltsstoffe</h4>
+        <p>
+          <ng-container *ngFor="let ingredient of product.ingredients">
+            {{ingredient.name}};
+          </ng-container>
+        </p>
+      </sc-card>
+      <div class="products__isAvailable">
+        <i class="sc-icon-bag-check" *ngIf="product.isAvailable; else not_available"></i>
+        <ng-template #not_available>
+          <i class="sc-icon-bag-remove"></i>
+        </ng-template>
+      </div>
     </li>
   </ul>
 </div>

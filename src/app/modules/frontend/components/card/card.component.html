@@ -1,58 +1,17 @@
 <div class="card" [class.open]="isOpen" (click)="isOpen = !isOpen">
 
-  <div class="card__meta">
+  <div class="card__header">
     <div>
       <div class="text-lg">{{product.company}}</div>
       <div class="text-xl">{{product.name}}</div>
     </div>
-    <div>
+    <div *ngIf="showCategory">
       <span class="text-sm">{{product.category}} </span>
       <span class="sc-icon-arrow">
       </span>
     </div>
   </div>
-  <div class="card__isAvailable">
-
-    <i class="sc-icon-bag-check" *ngIf="product.isAvailable; else not_available"></i>
-    <ng-template #not_available>
-      <i class="sc-icon-bag-remove"></i>
-    </ng-template>
-  </div>
-  <div class="card__properties">
-    <div class="text-sm">
-      <span>{{product.amount}}, </span>
-      <span>{{product.price}}</span>
-    </div>
-    <div class="">
-      <h4>
-        Hautzustand
-      </h4>
-      <p>
-        <ng-container *ngFor="let skinstatus of product.skinStatus">
-          {{skinstatus}}
-        </ng-container>
-      </p>
-    </div>
-    <div class="">
-      <h4>
-        Anwendung
-      </h4>
-      <p>
-        <ng-container *ngFor="let usage of product.usages">
-          {{usage}}
-        </ng-container>
-      </p>
-    </div>
-    <div>
-      <h4>
-        Inhaltsstoffe
-      </h4>
-      <p>
-        <ng-container *ngFor="let ingredient of product.ingredients">
-          {{ingredient.name}};
-        </ng-container>
-      </p>
-    </div>
-
+  <div class="card__content">
+    <ng-content></ng-content>
   </div>
 </div>

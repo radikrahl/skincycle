@@ -27,7 +27,14 @@
       </div>
       <div class="sc-accordion__content u-hidden" scAccordionContent>
         <div class="">
-          <sc-card [product]="product" *ngFor="let product of step.products"></sc-card>
+          <sc-card [product]="product" *ngFor="let product of step.products">
+            <span class="font-secondary--bold">
+              {{step.relations?.label}}
+            </span>
+            <ng-container *ngFor="let ingredient of step.relations?.ingredients">{{ingredient.name}};
+            </ng-container>
+            <span style="float:right">Prio: {{step.relations?.prio}}</span>
+          </sc-card>
         </div>
       </div>
     </div>

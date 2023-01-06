@@ -48,3 +48,13 @@
     }
   }
 }
+
+.card {
+  &__content {
+    display: flex;
+
+    &:last-child {
+      margin-left: auto;
+    }
+  }
+}

@@ -4,6 +4,7 @@ import { Category } from 'src/app/models/category.model';
 import { CsvCategory } from 'src/app/models/csv/csv.categories.model';
 import { CsvIngredientRelations } from 'src/app/models/csv/csv.ingredient-relations.model';
 import { CsvProduct } from 'src/app/models/csv/csv.products.model';
+import { IngredientRelations } from 'src/app/models/ingredient-relations.model';
 import { Product } from 'src/app/models/product.model';
 import { Routine } from 'src/app/models/routine.model';
 import { CsvCategoriesService } from 'src/app/services/csv/csv.categories.service';
@@ -37,6 +38,7 @@ export class CalendarComponent
   public steps: {
     category: Category;
     products: Product[];
+    relations?: IngredientRelations
   }[] = [];
   selectedStep:
     | {
@@ -159,6 +161,7 @@ export class CalendarComponent
         this.steps.push({
           category: category,
           products: products,
+          relations: relations
         });
       }
     }
