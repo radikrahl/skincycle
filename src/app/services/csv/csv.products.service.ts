@@ -50,9 +50,11 @@ export class CsvProductsService extends CsvService<CsvProduct> {
     products: CsvProduct[],
     relations?: IngredientRelations
   ) {
-    return products?.filter((product) => {
-      return product.ingredients.some((r) =>
-        relations?.ingredients.some((tN) => tN.name === r.name)
+    return products.filter((product) => {
+      return product.ingredients.some((productIngredient) =>
+        relations?.ingredients.some((relationIngredient) =>
+          productIngredient.name.includes(relationIngredient.name)
+        )
       );
     });
   }

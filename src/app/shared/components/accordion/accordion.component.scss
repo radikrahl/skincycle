@@ -1,27 +1,24 @@
 .sc-accordion {
   &__header {
-    padding: var(--space-6) 0;
+    padding: var(--space-3) 0;
     > * {
       pointer-events: none;
       user-select: none;
     }
 
-    .sc-icon-arrow {
-      display: inline-block;
+    &::after {
+      content: (">");
+      margin-right: var(--space-1);
+      float: right;
 
-      width: var(--space-4);
-      height: var(--space-6);
-      margin-right: var(--space-6);
-      margin-left: var(--space-2);
-      background-repeat: no-repeat;
-      background-size: contain;
+      transition: transform 0.2s ease-in;
     }
   }
 
   &__item {
     &.open {
       .sc-accordion__header {
-        .sc-icon-arrow {
+        &::after {
           transform: rotate(90deg);
         }
       }

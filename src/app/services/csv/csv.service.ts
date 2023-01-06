@@ -21,10 +21,10 @@ export abstract class CsvService<T extends ICsvEntity> {
     csvText: string,
     type: { new (row: string): T }
   ): Array<T> {
-    const dataRows = csvText.slice(csvText.indexOf('\n') + 1).split('\n');
+    const dataRows = csvText.slice(csvText.indexOf('\r\n') + 2).split('\r\n');
     const dataArray: Array<T> = [];
     dataRows.forEach((row) => {
-      dataArray.push(new type(row));
+      dataArray.push(new type(row.trim()));
     });
     return dataArray;
   }

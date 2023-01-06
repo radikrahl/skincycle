@@ -2,8 +2,9 @@ import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { Category } from 'src/app/models/category.model';
 import { CsvCategory } from 'src/app/models/csv/csv.categories.model';
+import { CsvIngredientRelations } from 'src/app/models/csv/csv.ingredient-relations.model';
 import { CsvProduct } from 'src/app/models/csv/csv.products.model';
-import { CsvIngredientRelations } from 'src/app/models/ingredient-relations.model';
+import { IngredientRelations } from 'src/app/models/ingredient-relations.model';
 import { Product } from 'src/app/models/product.model';
 import { Routine } from 'src/app/models/routine.model';
 import { CsvCategoriesService } from 'src/app/services/csv/csv.categories.service';
@@ -37,6 +38,7 @@ export class CalendarComponent
   public steps: {
     category: Category;
     products: Product[];
+    relations?: IngredientRelations
   }[] = [];
   selectedStep:
     | {
@@ -114,11 +116,11 @@ export class CalendarComponent
       .subscribe({
         next: (routine) => {
           this.routine = routine;
-
+          if (!routine) return;
           forkJoin([
             this.categoriesService.getAll(),
             this.productsService.getAll(),
-            this.ingredientRelationsService.getByLabel(routine?.base),
+            this.ingredientRelationsService.getByLabel(routine.base),
           ]).subscribe({
             next: (values) => {
               this.buildView(filter, values);
@@ -133,19 +135,19 @@ export class CalendarComponent
     values: [CsvCategory[], CsvProduct[], CsvIngredientRelations | undefined]
   ) {
     const categories = values[0];
-    let products = values[1];
     const relations = values[2];
 
     this.steps = [];
 
     for (let index = 0; index < categories.length; index++) {
       const category = categories[index];
+      let products: CsvProduct[] = [];
 
       if (category) {
-        products = this.productsService.getProductsByCategory(
+        products.push(...this.productsService.getProductsByCategory(
           values[1],
           category.label
-        );
+        ));
       }
 
       if (relations && filter.byRelation) {
@@ -159,6 +161,7 @@ export class CalendarComponent
         this.steps.push({
           category: category,
           products: products,
+          relations: relations
         });
       }
     }
