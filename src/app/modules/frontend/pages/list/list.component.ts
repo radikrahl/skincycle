@@ -1,14 +1,15 @@
 import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, tap } from 'rxjs';
 import { Category } from 'src/app/models/category.model';
-import { Product } from 'src/app/models/product.model';
+import { Product } from 'src/app/products/models/product.model';
 import {
   HeaderOptions,
   HeaderTitleService,
 } from 'src/app/shared/services/header-title.service';
 import { FrontendBaseComponent } from '../../base.component';
-import { CsvCategoriesService } from 'src/app/services/csv/csv.categories.service';
-import { CsvProductsService } from 'src/app/services/csv/csv.products.service';
+import { Store } from '@ngxs/store';
+import { ProductsState } from '../../../../products/products.state';
+import { GetAll } from '../../../../products/products.actions';
 
 @Component({
   selector: 'sc-list',
@@ -34,22 +35,22 @@ export class ListComponent
   constructor(
     headerTitleService: HeaderTitleService,
     renderer: Renderer2,
-    private productsService: CsvProductsService,
-    private categoriesService: CsvCategoriesService
+    private store: Store,
   ) {
     super(headerTitleService, renderer);
   }
 
   override ngOnInit(): void {
     super.ngOnInit();
-    this.subscription = this.productsService.getAll().subscribe({
+    this.store.dispatch(new GetAll());
+    this.subscription = this.store.select(ProductsState.getProducts).subscribe({
       next: (products) => {
         return (this.products = products);
       },
       complete: () => this.subscription?.unsubscribe(),
     });
 
-    this.categoriesSubscription = this.categoriesService.getAll().subscribe({
+    this.categoriesSubscription = this.store.select(ProductsState.getCategories).subscribe({
       next: (categories) => {
         return (this.categories = categories);
       },
@@ -58,8 +59,8 @@ export class ListComponent
   }
 
   headerCallback() {
-    const error = new Error("not implemented;");
-    console.error("notimplemented", error)
-    throw new Error("not implemented;");
+    const error = new Error('not implemented;');
+    console.error('notimplemented', error);
+    throw new Error('not implemented;');
   }
 }

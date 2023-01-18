@@ -1,6 +1,6 @@
 import { ICsvEntity } from 'src/app/services/csv/csv.service';
-import { Ingredient } from '../ingredient.model';
-import { Product } from '../product.model';
+import { Ingredient } from '../../models/ingredient.model';
+import { Product } from './product.model';
 
 export class CsvProduct extends Product implements ICsvEntity {
   constructor(private csvRow: string) {
@@ -11,7 +11,7 @@ export class CsvProduct extends Product implements ICsvEntity {
     this.company = values[ProductCsvHead.Firma];
     this.ingredients = values[ProductCsvHead.Inhaltsstoffe]
       ?.split('; ')
-      .map((x) => new Ingredient(x));
+      // .map((x) => new Ingredient(x));
     this.skinStatus = values[ProductCsvHead.Hautzustand]?.split('; ');
     this.usages = values[ProductCsvHead.Anwendung]?.split('; ');
     this.category = values[ProductCsvHead.Kat];

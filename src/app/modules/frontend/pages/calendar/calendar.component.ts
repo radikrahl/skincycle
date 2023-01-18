@@ -1,16 +1,9 @@
 import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
-import { forkJoin } from 'rxjs';
 import { Category } from 'src/app/models/category.model';
-import { CsvCategory } from 'src/app/models/csv/csv.categories.model';
-import { CsvIngredientRelations } from 'src/app/models/csv/csv.ingredient-relations.model';
-import { CsvProduct } from 'src/app/models/csv/csv.products.model';
 import { IngredientRelations } from 'src/app/models/ingredient-relations.model';
-import { Product } from 'src/app/models/product.model';
+import { Product } from 'src/app/products/models/product.model';
 import { Routine } from 'src/app/models/routine.model';
-import { CsvCategoriesService } from 'src/app/services/csv/csv.categories.service';
-import { CsvIngredientRelationsService } from 'src/app/services/csv/csv.ingredient-relations.service';
-import { CsvProductsService } from 'src/app/services/csv/csv.products.service';
-import { CsvRoutinesService } from 'src/app/services/csv/csv.routines.service';
+
 import { CalendarService } from 'src/app/shared/services/calendar.service';
 import {
   HeaderOptions,
@@ -18,6 +11,7 @@ import {
 } from 'src/app/shared/services/header-title.service';
 import { FrontendBaseComponent } from '../../base.component';
 import { CalendarModel, VisibleDay } from './calendar.model';
+
 
 @Component({
   selector: 'sc-calendar',
@@ -51,10 +45,6 @@ export class CalendarComponent
     protected override renderer: Renderer2,
     private titleService: HeaderTitleService,
     private moment: CalendarService,
-    private routinesService: CsvRoutinesService,
-    private ingredientRelationsService: CsvIngredientRelationsService,
-    private productsService: CsvProductsService,
-    private categoriesService: CsvCategoriesService
   ) {
     super(titleService, renderer);
 
@@ -111,59 +101,59 @@ export class CalendarComponent
   private updateView(
     filter: { byRelation: boolean } = { byRelation: false }
   ): void {
-    this.routinesService
-      .getRoutine(this.isEvening, this.calendar.visibleDays[1].date)
-      .subscribe({
-        next: (routine) => {
-          this.routine = routine;
-          if (!routine) return;
-          forkJoin([
-            this.categoriesService.getAll(),
-            this.productsService.getAll(),
-            this.ingredientRelationsService.getByLabel(routine.base),
-          ]).subscribe({
-            next: (values) => {
-              this.buildView(filter, values);
-            },
-          });
-        },
-      });
+    // this.routinesService
+    //   .getRoutine(this.isEvening, this.calendar.visibleDays[1].date)
+    //   .subscribe({
+    //     next: (routine) => {
+    //       this.routine = routine;
+    //       if (!routine) return;
+    //       forkJoin([
+    //         this.categoriesService.getAll(),
+    //         this.productsService.getAll(),
+    //         this.ingredientRelationsService.getByLabel(routine.base),
+    //       ]).subscribe({
+    //         next: (values) => {
+    //           this.buildView(filter, values);
+    //         },
+    //       });
+    //     },
+    //   });
   }
 
   private buildView(
     filter: { byRelation: boolean } = { byRelation: false },
-    values: [CsvCategory[], CsvProduct[], CsvIngredientRelations | undefined]
+    // values: [CsvCategory[], CsvProduct[], CsvIngredientRelations | undefined]
   ) {
-    const categories = values[0];
-    const relations = values[2];
+    // const categories = values[0];
+    // const relations = values[2];
 
-    this.steps = [];
+    // this.steps = [];
 
-    for (let index = 0; index < categories.length; index++) {
-      const category = categories[index];
-      let products: CsvProduct[] = [];
+    // for (let index = 0; index < categories.length; index++) {
+    //   const category = categories[index];
+    //   let products: CsvProduct[] = [];
 
-      if (category) {
-        products.push(...this.productsService.getProductsByCategory(
-          values[1],
-          category.label
-        ));
-      }
+    //   if (category) {
+    //     products.push(...this.productsService.getProductsByCategory(
+    //       values[1],
+    //       category.label
+    //     ));
+    //   }
 
-      if (relations && filter.byRelation) {
-        products = this.productsService.getProductsForWirkstoff(
-          products,
-          relations
-        );
-      }
+    //   if (relations && filter.byRelation) {
+    //     products = this.productsService.getProductsForWirkstoff(
+    //       products,
+    //       relations
+    //     );
+    //   }
 
-      if (products.length > 0) {
-        this.steps.push({
-          category: category,
-          products: products,
-          relations: relations
-        });
-      }
-    }
+    //   if (products.length > 0) {
+    //     this.steps.push({
+    //       category: category,
+    //       products: products,
+    //       relations: relations
+    //     });
+    //   }
+    // }
   }
 }

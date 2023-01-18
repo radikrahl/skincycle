@@ -25,7 +25,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes, {
       initialNavigation: 'enabledBlocking',
-      onSameUrlNavigation: 'reload'
+      onSameUrlNavigation: 'reload',
     }),
   ],
   exports: [RouterModule],
