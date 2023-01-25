@@ -16,7 +16,7 @@ import { ContentLayoutModule } from './layout/content-layout.module';
     ContentLayoutModule,
     NgxsModule.forRoot(),
     NgxsStoragePluginModule.forRoot({
-      key: 'products'
+      key: 'productsState'
     }),
   ],
   providers: [{provide: 'DATA_BASE_URL', useValue: ''},{provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true}],

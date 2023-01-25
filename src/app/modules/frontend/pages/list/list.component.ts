@@ -35,14 +35,13 @@ export class ListComponent
   constructor(
     headerTitleService: HeaderTitleService,
     renderer: Renderer2,
-    private store: Store,
+    private store: Store
   ) {
     super(headerTitleService, renderer);
   }
 
   override ngOnInit(): void {
     super.ngOnInit();
-    this.store.dispatch(new GetAll());
     this.subscription = this.store.select(ProductsState.getProducts).subscribe({
       next: (products) => {
         return (this.products = products);
@@ -50,12 +49,20 @@ export class ListComponent
       complete: () => this.subscription?.unsubscribe(),
     });
 
-    this.categoriesSubscription = this.store.select(ProductsState.getCategories).subscribe({
-      next: (categories) => {
-        return (this.categories = categories);
-      },
-      complete: () => this.categoriesSubscription?.unsubscribe(),
-    });
+    this.categoriesSubscription = this.store
+      .select(ProductsState.getCategories)
+      .subscribe({
+        next: (categories) => {
+          return (this.categories = categories);
+        },
+        complete: () => this.categoriesSubscription?.unsubscribe(),
+      });
+  }
+
+  filterByCategory(label: string) {
+    this.products = this.store.selectSnapshot(
+      ProductsState.getProductsByCategory(label)
+    );
   }
 
   headerCallback() {

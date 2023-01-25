@@ -1,6 +1,6 @@
 <div class="categories">
   <div class="categories__item" *ngFor="let category of categories">
-    <div class="">
+    <div (click)="filterByCategory(category.label)" class="">
       {{category.name}}
     </div>
   </div>
