@@ -1,5 +1,5 @@
 import { BaseEntity } from '../../models/base.model';
-import { Ingredient } from '../../models/ingredient.model';
+import { Ingredient } from '../../ingredients/models/ingredient.model';
 
 export class Product extends BaseEntity {
   public name?: string;

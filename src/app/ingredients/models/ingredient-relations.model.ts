@@ -1,4 +1,4 @@
-import { BaseEntity } from './base.model';
+import { BaseEntity } from '../../models/base.model';
 import { Ingredient } from './ingredient.model';
 
 export class IngredientRelations extends BaseEntity {

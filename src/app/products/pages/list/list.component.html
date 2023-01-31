@@ -1,5 +1,5 @@
 <div class="categories">
-  <div class="categories__item" *ngFor="let category of categories">
+  <div class="categories__item" *ngFor="let category of categories$ | async">
     <div (click)="filterByCategory(category.label)" class="">
       {{category.name}}
     </div>
@@ -8,7 +8,7 @@
 
 <div class="products">
   <ul class="products__list">
-    <li class="products__card" *ngFor="let product of products">
+    <li class="products__card" *ngFor="let product of products$ | async">
       <sc-card [showCategory]="true" [product]="product">
         <span>{{product.amount}}, {{product.price}}</span>
         <h4>Hautzustand</h4>

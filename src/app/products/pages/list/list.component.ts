@@ -1,15 +1,16 @@
 import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
-import { Subscription, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Category } from 'src/app/models/category.model';
 import { Product } from 'src/app/products/models/product.model';
 import {
   HeaderOptions,
   HeaderTitleService,
 } from 'src/app/shared/services/header-title.service';
-import { FrontendBaseComponent } from '../../base.component';
-import { Store } from '@ngxs/store';
-import { ProductsState } from '../../../../products/products.state';
-import { GetAll } from '../../../../products/products.actions';
+import { FrontendBaseComponent } from '../../../modules/frontend/base.component';
+import { Select, Store } from '@ngxs/store';
+import { ProductsState } from '../../state/products.state';
+import { CategoriesState } from '../../state/categories.state';
+import { ProductsQueries } from '../../queries/products.queries';
 
 @Component({
   selector: 'sc-list',
@@ -27,11 +28,11 @@ export class ListComponent
     callback: this.headerCallback,
   };
 
-  products: Product[] = [];
-  categories: Category[] = [];
+  products$?: Observable<Product[]>;
 
-  private subscription?: Subscription;
-  private categoriesSubscription?: Subscription;
+  @Select(CategoriesState.categories)
+  categories$?: Observable<Category[]>;
+
   constructor(
     headerTitleService: HeaderTitleService,
     renderer: Renderer2,
@@ -42,26 +43,12 @@ export class ListComponent
 
   override ngOnInit(): void {
     super.ngOnInit();
-    this.subscription = this.store.select(ProductsState.getProducts).subscribe({
-      next: (products) => {
-        return (this.products = products);
-      },
-      complete: () => this.subscription?.unsubscribe(),
-    });
-
-    this.categoriesSubscription = this.store
-      .select(ProductsState.getCategories)
-      .subscribe({
-        next: (categories) => {
-          return (this.categories = categories);
-        },
-        complete: () => this.categoriesSubscription?.unsubscribe(),
-      });
+    this.products$ = this.store.select(ProductsQueries.getProducts);
   }
 
   filterByCategory(label: string) {
-    this.products = this.store.selectSnapshot(
-      ProductsState.getProductsByCategory(label)
+    this.products$ = this.store.select(
+      ProductsQueries.getProductsByCategory(label)
     );
   }
 

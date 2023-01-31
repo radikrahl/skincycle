@@ -1,5 +1,4 @@
 import { ICsvEntity } from 'src/app/services/csv/csv.service';
-import { Ingredient } from '../../models/ingredient.model';
 import { Product } from './product.model';
 
 export class CsvProduct extends Product implements ICsvEntity {

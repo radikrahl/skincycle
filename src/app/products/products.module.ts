@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CardComponent } from './views/card/card.component';
 import { NgxsModule } from '@ngxs/store';
-import { ProductsState } from './products.state';
-import { DataService } from '../shared/services/data.service';
+import { ProductsState } from './state/products.state';
+import { ApiDataService } from '../shared/services/apidata.service';
+import { CardComponent } from './components/card/card.component';
+import { CategoriesState } from './state/categories.state';
 
 @NgModule({
   declarations: [CardComponent],
-  imports: [CommonModule, NgxsModule.forFeature([ProductsState])],
+  imports: [CommonModule, NgxsModule.forFeature([ProductsState, CategoriesState])],
   exports: [CardComponent],
-  providers: [DataService]
+  providers: [ApiDataService]
 })
 export class ProductsModule {}

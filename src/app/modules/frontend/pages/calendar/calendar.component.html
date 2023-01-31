@@ -5,10 +5,10 @@
       <div>{{item.day}}</div>
     </div>
   </div>
-  <ng-container *ngIf="routine?.base">
+  <ng-container *ngIf="(routine$ | async)?.base">
     <div class="calendar__base">
       <div class="text-lg font-primary--bold align-center">
-        {{routine?.base}}
+        {{(routine$ | async)?.base}}
       </div>
     </div>
   </ng-container>

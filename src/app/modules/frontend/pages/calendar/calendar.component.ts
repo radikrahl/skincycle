@@ -1,23 +1,27 @@
 import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { Category } from 'src/app/models/category.model';
-import { IngredientRelations } from 'src/app/models/ingredient-relations.model';
+import { IngredientRelations } from 'src/app/ingredients/models/ingredient-relations.model';
 import { Product } from 'src/app/products/models/product.model';
 import { Routine } from 'src/app/models/routine.model';
 
-import { CalendarService } from 'src/app/shared/services/calendar.service';
 import {
   HeaderOptions,
   HeaderTitleService,
 } from 'src/app/shared/services/header-title.service';
 import { FrontendBaseComponent } from '../../base.component';
 import { CalendarModel, VisibleDay } from './calendar.model';
-
+import { Select, Store } from '@ngxs/store';
+import { IngredientsState } from 'src/app/ingredients/ingredients.state';
+import { Observable } from 'rxjs';
+import { ProductsState } from 'src/app/products/state/products.state';
+import { DateService } from 'src/app/shared/services/date.service';
+import { ProductsQueries } from 'src/app/products/queries/products.queries';
 
 @Component({
   selector: 'sc-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss'],
-  providers: [CalendarService],
+  providers: [DateService],
 })
 export class CalendarComponent
   extends FrontendBaseComponent
@@ -27,12 +31,12 @@ export class CalendarComponent
   public themeClass: string;
   public headerOptions: HeaderOptions;
 
-  public routine?: Routine;
+  public routine$: Observable<Routine | undefined> = new Observable();
   public calendar: CalendarModel;
   public steps: {
     category: Category;
     products: Product[];
-    relations?: IngredientRelations
+    relations?: IngredientRelations;
   }[] = [];
   selectedStep:
     | {
@@ -44,7 +48,9 @@ export class CalendarComponent
   constructor(
     protected override renderer: Renderer2,
     private titleService: HeaderTitleService,
-    private moment: CalendarService,
+    private moment: DateService,
+
+    private store: Store
   ) {
     super(titleService, renderer);
 
@@ -66,7 +72,16 @@ export class CalendarComponent
 
   override ngOnInit(): void {
     super.ngOnInit();
-    this.updateView();
+    this.routine$ = this.store.select(
+      IngredientsState.getRoutine(
+        this.isEvening,
+        this.calendar.visibleDays[1].date //get selected day
+      )
+    );
+
+    this.store.select(ProductsQueries.getProductsForCategories).subscribe((x) => {
+      this.steps.push(...x);
+    });
   }
 
   headerCallback() {
@@ -79,81 +94,15 @@ export class CalendarComponent
       new HeaderOptions('Kalender', iconClass, this.headerCallback.bind(this))
     );
     this.renderer.addClass(document.body, this.themeClass);
-
-    this.updateView();
   }
 
   selectDay(event: MouseEvent, date: Date) {
     this.calendar.visibleDays = this.moment
       .getVisibleDays(date)
       .map((x) => new VisibleDay(x));
-    this.updateView();
   }
 
-  apply() {
-    this.updateView({ byRelation: true });
-  }
+  apply() {}
 
-  clear() {
-    this.updateView();
-  }
-
-  private updateView(
-    filter: { byRelation: boolean } = { byRelation: false }
-  ): void {
-    // this.routinesService
-    //   .getRoutine(this.isEvening, this.calendar.visibleDays[1].date)
-    //   .subscribe({
-    //     next: (routine) => {
-    //       this.routine = routine;
-    //       if (!routine) return;
-    //       forkJoin([
-    //         this.categoriesService.getAll(),
-    //         this.productsService.getAll(),
-    //         this.ingredientRelationsService.getByLabel(routine.base),
-    //       ]).subscribe({
-    //         next: (values) => {
-    //           this.buildView(filter, values);
-    //         },
-    //       });
-    //     },
-    //   });
-  }
-
-  private buildView(
-    filter: { byRelation: boolean } = { byRelation: false },
-    // values: [CsvCategory[], CsvProduct[], CsvIngredientRelations | undefined]
-  ) {
-    // const categories = values[0];
-    // const relations = values[2];
-
-    // this.steps = [];
-
-    // for (let index = 0; index < categories.length; index++) {
-    //   const category = categories[index];
-    //   let products: CsvProduct[] = [];
-
-    //   if (category) {
-    //     products.push(...this.productsService.getProductsByCategory(
-    //       values[1],
-    //       category.label
-    //     ));
-    //   }
-
-    //   if (relations && filter.byRelation) {
-    //     products = this.productsService.getProductsForWirkstoff(
-    //       products,
-    //       relations
-    //     );
-    //   }
-
-    //   if (products.length > 0) {
-    //     this.steps.push({
-    //       category: category,
-    //       products: products,
-    //       relations: relations
-    //     });
-    //   }
-    // }
-  }
+  clear() {}
 }

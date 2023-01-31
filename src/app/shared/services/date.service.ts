@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { subDays, addDays } from 'date-fns';
 
 @Injectable()
-export class CalendarService {
+export class DateService {
   isEvening() {
     const today = new Date();
     return today.getHours() > 13;

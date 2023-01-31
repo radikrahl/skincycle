@@ -3,8 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, ObservableInput } from 'rxjs';
 import { Entity } from 'src/app/models/base.model';
 
+
 @Injectable()
-export class DataService {
+export class ApiDataService {
   constructor(private http: HttpClient) {}
 
   public getAll(url: string): Observable<Entity[]> {
