@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FrontendModule } from '../../frontend.module';
+import { FrontendModule } from '../../../modules/frontend/frontend.module';
 
 import { CalendarComponent } from './calendar.component';
 

@@ -1,6 +1,6 @@
 import { ICsvEntity } from "src/app/services/csv/csv.service";
-import { IngredientRelations } from "../../ingredients/models/ingredient-relations.model";
-import { Ingredient } from "../../ingredients/models/ingredient.model";
+import { IngredientRelations } from "../../calendar/models/ingredient-relations.model";
+import { Ingredient } from "../../calendar/models/ingredient.model";
 
 export class CsvIngredientRelations
   extends IngredientRelations

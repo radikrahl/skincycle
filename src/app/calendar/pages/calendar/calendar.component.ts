@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { Category } from 'src/app/models/category.model';
-import { IngredientRelations } from 'src/app/ingredients/models/ingredient-relations.model';
+import { IngredientRelations } from 'src/app/calendar/models/ingredient-relations.model';
 import { Product } from 'src/app/products/models/product.model';
 import { Routine } from 'src/app/models/routine.model';
 
@@ -8,14 +8,15 @@ import {
   HeaderOptions,
   HeaderTitleService,
 } from 'src/app/shared/services/header-title.service';
-import { FrontendBaseComponent } from '../../base.component';
-import { CalendarModel, VisibleDay } from './calendar.model';
+import { FrontendBaseComponent } from '../../../modules/frontend/base.component';
+import { CalendarModel, VisibleDay } from '../../models/calendar.model';
 import { Select, Store } from '@ngxs/store';
-import { IngredientsState } from 'src/app/ingredients/ingredients.state';
+import { IngredientsState } from 'src/app/calendar/state/ingredients.state';
 import { Observable } from 'rxjs';
 import { ProductsState } from 'src/app/products/state/products.state';
 import { DateService } from 'src/app/shared/services/date.service';
 import { ProductsQueries } from 'src/app/products/queries/products.queries';
+import { RoutineQueries } from '../../queries/routine.queries';
 
 @Component({
   selector: 'sc-calendar',
@@ -73,14 +74,14 @@ export class CalendarComponent
   override ngOnInit(): void {
     super.ngOnInit();
     this.routine$ = this.store.select(
-      IngredientsState.getRoutine(
+      RoutineQueries.getRoutine(
         this.isEvening,
         this.calendar.visibleDays[1].date //get selected day
       )
     );
 
-    this.store.select(ProductsQueries.getProductsForCategories).subscribe((x) => {
-      this.steps.push(...x);
+    this.store.select(ProductsQueries.getProductsForCategories).subscribe((steps) => {
+      this.steps = steps;
     });
   }
 

@@ -1,13 +1,10 @@
-import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { Directive, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import {
   HeaderOptions,
   HeaderTitleService,
 } from 'src/app/shared/services/header-title.service';
 
-@Component({
-  selector: 'sc-base',
-  template: '<div></div>'
-})
+@Directive()
 export abstract class FrontendBaseComponent implements OnInit, OnDestroy {
   public abstract headerOptions: HeaderOptions;
   public abstract themeClass: string;

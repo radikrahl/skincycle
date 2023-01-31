@@ -1,5 +1,5 @@
 import { createSelector, Selector } from '@ngxs/store';
-import { IngredientRelations } from 'src/app/ingredients/models/ingredient-relations.model';
+import { IngredientRelations } from 'src/app/calendar/models/ingredient-relations.model';
 import { Category } from 'src/app/models/category.model';
 import { Product } from '../models/product.model';
 import { CategoriesState } from '../state/categories.state';
@@ -33,7 +33,7 @@ export class ProductsQueries {
     );
   }
 
-  @Selector([CategoriesState.categories, ProductsState.products])
+  @Selector([CategoriesState.categories, ProductsQueries.getProducts])
   static getProductsForCategories(categories: Category[], products: Product[]) {
     return categories.map((category) => {
       return {
