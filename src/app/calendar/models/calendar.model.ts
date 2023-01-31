@@ -1,3 +1,7 @@
+import { Category } from 'src/app/models/category.model';
+import { Product } from 'src/app/products/models/product.model';
+import { IngredientRelations } from './ingredient-relations.model';
+
 export class VisibleDay {
   public name: string;
   public label: string;
@@ -23,4 +27,10 @@ export class CalendarModel {
     this.visibleDays = visibleDays;
     this.today = new Date();
   }
+}
+
+export interface CalendarStepModel {
+  category: Category;
+  products: Product[];
+  relations?: IngredientRelations;
 }

@@ -39,12 +39,9 @@ export class RoutinesState implements NgxsOnInit {
       return;
     }
 
-    return this.dataService.getAll('/api/ingredientRelations').pipe(
-      tap((values) => {
-        const routines = values as Routine[];
-
-        ctx.setState({ routines });
-      })
-    );
+    return this.dataService.getAll('/api/routines').subscribe((values) => {
+      const routines = values as Routine[];
+      ctx.setState({ routines });
+    });
   }
 }

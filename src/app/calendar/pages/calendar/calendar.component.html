@@ -5,10 +5,10 @@
       <div>{{item.day}}</div>
     </div>
   </div>
-  <ng-container *ngIf="(routine$ | async)?.base">
+  <ng-container *ngIf="routine?.base">
     <div class="calendar__base">
       <div class="text-lg font-primary--bold align-center">
-        {{(routine$ | async)?.base}}
+        {{routine?.base}}
       </div>
     </div>
   </ng-container>
@@ -31,7 +31,7 @@
             <span class="font-secondary--bold">
               {{step.relations?.label}}
             </span>
-            <ng-container *ngFor="let ingredient of step.relations?.ingredients">{{ingredient.name}};
+            <ng-container *ngFor="let ingredient of step.relations?.ingredients">{{ingredient}};
             </ng-container>
             <span style="float:right">Prio: {{step.relations?.prio}}</span>
           </sc-card>

@@ -1,14 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  State,
-  Selector,
-  Action,
-  StateContext,
-  createSelector,
-  NgxsOnInit,
-} from '@ngxs/store';
-import { forkJoin, tap } from 'rxjs';
-import { Routine } from '../../models/routine.model';
+import { State, Selector, Action, StateContext, NgxsOnInit } from '@ngxs/store';
 import { ApiDataService } from '../../shared/services/apidata.service';
 import { GetIngredients } from './actions';
 import { IngredientRelations } from '../models/ingredient-relations.model';
@@ -25,25 +16,14 @@ export interface IngredientsStateModel {
 })
 @Injectable()
 export class IngredientsState implements NgxsOnInit {
+  @Selector()
+  static ingredients(state: IngredientsStateModel) {
+    return state;
+  }
+
   constructor(private dataService: ApiDataService) {}
   ngxsOnInit(ctx: StateContext<IngredientsStateModel>): void {
     ctx.dispatch(new GetIngredients());
-  }
-
-  @Selector()
-  static getIngredients(state: IngredientsStateModel): IngredientRelations[] {
-    return state.ingredients;
-  }
-
-  static getRelationByLabel(label: string) {
-    return createSelector(
-      [IngredientsState],
-      (state: { ingredients: IngredientsStateModel }) => {
-        return state.ingredients.ingredients.find(
-          (relation) => relation.label === label
-        );
-      }
-    );
   }
 
   @Action(GetIngredients)
@@ -52,12 +32,12 @@ export class IngredientsState implements NgxsOnInit {
       return;
     }
 
-    return this.dataService.getAll('/api/ingredientRelations').pipe(
-      tap((values) => {
+    return this.dataService
+      .getAll('/api/ingredientRelations')
+      .subscribe((values) => {
         const ingredients = values as IngredientRelations[];
 
         ctx.setState({ ingredients: ingredients });
-      })
-    );
+      });
   }
 }

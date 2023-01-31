@@ -26,7 +26,7 @@ export class ProductsQueries {
       (products: Product[]) => {
         return products.filter((product) => {
           return product.ingredients.some((r) =>
-            relations.ingredients.some((tN) => tN.name === r)
+            relations.ingredients.some((tN) => tN === r)
           );
         });
       }

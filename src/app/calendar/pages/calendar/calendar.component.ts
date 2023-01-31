@@ -1,7 +1,4 @@
 import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
-import { Category } from 'src/app/models/category.model';
-import { IngredientRelations } from 'src/app/calendar/models/ingredient-relations.model';
-import { Product } from 'src/app/products/models/product.model';
 import { Routine } from 'src/app/models/routine.model';
 
 import {
@@ -9,14 +6,18 @@ import {
   HeaderTitleService,
 } from 'src/app/shared/services/header-title.service';
 import { FrontendBaseComponent } from '../../../modules/frontend/base.component';
-import { CalendarModel, VisibleDay } from '../../models/calendar.model';
-import { Select, Store } from '@ngxs/store';
-import { IngredientsState } from 'src/app/calendar/state/ingredients.state';
+import {
+  CalendarModel,
+  CalendarStepModel,
+  VisibleDay,
+} from '../../models/calendar.model';
+import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { ProductsState } from 'src/app/products/state/products.state';
 import { DateService } from 'src/app/shared/services/date.service';
 import { ProductsQueries } from 'src/app/products/queries/products.queries';
 import { RoutineQueries } from '../../queries/routine.queries';
+import { IngredientQueries } from '../../queries/ingredient.queries';
+import { CategoriesState } from 'src/app/products/state/categories.state';
 
 @Component({
   selector: 'sc-calendar',
@@ -33,19 +34,13 @@ export class CalendarComponent
   public headerOptions: HeaderOptions;
 
   public routine$: Observable<Routine | undefined> = new Observable();
+
+  public routine?: Routine;
+
   public calendar: CalendarModel;
-  public steps: {
-    category: Category;
-    products: Product[];
-    relations?: IngredientRelations;
-  }[] = [];
-  selectedStep:
-    | {
-        category: Category;
-        products: Product[];
-        isOpen: boolean;
-      }
-    | undefined;
+
+  public steps: CalendarStepModel[] = [];
+
   constructor(
     protected override renderer: Renderer2,
     private titleService: HeaderTitleService,
@@ -80,9 +75,13 @@ export class CalendarComponent
       )
     );
 
-    this.store.select(ProductsQueries.getProductsForCategories).subscribe((steps) => {
-      this.steps = steps;
-    });
+    this.routine$.subscribe((routine) => (this.routine = routine));
+
+    this.store
+      .select(ProductsQueries.getProductsForCategories)
+      .subscribe((steps) => {
+        this.steps = steps;
+      });
   }
 
   headerCallback() {
@@ -101,9 +100,35 @@ export class CalendarComponent
     this.calendar.visibleDays = this.moment
       .getVisibleDays(date)
       .map((x) => new VisibleDay(x));
+
+    this.routine = this.store.selectSnapshot(
+      RoutineQueries.getRoutine(
+        this.isEvening,
+        this.calendar.visibleDays[1].date //get selected day
+      )
+    );
   }
 
-  apply() {}
+  apply() {
+    if (this.routine) {
+      const ingredients = this.store.selectSnapshot(
+        IngredientQueries.getRelationByLabel(this.routine?.base)
+      );
 
-  clear() {}
+      if (ingredients) {
+        const products = this.store.selectSnapshot(
+          ProductsQueries.getProductsForIngredients(ingredients)
+        );
+        this.steps = this.store.selectSnapshot(
+          CategoriesState.getStepModel(products)
+        );
+      }
+    }
+  }
+
+  clear() {
+    this.steps = this.store.selectSnapshot(
+      ProductsQueries.getProductsForCategories
+    );
+  }
 }

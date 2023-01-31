@@ -1,5 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Action, NgxsOnInit, Selector, State, StateContext } from '@ngxs/store';
+import {
+  Action,
+  createSelector,
+  NgxsOnInit,
+  Selector,
+  State,
+  StateContext,
+} from '@ngxs/store';
 import { tap } from 'rxjs';
 import { Category } from 'src/app/models/category.model';
 import { ApiDataService } from 'src/app/shared/services/apidata.service';
@@ -28,20 +35,34 @@ export class CategoriesState implements NgxsOnInit {
     return state.categories;
   }
 
-  /**
-   *
-   */
   constructor(private dataService: ApiDataService) {}
   ngxsOnInit(ctx: StateContext<CategoryStateModel>): void {
     ctx.dispatch(new GetCategories());
   }
+
+  static getStepModel(products: Product[]) {
+    return createSelector(
+      [CategoriesState.categories],
+      (categories: Category[]) => {
+        return categories.map((category) => {
+          return {
+            category: category,
+            products: products.filter(
+              (product) => product.category === category.label
+            ),
+          };
+        });
+      }
+    );
+  }
+
   @Action(GetCategories)
   getAll(ctx: StateContext<CategoryStateModel>) {
     return this.dataService.getAll('/api/categories').pipe(
       tap((values) => {
         const categories = values as Category[];
 
-        ctx.setState({categories: categories});
+        ctx.setState({ categories: categories });
       })
     );
   }
