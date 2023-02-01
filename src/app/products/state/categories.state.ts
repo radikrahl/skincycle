@@ -8,12 +8,12 @@ import {
   StateContext,
 } from '@ngxs/store';
 import { tap } from 'rxjs';
-import { Category } from 'src/app/models/category.model';
+import { Category } from 'src/app/products/models/category.model';
 import { ApiDataService } from 'src/app/shared/services/apidata.service';
 import { Product } from '../models/product.model';
 import { GetCategories } from './actions';
 
-type CategoryMap = {
+export type CategoryMap = {
   [categoryName: string]: Product[] | null;
 };
 
@@ -31,9 +31,13 @@ export interface CategoryStateModel {
 export class CategoriesState implements NgxsOnInit {
   @Selector()
   static categories(state: CategoryStateModel) {
-    console.log(state);
     return state.categories;
   }
+
+  // @Selector()
+  // static getCategories(state: CategoryStateModel) {
+  //   return state.categories.map(x => x[x.name])
+  // }
 
   constructor(private dataService: ApiDataService) {}
   ngxsOnInit(ctx: StateContext<CategoryStateModel>): void {
@@ -57,13 +61,11 @@ export class CategoriesState implements NgxsOnInit {
   }
 
   @Action(GetCategories)
-  getAll(ctx: StateContext<CategoryStateModel>) {
-    return this.dataService.getAll('/api/categories').pipe(
-      tap((values) => {
-        const categories = values as Category[];
+  protected getAll(ctx: StateContext<CategoryStateModel>) {
+    return this.dataService.getAll('/api/categories').subscribe((values) => {
+      const categories = values as Category[];
 
-        ctx.setState({ categories: categories });
-      })
-    );
+      ctx.setState({ categories: categories });
+    });
   }
 }

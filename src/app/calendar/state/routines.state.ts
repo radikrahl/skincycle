@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { State, NgxsOnInit, StateContext, Action, Selector } from '@ngxs/store';
-import { tap } from 'rxjs';
-import { Routine } from 'src/app/models/routine.model';
+import { Routine } from 'src/app/calendar/models/routine.model';
 import { ApiDataService } from 'src/app/shared/services/apidata.service';
 import { GetRoutines } from './actions';
 

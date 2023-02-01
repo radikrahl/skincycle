@@ -1,4 +1,4 @@
-import { BaseEntity } from '../../models/base.model';
+import { BaseEntity } from '../../core/models/base.model';
 
 export class IngredientRelations extends BaseEntity {
   public label = '';

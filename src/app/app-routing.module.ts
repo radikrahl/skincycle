@@ -8,7 +8,7 @@ const routes: Routes = [
     path: '',
     component: ContentLayoutComponent,
     loadChildren: () =>
-      import('./modules/frontend/frontend.module').then(
+      import('./home/frontend.module').then(
         (m) => m.FrontendModule
       ),
   },
@@ -16,7 +16,7 @@ const routes: Routes = [
     path: 'login',
     component: ContentLayoutComponent,
     loadChildren: () =>
-      import('./modules/authentication/auth.module').then((m) => m.AuthModule),
+      import('./authentication/auth.module').then((m) => m.AuthModule),
   },
   { path: '**', component: PageNotFoundComponent },
 ];

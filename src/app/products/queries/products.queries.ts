@@ -1,6 +1,6 @@
 import { createSelector, Selector } from '@ngxs/store';
 import { IngredientRelations } from 'src/app/calendar/models/ingredient-relations.model';
-import { Category } from 'src/app/models/category.model';
+import { Category } from 'src/app/products/models/category.model';
 import { Product } from '../models/product.model';
 import { CategoriesState } from '../state/categories.state';
 import { ProductsState, ProductsStateModel } from '../state/products.state';

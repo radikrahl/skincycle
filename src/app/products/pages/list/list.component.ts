@@ -1,16 +1,15 @@
 import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Category } from 'src/app/models/category.model';
+import { Category } from 'src/app/products/models/category.model';
 import { Product } from 'src/app/products/models/product.model';
 import {
   HeaderOptions,
   HeaderTitleService,
 } from 'src/app/shared/services/header-title.service';
-import { FrontendBaseComponent } from '../../../modules/frontend/base.component';
 import { Select, Store } from '@ngxs/store';
-import { ProductsState } from '../../state/products.state';
 import { CategoriesState } from '../../state/categories.state';
 import { ProductsQueries } from '../../queries/products.queries';
+import { FrontendBaseComponent } from 'src/app/home/base.component';
 
 @Component({
   selector: 'sc-list',

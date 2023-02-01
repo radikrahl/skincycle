@@ -1,4 +1,5 @@
-import { Category } from 'src/app/models/category.model';
+import { Category } from 'src/app/products/models/category.model';
+import { Routine } from 'src/app/calendar/models/routine.model';
 import { Product } from 'src/app/products/models/product.model';
 import { IngredientRelations } from './ingredient-relations.model';
 
@@ -19,14 +20,23 @@ export class VisibleDay {
   }
 }
 
-export class CalendarModel {
+export class CalendarDays {
   public visibleDays: VisibleDay[];
   public today: Date;
+
+  public isEvening = false;
 
   constructor(visibleDays: VisibleDay[]) {
     this.visibleDays = visibleDays;
     this.today = new Date();
   }
+}
+
+export interface CalendarViewModel {
+  days: CalendarDays;
+  steps: CalendarStepModel[];
+
+  routine: Routine | undefined;
 }
 
 export interface CalendarStepModel {

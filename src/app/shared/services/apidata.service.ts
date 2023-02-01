@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, ObservableInput } from 'rxjs';
-import { Entity } from 'src/app/models/base.model';
+import { Entity } from 'src/app/core/models/base.model';
 
 
 @Injectable()

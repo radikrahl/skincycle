@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { BaseEntity } from 'src/app/models/base.model';
+import { BaseEntity } from 'src/app/core/models/base.model';
 
 @Injectable()
 export abstract class CsvService<T extends ICsvEntity> {

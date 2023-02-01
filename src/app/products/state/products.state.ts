@@ -9,7 +9,7 @@ import {
 import { Product } from '../models/product.model';
 import { ApiDataService } from '../../shared/services/apidata.service';
 import { GetProducts } from './actions';
-import { tap } from 'rxjs';
+import { share, tap } from 'rxjs';
 
 export interface ProductsStateModel {
   products: Product[];
@@ -39,6 +39,7 @@ export class ProductsState implements NgxsOnInit {
     }
 
     return this.dataService.getAll('/api/products').pipe(
+      share(),
       tap((values) => {
         const products = values as Product[];
         products.map((product) => {

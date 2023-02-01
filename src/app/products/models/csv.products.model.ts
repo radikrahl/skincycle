@@ -1,4 +1,4 @@
-import { ICsvEntity } from 'src/app/services/csv/csv.service';
+import { ICsvEntity } from 'src/app/shared/services/csv.service';
 import { Product } from './product.model';
 
 export class CsvProduct extends Product implements ICsvEntity {

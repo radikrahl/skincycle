@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, ofActionDispatched } from '@ngxs/store';
-import { Logout } from './modules/authentication/auth.actions';
+import { Logout } from './authentication/auth.actions';
 
 @Component({
   selector: 'sc-root',
