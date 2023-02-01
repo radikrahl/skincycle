@@ -12,7 +12,7 @@ import { AccordionItemDirective } from "./directives/accordion-item.directive";
     AccordionContentDirective,
     AccordionHeaderDirective
   ],
-  imports: [CommonModule],
+  imports: [],
   exports: [
     AccordionComponent,
     AccordionItemDirective,

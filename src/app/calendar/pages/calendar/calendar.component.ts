@@ -11,7 +11,7 @@ import { DateService } from 'src/app/shared/services/date.service';
 
 import { CalendarViewQueries } from '../../queries/calendar-view.queries';
 import { SetCalendarModel, SetVisibleDays } from '../../state/actions';
-import { FrontendBaseComponent } from 'src/app/home/base.component';
+import { FrontendBaseComponent } from 'src/app/core/components/base.component';
 
 @Component({
   selector: 'sc-calendar',
@@ -38,7 +38,7 @@ export class CalendarComponent
   ) {
     super(titleService, renderer);
 
-    this.isEvening = moment.isEvening();
+    this.isEvening = this.moment.isEvening();
     this.themeClass = this.isEvening ? 'theme-blue' : 'theme-orange';
     const iconClass = this.isEvening ? 'sc-icon-moon' : 'sc-icon-sun';
     this.headerOptions = new HeaderOptions(
@@ -72,7 +72,11 @@ export class CalendarComponent
     this.store.dispatch(new SetVisibleDays(date));
   }
 
-  apply() {}
+  apply() {
+    console.log('apply filter');
+  }
 
-  clear() {}
+  clear() {
+    console.log('clear filter');
+  }
 }

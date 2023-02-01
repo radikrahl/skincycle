@@ -9,7 +9,7 @@ import {
 import { Select, Store } from '@ngxs/store';
 import { CategoriesState } from '../../state/categories.state';
 import { ProductsQueries } from '../../queries/products.queries';
-import { FrontendBaseComponent } from 'src/app/home/base.component';
+import { FrontendBaseComponent } from 'src/app/core/components/base.component';
 
 @Component({
   selector: 'sc-list',
