@@ -1,5 +1,4 @@
 import { BaseEntity } from '../../core/models/base.model';
-import { Ingredient } from '../../calendar/models/ingredient.model';
 
 export class Product extends BaseEntity {
   public name?: string;

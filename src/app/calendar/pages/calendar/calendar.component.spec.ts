@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FrontendModule } from '../../../modules/frontend/frontend.module';
+import { NgxsModule } from '@ngxs/store';
 
 import { CalendarComponent } from './calendar.component';
 
@@ -10,7 +10,7 @@ describe('CalendarComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [CalendarComponent],
-      imports: [FrontendModule]
+      imports: [NgxsModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CalendarComponent);

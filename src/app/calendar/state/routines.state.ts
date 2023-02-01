@@ -28,7 +28,7 @@ export class RoutinesState implements NgxsOnInit {
 
   constructor(private dataService: ApiDataService) {}
 
-  ngxsOnInit(ctx: StateContext<any>): void {
+  ngxsOnInit(ctx: StateContext<RoutinesStateModel>): void {
     ctx.dispatch(new GetRoutines());
   }
 

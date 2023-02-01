@@ -7,7 +7,6 @@ import {
   State,
   StateContext,
 } from '@ngxs/store';
-import { tap } from 'rxjs';
 import { Category } from 'src/app/products/models/category.model';
 import { ApiDataService } from 'src/app/shared/services/apidata.service';
 import { Product } from '../models/product.model';

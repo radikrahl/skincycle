@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { NgxsModule } from '@ngxs/store';
-import { CardComponent } from '../products/components/card/card.component';
 import { ProductsModule } from '../products/products.module';
 import { ApiDataService } from '../shared/services/apidata.service';
 import { DateService } from '../shared/services/date.service';

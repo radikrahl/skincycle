@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, ObservableInput } from 'rxjs';
 import { Entity } from 'src/app/core/models/base.model';
 
-
 @Injectable()
 export class ApiDataService {
   constructor(private http: HttpClient) {}
@@ -13,9 +12,9 @@ export class ApiDataService {
   }
 
   private handleError<T>(
-    err: any,
+    err: string,
     caught: Observable<T[]>
-  ): ObservableInput<any> {
+  ): ObservableInput<T[]> {
     throw new Error(err);
   }
 }

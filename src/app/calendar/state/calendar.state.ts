@@ -1,15 +1,9 @@
 import { Injectable } from '@angular/core';
-import {
-  Action,
-  NgxsOnInit,
-  Selector,
-  State,
-  StateContext,
-} from '@ngxs/store';
+import { Action, NgxsOnInit, Selector, State, StateContext } from '@ngxs/store';
 import { Routine } from 'src/app/calendar/models/routine.model';
 import { DateService } from 'src/app/shared/services/date.service';
 import { VisibleDay } from '../models/calendar.model';
-import { SetCalendarModel, SetRoutine, SetVisibleDays } from './actions';
+import { SetCalendarModel, SetVisibleDays } from './actions';
 
 export interface CalendarStateModel {
   routine?: Routine;
@@ -21,7 +15,7 @@ export interface CalendarStateModel {
   name: 'calendar',
   defaults: {
     visibleDays: [],
-    isEvening: false
+    isEvening: false,
   },
 })
 @Injectable()
@@ -44,7 +38,10 @@ export class CalendarState implements NgxsOnInit {
   }
 
   ngxsOnInit(ctx: StateContext<CalendarStateModel>): void {
-    ctx.patchState({isEvening: this.dateService.isEvening(), visibleDays: this.getVisibleDates() });
+    ctx.patchState({
+      isEvening: this.dateService.isEvening(),
+      visibleDays: this.getVisibleDates(),
+    });
   }
 
   @Action(SetVisibleDays)
@@ -54,7 +51,7 @@ export class CalendarState implements NgxsOnInit {
 
   @Action(SetCalendarModel)
   setModel(ctx: StateContext<CalendarStateModel>, payload: SetCalendarModel) {
-    ctx.patchState(({isEvening: payload.isEvening}))
+    ctx.patchState({ isEvening: payload.isEvening });
   }
   private getVisibleDates(date: Date = new Date()): VisibleDay[] {
     return this.dateService.getVisibleDays(date).map((x) => new VisibleDay(x));

@@ -1,12 +1,7 @@
-import { createSelector, Selector } from '@ngxs/store';
+import { Selector } from '@ngxs/store';
 import { Routine } from 'src/app/calendar/models/routine.model';
 import { ProductsQueries } from 'src/app/products/queries/products.queries';
-import {
-  CalendarDays,
-  CalendarStepModel,
-  CalendarViewModel,
-  VisibleDay,
-} from '../models/calendar.model';
+import { CalendarDays, CalendarStepModel } from '../models/calendar.model';
 import { CalendarState, CalendarStateModel } from '../state/calendar.state';
 import { RoutinesState } from '../state/routines.state';
 
