@@ -79,14 +79,16 @@ export class CalendarViewQueries {
     CalendarViewQueries.getProductsByRelation,
   ])
   static getCategoryStepModel(categories: Category[], products: Product[]) {
-    return categories.map((category) => {
-      return {
-        category: category,
-        products: products.filter(
-          (product) => product.category === category.label
-        ),
-      };
-    });
+    return categories
+      .map((category) => {
+        return {
+          category: category,
+          products: products.filter(
+            (product) => product.category === category.label
+          ),
+        };
+      })
+      .filter((x) => x.products.length > 0);
   }
 
   @Selector([CategoriesState.entities(), ProductsState.entities()])

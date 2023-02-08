@@ -4,10 +4,7 @@ import { Store } from '@ngxs/store';
 import { DateService } from 'src/app/shared/services/date.service';
 
 import { CalendarViewQueries } from '../../selectors/calendar-view.queries';
-import {
-  SetCalendarModel,
-  SetVisibleDays,
-} from '../../state/actions';
+import { SetCalendarModel, SetVisibleDays } from '../../state/actions';
 import { FrontendBaseComponent } from 'src/app/core/components/base.component';
 import { SetHeaderIcon } from 'src/app/layout/header/state/actions';
 import { HeaderOptions } from 'src/app/layout/header/models/options.model';
@@ -42,7 +39,8 @@ export class CalendarComponent
     this.headerOptions = new HeaderOptions(
       'Kalender',
       iconClass,
-      this.headerCallback.bind(this)
+      this.headerCallback.bind(this),
+      this.moment.currentMonth()
     );
 
     this.viewModel$ = this.store.select(CalendarViewQueries.getViewModel2);

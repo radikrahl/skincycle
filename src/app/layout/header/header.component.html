@@ -1,15 +1,17 @@
-
 <header id="main-navigation" class="l-grid">
   <nav class="l-grid--wide navigation">
 
     <div class="logo" [routerLink]="['/']">
       <img src="{{logo.url}}" alt="">
     </div>
-    <div class="page-title">
-      {{(options$ | async)?.title}}
-    </div>
-    <div class="page-action">
-      <span class="sc-icon {{(options$ | async)?.iconClass}}" (click)="iconClick()"></span>
-    </div>
+    <ng-container *ngIf="(options$ | async) as options">
+      <div class="page-title">
+        {{options?.title}}
+        <div class="page-subtitle" *ngIf="options?.subtitle">{{options?.subtitle}}</div>
+      </div>
+      <div class="page-action">
+        <span class="sc-icon {{options?.iconClass}}" (click)="iconClick()"></span>
+      </div>
+    </ng-container>
   </nav>
 </header>

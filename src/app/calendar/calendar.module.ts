@@ -8,11 +8,13 @@ import { CalendarRoutingModule } from './calendar-routing.module';
 import { CalendarComponent } from './pages/calendar/calendar.component';
 import { CalendarState } from './state/calendar.state';
 import { RoutinesState } from '../shared/routines/state/routines.state';
+import { IngredientsModule } from '../ingredients/ingredients.module';
 
 @NgModule({
   declarations: [CalendarComponent],
   imports: [
     CalendarRoutingModule,
+    IngredientsModule,
     ProductsModule,
     SharedModule,
     NgxsModule.forFeature([RoutinesState, CalendarState]),

@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
-import { subDays, addDays } from 'date-fns';
+import { subDays, addDays, format } from 'date-fns';
+import { de } from 'date-fns/locale';
 
 @Injectable()
 export class DateService {
   isEvening() {
     const today = new Date();
     return today.getHours() > 13;
+  }
+
+  currentMonth() {
+    return format(new Date(), 'LLLL', { locale: de });
   }
 
   getVisibleDays(date: Date): Date[] {
