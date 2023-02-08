@@ -6,15 +6,24 @@ import { RouterModule } from '@angular/router';
 import { ContentLayoutComponent } from './content-layout.component';
 import { CommonModule } from '@angular/common';
 import { FixedBackgroundComponent } from '../shared/components/fixed-background/fixed-background.component';
+import { NgxsModule } from '@ngxs/store';
+import { HeaderState } from './header/state/header.state';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
     ContentLayoutComponent,
     HeaderComponent,
     FooterComponent,
-    FixedBackgroundComponent
+    FixedBackgroundComponent,
+    MenuComponent,
   ],
-  imports: [RouterModule, CommonModule, SharedModule],
+  imports: [
+    RouterModule,
+    CommonModule,
+    SharedModule,
+    NgxsModule.forFeature([HeaderState]),
+  ],
   providers: [],
   exports: [FixedBackgroundComponent, HeaderComponent],
 })

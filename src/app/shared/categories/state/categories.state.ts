@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import {
   Action,
-  createSelector,
   NgxsOnInit,
-  Selector,
   State,
   StateContext,
 } from '@ngxs/store';
@@ -13,7 +11,6 @@ import {
 } from 'src/app/core/state/entities.state';
 import { Category } from 'src/app/shared/categories/models/category.model';
 import { ApiDataService } from 'src/app/shared/services/apidata.service';
-import { Product } from '../../../products/models/product.model';
 import { GetCategories } from './actions';
 
 export type CategoryStateModel = EntitiesStateModel<Category>;

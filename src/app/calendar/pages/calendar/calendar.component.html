@@ -2,15 +2,15 @@
 
   <div class="calendar">
     <div class="calendar__days">
-      <div class="calendar__bubbles" (click)="selectDay($event, item.date)" *ngFor="let item of viewModel.days.visibleDays">
+      <div class="calendar__bubbles" (click)="selectDay($event, item.date)" *ngFor="let item of viewModel?.days?.visibleDays">
         <div>{{item.label}}</div>
         <div>{{item.day}}</div>
       </div>
     </div>
-    <ng-container *ngIf="viewModel.routine?.base">
+    <ng-container *ngIf="viewModel?.routine?.base">
       <div class="calendar__base">
         <div class="text-lg font-primary--bold align-center">
-          {{viewModel.routine?.base}}
+          {{viewModel?.routine?.base}}
         </div>
       </div>
     </ng-container>
@@ -21,7 +21,7 @@
       </div>
     </ng-container>
     <sc-accordion class="calendar__categories">
-      <div class="calendar__category sc-accordion__item" scAccordionItem *ngFor="let step of viewModel.steps">
+      <div class="calendar__category sc-accordion__item" scAccordionItem *ngFor="let step of viewModel?.steps">
         <div class="sc-accordion__header text-xl font-primary--bold" scAccordionHeader>
           <span class="sc-icon-arrow"></span>
           <span>{{step.category.name}}</span>

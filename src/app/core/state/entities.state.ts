@@ -1,4 +1,4 @@
-import { createSelector, Selector } from "@ngxs/store";
+import { createSelector } from "@ngxs/store";
 import { Entity } from "../models/base.model";
 
 export interface EntitiesStateModel<T extends Entity> {

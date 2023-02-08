@@ -10,9 +10,9 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class CsvInterceptor implements HttpInterceptor {
   intercept(
-    req: HttpRequest<any>,
+    req: HttpRequest<unknown>,
     next: HttpHandler
-  ): Observable<HttpEvent<any>> {
+  ): Observable<HttpEvent<unknown>> {
     const baseUrl = '../assets/data/';
     req.url.split('/');
     const array1 = req.url.split('/');

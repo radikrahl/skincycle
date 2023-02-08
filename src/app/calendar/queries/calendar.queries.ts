@@ -1,4 +1,4 @@
-import { createSelector, Selector } from "@ngxs/store";
+import {  Selector } from "@ngxs/store";
 import { Product } from "src/app/products/models/product.model";
 import { ProductsQueries } from "src/app/products/queries/products.queries";
 import { Category } from "src/app/shared/categories/models/category.model";

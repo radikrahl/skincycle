@@ -1,4 +1,4 @@
-import { createSelector, Selector } from "@ngxs/store";
+import { createSelector } from "@ngxs/store";
 import { RoutinesState, RoutinesStateModel } from "../state/routines.state";
 
 export class RoutineSelectors {

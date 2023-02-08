@@ -1,11 +1,6 @@
 import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
-
-import {
-  HeaderOptions,
-  HeaderTitleService,
-} from 'src/app/shared/services/header-title.service';
 import { CalendarViewModel } from '../../models/calendar.model';
-import { Select, Store } from '@ngxs/store';
+import { Store } from '@ngxs/store';
 import { DateService } from 'src/app/shared/services/date.service';
 
 import { CalendarViewQueries } from '../../queries/calendar-view.queries';
@@ -14,6 +9,8 @@ import {
   SetVisibleDays,
 } from '../../state/actions';
 import { FrontendBaseComponent } from 'src/app/core/components/base.component';
+import { SetHeaderIcon } from 'src/app/layout/header/state/actions';
+import { HeaderOptions } from 'src/app/layout/header/models/options.model';
 
 @Component({
   selector: 'sc-calendar',
@@ -29,16 +26,15 @@ export class CalendarComponent
   public themeClass: string;
   public headerOptions: HeaderOptions;
 
-  public viewModel!: CalendarViewModel;
+  public viewModel?: CalendarViewModel;
 
   constructor(
     protected override renderer: Renderer2,
-    private titleService: HeaderTitleService,
+    protected override store: Store,
     private moment: DateService,
 
-    private store: Store
   ) {
-    super(titleService, renderer);
+    super(store, renderer);
 
     this.isEvening = this.moment.isEvening();
     this.themeClass = this.isEvening ? 'theme-blue' : 'theme-orange';
@@ -63,11 +59,9 @@ export class CalendarComponent
     this.isEvening = !this.isEvening;
     this.themeClass = this.isEvening ? 'theme-blue' : 'theme-orange';
     const iconClass = this.isEvening ? 'sc-icon-moon' : 'sc-icon-sun';
-
-    this.titleService.setHeaderOptions(
-      new HeaderOptions('Kalender', iconClass, this.headerCallback.bind(this))
-    );
     this.renderer.addClass(document.body, this.themeClass);
+
+    this.store.dispatch(new SetHeaderIcon(iconClass));
     this.store.dispatch(new SetCalendarModel(this.isEvening));
   }
 

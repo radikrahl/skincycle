@@ -2,14 +2,11 @@ import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Category } from 'src/app/shared/categories/models/category.model';
 import { Product } from 'src/app/products/models/product.model';
-import {
-  HeaderOptions,
-  HeaderTitleService,
-} from 'src/app/shared/services/header-title.service';
 import { Select, Store } from '@ngxs/store';
 import { CategoriesState } from '../../../shared/categories/state/categories.state';
 import { ProductsQueries } from '../../queries/products.queries';
 import { FrontendBaseComponent } from 'src/app/core/components/base.component';
+import { HeaderOptions } from 'src/app/layout/header/models/options.model';
 
 @Component({
   selector: 'sc-list',
@@ -33,11 +30,10 @@ export class ListComponent
   categories$?: Observable<Category[]>;
 
   constructor(
-    headerTitleService: HeaderTitleService,
+    store: Store,
     renderer: Renderer2,
-    private store: Store
   ) {
-    super(headerTitleService, renderer);
+    super(store, renderer);
   }
 
   override ngOnInit(): void {

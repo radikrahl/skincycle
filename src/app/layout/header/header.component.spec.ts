@@ -4,6 +4,7 @@ import { HeaderComponent } from './header.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RouterTestingModule } from '@angular/router/testing';
+import { NgxsModule } from '@ngxs/store';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -13,7 +14,7 @@ describe('HeaderComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ HeaderComponent ],
       imports: [
-        HttpClientTestingModule, SharedModule, RouterTestingModule
+        HttpClientTestingModule, SharedModule, RouterTestingModule, NgxsModule.forRoot()
       ],
       providers: [
       ],

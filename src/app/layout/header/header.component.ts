@@ -1,9 +1,11 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import {
-  HeaderOptions,
-  HeaderTitleService,
-} from 'src/app/shared/services/header-title.service';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { HeaderOptions } from './models/options.model';
+
+import { IconClick } from './state/actions';
+import { HeaderState } from './state/header.state';
 
 @Component({
   selector: 'sc-header',
@@ -17,15 +19,14 @@ export class HeaderComponent {
   };
 
   options?: HeaderOptions;
-  constructor(public router: Router, private service: HeaderTitleService) {
-    this.service.optionsObservable.subscribe({
-      next: (options: HeaderOptions) => {
-        this.options = options;
-      },
-    });
+
+  @Select(HeaderState)
+  options$!: Observable<HeaderOptions>;
+
+  constructor(public router: Router, private store: Store) {
   }
 
   iconClick() {
-    this.service.iconClick();
+    this.store.dispatch(new IconClick);
   }
 }

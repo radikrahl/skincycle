@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { State, NgxsOnInit, StateContext, Action, Selector } from '@ngxs/store';
+import { State, NgxsOnInit, StateContext, Action } from '@ngxs/store';
 import { shareReplay } from 'rxjs';
 import {
   EntitiesState,
