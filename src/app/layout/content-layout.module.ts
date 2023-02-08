@@ -5,18 +5,14 @@ import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { ContentLayoutComponent } from './content-layout.component';
 import { CommonModule } from '@angular/common';
-import { FixedBackgroundComponent } from '../shared/components/fixed-background/fixed-background.component';
 import { NgxsModule } from '@ngxs/store';
 import { HeaderState } from './header/state/header.state';
-import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
     ContentLayoutComponent,
     HeaderComponent,
     FooterComponent,
-    FixedBackgroundComponent,
-    MenuComponent,
   ],
   imports: [
     RouterModule,
@@ -25,6 +21,6 @@ import { MenuComponent } from './menu/menu.component';
     NgxsModule.forFeature([HeaderState]),
   ],
   providers: [],
-  exports: [FixedBackgroundComponent, HeaderComponent],
+  exports: [HeaderComponent],
 })
 export class ContentLayoutModule {}

@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ContentLayoutComponent } from './layout/content-layout.component';
-import { MenuComponent } from './layout/menu/menu.component';
 import { PageNotFoundComponent } from './layout/page-not-found/page-not-found.component';
 
 const routes: Routes = [
-
   {
     path: 'list',
     component: ContentLayoutComponent,
@@ -26,7 +24,8 @@ const routes: Routes = [
   },
   {
     path: '',
-    loadComponent: () => MenuComponent,
+    component: ContentLayoutComponent,
+    loadChildren: () => import('./menu/menu.module').then((m) => m.MenuModule),
   },
   {
     path: '',

@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 
 import { FrontendBaseComponent } from 'src/app/core/components/base.component';
 import { Store } from '@ngxs/store';
-import { HeaderOptions } from '../header/models/options.model';
+import { HeaderOptions } from 'src/app/layout/header/models/options.model';
 
 @Component({
   selector: 'sc-menu',
