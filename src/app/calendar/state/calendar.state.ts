@@ -1,47 +1,31 @@
 import { Injectable } from '@angular/core';
-import { Action, NgxsOnInit, Selector, State, StateContext } from '@ngxs/store';
+import { Action, NgxsOnInit, State, StateContext, Store } from '@ngxs/store';
+import { Product } from 'src/app/products/models/product.model';
 import { Routine } from 'src/app/shared/routines/models/routine.model';
+import { RoutinesState } from 'src/app/shared/routines/state/routines.state';
 import { DateService } from 'src/app/shared/services/date.service';
 import { CalendarStepModel, VisibleDay } from '../models/calendar.model';
-import { SetCalendarModel, SetRoutine, SetVisibleDays } from './actions';
+import { IngredientRelations } from '../models/ingredient-relations.model';
+import { SetCalendarModel, SetVisibleDays } from './actions';
 
 export interface CalendarStateModel {
   routine?: Routine;
   visibleDays: VisibleDay[];
   isEvening: boolean;
-  steps?: CalendarStepModel
+  steps: CalendarStepModel[];
 }
 
 @State<CalendarStateModel>({
   name: 'calendar',
   defaults: {
     visibleDays: [],
+    steps: [],
     isEvening: false,
   },
 })
 @Injectable()
 export class CalendarState implements NgxsOnInit {
-  constructor(private dateService: DateService) {}
-
-  @Selector()
-  static getVisibleDays(state: CalendarStateModel): VisibleDay[] {
-    return state.visibleDays;
-  }
-
-  @Selector()
-  static getCurrentDay(state: CalendarStateModel): VisibleDay {
-    return state.visibleDays[1];
-  }
-
-  @Selector()
-  static getRoutine(state: CalendarStateModel): Routine | undefined {
-    return state.routine;
-  }
-
-  @Selector()
-  static isEvening(state: CalendarStateModel): boolean {
-    return state.isEvening;
-  }
+  constructor(private dateService: DateService, private store: Store) {}
 
   ngxsOnInit(ctx: StateContext<CalendarStateModel>): void {
     ctx.patchState({
@@ -52,7 +36,21 @@ export class CalendarState implements NgxsOnInit {
 
   @Action(SetVisibleDays)
   setDates(ctx: StateContext<CalendarStateModel>, payload: SetVisibleDays) {
-    ctx.patchState({ visibleDays: this.getVisibleDates(payload.date) });
+    this.store
+      .select(RoutinesState.entities<Routine>())
+      .subscribe((routines) => {
+        const state = ctx.getState();
+        const routine = this.extractRoutine(
+          routines,
+          state.isEvening,
+          payload.date
+        );
+
+        ctx.patchState({
+          routine: routine,
+          visibleDays: this.getVisibleDates(payload.date),
+        });
+      });
   }
 
   @Action(SetCalendarModel)
@@ -60,12 +58,24 @@ export class CalendarState implements NgxsOnInit {
     ctx.patchState(payload);
   }
 
-  @Action(SetRoutine)
-  setRoutine(ctx: StateContext<CalendarStateModel>, payload: SetRoutine) {
-    ctx.patchState({ routine: payload.routine });
-  }
-
   private getVisibleDates(date: Date = new Date()): VisibleDay[] {
     return this.dateService.getVisibleDays(date).map((x) => new VisibleDay(x));
+  }
+
+  private extractRoutine(routines: Routine[], isEvening: boolean, date: Date) {
+    return routines?.find((routine) => {
+      return (
+        routine.day === date.toLocaleDateString('de-DE', { weekday: 'long' }) &&
+        (isEvening ? routine.daytime == 'abends' : routine.daytime == 'morgens')
+      );
+    });
+  }
+
+  private extractProduct(products: Product[], relations: IngredientRelations) {
+    return products.filter((product) => {
+      return product.ingredients.some((r) =>
+        relations?.ingredients.some((tN) => tN === r)
+      );
+    });
   }
 }

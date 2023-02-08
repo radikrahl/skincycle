@@ -3,7 +3,7 @@ import { CalendarViewModel } from '../../models/calendar.model';
 import { Store } from '@ngxs/store';
 import { DateService } from 'src/app/shared/services/date.service';
 
-import { CalendarViewQueries } from '../../queries/calendar-view.queries';
+import { CalendarViewQueries } from '../../selectors/calendar-view.queries';
 import {
   SetCalendarModel,
   SetVisibleDays,
@@ -11,6 +11,7 @@ import {
 import { FrontendBaseComponent } from 'src/app/core/components/base.component';
 import { SetHeaderIcon } from 'src/app/layout/header/state/actions';
 import { HeaderOptions } from 'src/app/layout/header/models/options.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'sc-calendar',
@@ -26,13 +27,12 @@ export class CalendarComponent
   public themeClass: string;
   public headerOptions: HeaderOptions;
 
-  public viewModel?: CalendarViewModel;
+  public viewModel$: Observable<CalendarViewModel>;
 
   constructor(
     protected override renderer: Renderer2,
     protected override store: Store,
-    private moment: DateService,
-
+    private moment: DateService
   ) {
     super(store, renderer);
 
@@ -44,14 +44,9 @@ export class CalendarComponent
       iconClass,
       this.headerCallback.bind(this)
     );
-  }
 
-  override ngOnInit(): void {
-    super.ngOnInit();
-
-    this.store
-      .select(CalendarViewQueries.getViewModel)
-      .subscribe((x) => (this.viewModel = x));
+    this.viewModel$ = this.store.select(CalendarViewQueries.getViewModel2);
+    this.store.dispatch(new SetVisibleDays(new Date()));
   }
 
   headerCallback() {
@@ -67,19 +62,14 @@ export class CalendarComponent
 
   selectDay(event: MouseEvent, date: Date) {
     this.store.dispatch(new SetVisibleDays(date));
+    this.clear();
   }
 
   apply() {
-    // this.store
-    //   .select(CalendarViewQueries.getIngredientFilteredView)
-    //   .subscribe((x) => {
-    //     this.viewModel = x;
-    //   });
+    this.viewModel$ = this.store.select(CalendarViewQueries.getViewModel);
   }
 
   clear() {
-    // this.store
-    //   .select(CalendarViewQueries.getViewModel)
-    //   .subscribe((x) => (this.viewModel = x));
+    this.viewModel$ = this.store.select(CalendarViewQueries.getViewModel2);
   }
 }

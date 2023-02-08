@@ -1,16 +1,17 @@
-<!-- <ng-container *ngIf="(viewModel$ | async) as viewModel"> -->
+<ng-container *ngIf="(viewModel$ | async) as viewModel">
 
   <div class="calendar">
     <div class="calendar__days">
-      <div class="calendar__bubbles" (click)="selectDay($event, item.date)" *ngFor="let item of viewModel?.days?.visibleDays">
+      <div class="calendar__bubbles" (click)="selectDay($event, item.date)"
+        *ngFor="let item of viewModel.days.visibleDays">
         <div>{{item.label}}</div>
         <div>{{item.day}}</div>
       </div>
     </div>
-    <ng-container *ngIf="viewModel?.routine?.base">
+    <ng-container *ngIf="viewModel.routine?.base">
       <div class="calendar__base">
         <div class="text-lg font-primary--bold align-center">
-          {{viewModel?.routine?.base}}
+          {{viewModel.routine?.base}}
         </div>
       </div>
     </ng-container>
@@ -42,4 +43,4 @@
       </div>
     </sc-accordion>
   </div>
-<!-- </ng-container> -->
+</ng-container>
