@@ -1,14 +1,17 @@
 import { createSelector, Selector } from '@ngxs/store';
 import { IngredientRelations } from 'src/app/calendar/models/ingredient-relations.model';
-import { Category } from 'src/app/products/models/category.model';
 import { Product } from '../models/product.model';
-import { CategoriesState } from '../state/categories.state';
-import { ProductsState, ProductsStateModel } from '../state/products.state';
+import { ProductsState } from '../state/products.state';
+
+export type CategoryProductMap = {
+  [key: string]: Product[] | null;
+};
+
 
 export class ProductsQueries {
-  @Selector([ProductsState.products])
-  static getProducts(state: ProductsStateModel): Product[] {
-    return state.products;
+  @Selector([ProductsState.entities()])
+  static getProducts(products: Product[]): Product[] {
+    return products;
   }
 
   static getProductsByCategory(categoryName: string) {
@@ -31,17 +34,5 @@ export class ProductsQueries {
         });
       }
     );
-  }
-
-  @Selector([CategoriesState.categories, ProductsQueries.getProducts])
-  static getProductsForCategories(categories: Category[], products: Product[]) {
-    return categories.map((category) => {
-      return {
-        category: category,
-        products: products.filter(
-          (product) => product.category === category.label
-        ),
-      };
-    });
   }
 }

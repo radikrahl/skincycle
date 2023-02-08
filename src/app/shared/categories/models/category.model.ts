@@ -1,4 +1,4 @@
-import { BaseEntity } from '../../core/models/base.model';
+import { BaseEntity } from '../../../core/models/base.model';
 
 export class Category extends BaseEntity {
   public name = '';

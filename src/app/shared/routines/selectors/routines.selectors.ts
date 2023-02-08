@@ -1,12 +1,13 @@
-import { createSelector } from "@ngxs/store";
+import { createSelector, Selector } from "@ngxs/store";
 import { RoutinesState, RoutinesStateModel } from "../state/routines.state";
 
-export class RoutineQueries {
+export class RoutineSelectors {
+
   static getRoutine(isEvening: boolean, date: Date) {
     return createSelector(
-      [RoutinesState.routines],
+      [RoutinesState.entities()],
       (state: RoutinesStateModel) => {
-        return state.routines?.find((routine) => {
+        return state.entities?.find((routine) => {
           return (
             routine.day ===
               date.toLocaleDateString('de-DE', { weekday: 'long' }) &&

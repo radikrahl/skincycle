@@ -6,16 +6,16 @@ import {
 } from '../state/ingredients.state';
 
 export class IngredientQueries {
-  @Selector([IngredientsState.ingredients])
-  static getIngredients(state: IngredientsStateModel): IngredientRelations[] {
-    return state.ingredients;
+  @Selector([IngredientsState.entities()])
+  static getIngredients(entities: IngredientRelations[]): IngredientRelations[] {
+    return entities;
   }
 
   static getRelationByLabel(label: string) {
     return createSelector(
       [IngredientsState.ingredients],
       (state: IngredientsStateModel) => {
-        return state.ingredients.find((relation) => relation.label === label);
+        return state.entities.find((relation) => relation.label === label);
       }
     );
   }

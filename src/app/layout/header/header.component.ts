@@ -16,13 +16,6 @@ export class HeaderComponent {
     url: '../../../assets/images/logo-small.svg',
   };
 
-  public menu = {
-    url: '../../../assets/icons/burger-slim.svg',
-    open: false,
-    burgerUrl: '../../../assets/icons/burger-slim.svg',
-    closeUrl: '../../../assets/icons/close-bold.svg',
-  };
-
   options?: HeaderOptions;
   constructor(public router: Router, private service: HeaderTitleService) {
     this.service.optionsObservable.subscribe({

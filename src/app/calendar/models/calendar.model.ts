@@ -1,5 +1,5 @@
-import { Category } from 'src/app/products/models/category.model';
-import { Routine } from 'src/app/calendar/models/routine.model';
+import { Category } from 'src/app/shared/categories/models/category.model';
+import { Routine } from 'src/app/shared/routines/models/routine.model';
 import { Product } from 'src/app/products/models/product.model';
 import { IngredientRelations } from './ingredient-relations.model';
 

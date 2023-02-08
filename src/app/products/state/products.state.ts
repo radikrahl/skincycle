@@ -1,29 +1,27 @@
 import { Injectable } from '@angular/core';
-import {
-  State,
-  Selector,
-  Action,
-  StateContext,
-  NgxsOnInit,
-} from '@ngxs/store';
+import { State, Selector, Action, StateContext, NgxsOnInit } from '@ngxs/store';
 import { Product } from '../models/product.model';
 import { ApiDataService } from '../../shared/services/apidata.service';
 import { GetProducts } from './actions';
 import { share, tap } from 'rxjs';
+import {
+  EntitiesState,
+  EntitiesStateModel,
+} from 'src/app/core/state/entities.state';
 
-export interface ProductsStateModel {
-  products: Product[];
-}
+export type ProductsStateModel = EntitiesStateModel<Product>;
 
 @State<ProductsStateModel>({
   name: 'products',
   defaults: {
-    products: [],
+    entities: [],
   },
 })
 @Injectable()
-export class ProductsState implements NgxsOnInit {
-  constructor(private dataService: ApiDataService) {}
+export class ProductsState extends EntitiesState implements NgxsOnInit {
+  constructor(private dataService: ApiDataService<Product>) {
+    super();
+  }
   ngxsOnInit(ctx: StateContext<ProductsStateModel>): void {
     ctx.dispatch(new GetProducts());
   }
@@ -34,14 +32,13 @@ export class ProductsState implements NgxsOnInit {
 
   @Action(GetProducts)
   getAll(ctx: StateContext<ProductsStateModel>) {
-    if (ctx.getState().products.length > 0) {
+    if (ctx.getState().entities.length > 0) {
       return;
     }
 
     return this.dataService.getAll('/api/products').pipe(
       share(),
-      tap((values) => {
-        const products = values as Product[];
+      tap((products) => {
         products.map((product) => {
           product.price = Number.parseFloat(
             product.price as string
@@ -51,7 +48,7 @@ export class ProductsState implements NgxsOnInit {
           });
         });
 
-        ctx.setState({ products: products });
+        ctx.setState({ entities: products });
       })
     );
   }

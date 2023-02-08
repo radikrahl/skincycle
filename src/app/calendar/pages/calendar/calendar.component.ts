@@ -5,12 +5,14 @@ import {
   HeaderTitleService,
 } from 'src/app/shared/services/header-title.service';
 import { CalendarViewModel } from '../../models/calendar.model';
-import { Store } from '@ngxs/store';
-import { Observable } from 'rxjs';
+import { Select, Store } from '@ngxs/store';
 import { DateService } from 'src/app/shared/services/date.service';
 
 import { CalendarViewQueries } from '../../queries/calendar-view.queries';
-import { SetCalendarModel, SetVisibleDays } from '../../state/actions';
+import {
+  SetCalendarModel,
+  SetVisibleDays,
+} from '../../state/actions';
 import { FrontendBaseComponent } from 'src/app/core/components/base.component';
 
 @Component({
@@ -27,7 +29,7 @@ export class CalendarComponent
   public themeClass: string;
   public headerOptions: HeaderOptions;
 
-  public viewModel$!: Observable<CalendarViewModel>;
+  public viewModel!: CalendarViewModel;
 
   constructor(
     protected override renderer: Renderer2,
@@ -51,7 +53,9 @@ export class CalendarComponent
   override ngOnInit(): void {
     super.ngOnInit();
 
-    this.viewModel$ = this.store.select(CalendarViewQueries.getViewModel);
+    this.store
+      .select(CalendarViewQueries.getViewModel)
+      .subscribe((x) => (this.viewModel = x));
   }
 
   headerCallback() {
@@ -64,7 +68,6 @@ export class CalendarComponent
       new HeaderOptions('Kalender', iconClass, this.headerCallback.bind(this))
     );
     this.renderer.addClass(document.body, this.themeClass);
-
     this.store.dispatch(new SetCalendarModel(this.isEvening));
   }
 
@@ -73,10 +76,16 @@ export class CalendarComponent
   }
 
   apply() {
-    console.log('apply filter');
+    // this.store
+    //   .select(CalendarViewQueries.getIngredientFilteredView)
+    //   .subscribe((x) => {
+    //     this.viewModel = x;
+    //   });
   }
 
   clear() {
-    console.log('clear filter');
+    // this.store
+    //   .select(CalendarViewQueries.getViewModel)
+    //   .subscribe((x) => (this.viewModel = x));
   }
 }

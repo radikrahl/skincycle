@@ -3,41 +3,38 @@ import { State, Selector, Action, StateContext, NgxsOnInit } from '@ngxs/store';
 import { ApiDataService } from '../../shared/services/apidata.service';
 import { GetIngredients } from './actions';
 import { IngredientRelations } from '../models/ingredient-relations.model';
+import { EntitiesState, EntitiesStateModel } from 'src/app/core/state/entities.state';
 
-export interface IngredientsStateModel {
-  ingredients: IngredientRelations[];
-}
+export type IngredientsStateModel = EntitiesStateModel<IngredientRelations>
 
 @State<IngredientsStateModel>({
   name: 'ingredients',
   defaults: {
-    ingredients: [],
+    entities: [],
   },
 })
 @Injectable()
-export class IngredientsState implements NgxsOnInit {
+export class IngredientsState extends EntitiesState implements NgxsOnInit {
   @Selector()
   static ingredients(state: IngredientsStateModel) {
     return state;
   }
 
-  constructor(private dataService: ApiDataService) {}
+  constructor(private dataService: ApiDataService<IngredientRelations>) {super();}
   ngxsOnInit(ctx: StateContext<IngredientsStateModel>): void {
     ctx.dispatch(new GetIngredients());
   }
 
   @Action(GetIngredients)
   getAll(ctx: StateContext<IngredientsStateModel>) {
-    if (ctx.getState().ingredients.length > 0) {
+    if (ctx.getState().entities.length > 0) {
       return;
     }
 
     return this.dataService
       .getAll('/api/ingredientRelations')
-      .subscribe((values) => {
-        const ingredients = values as IngredientRelations[];
-
-        ctx.setState({ ingredients: ingredients });
+      .subscribe((ingredients) => {
+        ctx.setState({ entities: ingredients });
       });
   }
 }

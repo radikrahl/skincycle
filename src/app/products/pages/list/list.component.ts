@@ -1,13 +1,13 @@
 import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Category } from 'src/app/products/models/category.model';
+import { Category } from 'src/app/shared/categories/models/category.model';
 import { Product } from 'src/app/products/models/product.model';
 import {
   HeaderOptions,
   HeaderTitleService,
 } from 'src/app/shared/services/header-title.service';
 import { Select, Store } from '@ngxs/store';
-import { CategoriesState } from '../../state/categories.state';
+import { CategoriesState } from '../../../shared/categories/state/categories.state';
 import { ProductsQueries } from '../../queries/products.queries';
 import { FrontendBaseComponent } from 'src/app/core/components/base.component';
 
@@ -29,7 +29,7 @@ export class ListComponent
 
   products$?: Observable<Product[]>;
 
-  @Select(CategoriesState.categories)
+  @Select(CategoriesState.entities())
   categories$?: Observable<Category[]>;
 
   constructor(
