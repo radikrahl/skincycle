@@ -10,9 +10,9 @@ import {
   CalendarStepModel,
   CalendarViewModel,
 } from '../models/calendar.model';
-import { IngredientRelations } from '../models/ingredient-relations.model';
+import { IngredientRelations } from '../../ingredients/models/ingredient-relations.model';
 import { CalendarState, CalendarStateModel } from '../state/calendar.state';
-import { IngredientsState } from '../state/ingredients.state';
+import { IngredientsState } from '../../ingredients/state/ingredients.state';
 
 export class CalendarViewQueries {
   @Selector([CalendarState, CalendarViewQueries.getCategoryStepModel])
@@ -27,7 +27,7 @@ export class CalendarViewQueries {
     };
   }
 
-  @Selector([CalendarState, CalendarViewQueries.getCategoryStepModel2])
+  @Selector([CalendarState, CalendarViewQueries.getCategoryStepModelAll])
   static getViewModel2(
     state: CalendarStateModel,
     steps: CalendarStepModel[]
@@ -90,7 +90,7 @@ export class CalendarViewQueries {
   }
 
   @Selector([CategoriesState.entities(), ProductsState.entities()])
-  static getCategoryStepModel2(categories: Category[], products: Product[]) {
+  static getCategoryStepModelAll(categories: Category[], products: Product[]) {
     return categories.map((category) => {
       return {
         category: category,

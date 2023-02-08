@@ -5,7 +5,7 @@ import { Category } from 'src/app/shared/categories/models/category.model';
 import { CategoriesState } from 'src/app/shared/categories/state/categories.state';
 import { Routine } from 'src/app/shared/routines/models/routine.model';
 import { VisibleDay } from '../models/calendar.model';
-import { IngredientRelations } from '../models/ingredient-relations.model';
+import { IngredientRelations } from '../../ingredients/models/ingredient-relations.model';
 import { CalendarStateModel } from '../state/calendar.state';
 
 export class CalendarSelectors {

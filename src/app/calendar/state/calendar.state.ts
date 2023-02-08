@@ -5,7 +5,7 @@ import { Routine } from 'src/app/shared/routines/models/routine.model';
 import { RoutinesState } from 'src/app/shared/routines/state/routines.state';
 import { DateService } from 'src/app/shared/services/date.service';
 import { CalendarStepModel, VisibleDay } from '../models/calendar.model';
-import { IngredientRelations } from '../models/ingredient-relations.model';
+import { IngredientRelations } from '../../ingredients/models/ingredient-relations.model';
 import { SetCalendarModel, SetVisibleDays } from './actions';
 
 export interface CalendarStateModel {

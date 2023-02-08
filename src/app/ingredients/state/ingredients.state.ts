@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { State, Selector, Action, StateContext, NgxsOnInit } from '@ngxs/store';
 import { ApiDataService } from '../../shared/services/apidata.service';
-import { GetIngredients } from './actions';
 import { IngredientRelations } from '../models/ingredient-relations.model';
-import { EntitiesState, EntitiesStateModel } from 'src/app/core/state/entities.state';
+import {
+  EntitiesState,
+  EntitiesStateModel,
+} from 'src/app/core/state/entities.state';
+import { GetIngredients } from './actions';
 
-export type IngredientsStateModel = EntitiesStateModel<IngredientRelations>
+export type IngredientsStateModel = EntitiesStateModel<IngredientRelations>;
 
 @State<IngredientsStateModel>({
   name: 'ingredients',
@@ -20,7 +23,9 @@ export class IngredientsState extends EntitiesState implements NgxsOnInit {
     return state;
   }
 
-  constructor(private dataService: ApiDataService<IngredientRelations>) {super();}
+  constructor(private dataService: ApiDataService<IngredientRelations>) {
+    super();
+  }
   ngxsOnInit(ctx: StateContext<IngredientsStateModel>): void {
     ctx.dispatch(new GetIngredients());
   }

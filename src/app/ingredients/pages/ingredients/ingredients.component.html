@@ -1,0 +1,8 @@
+<sc-ingredient-card [relation]="relations" *ngFor="let relations of ingredients$|async ">
+  <span class="font-secondary--bold">
+    {{relations.label}}
+  </span>
+  <ng-container *ngFor="let relation of relations.ingredients">{{relation}};
+  </ng-container>
+  <span style="float:right">Prio: {{relations.prio}}</span>
+</sc-ingredient-card>
