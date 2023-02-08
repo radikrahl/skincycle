@@ -1,11 +1,12 @@
 <div class="categories">
-  <div class="categories__item" *ngFor="let category of categories$ | async">
-    <div (click)="filterByCategory(category.label)" class="">
-      {{category.name}}
-    </div>
+  <div (click)="filterByCategory(category.label)" class="categories__item" *ngFor="let category of categories$ | async">
+    {{category.name}}
   </div>
-</div>
 
+</div>
+<div class="filter" *ngIf="isFiltered">
+  <button (click)="clear()" class="c-btn">Clear</button>
+</div>
 <div class="products">
   <ul class="products__list">
     <li class="products__card" *ngFor="let product of products$ | async">

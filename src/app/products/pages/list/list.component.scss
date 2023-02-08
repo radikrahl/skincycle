@@ -28,9 +28,8 @@
   flex-direction: row;
   justify-content: space-between;
   &__item {
-    > * {
-      user-select: none;
-    }
+    user-select: none;
+
     background-color: hsla(151, 49%, 26%, 1);
     font-family: var(--font-family-primary);
     font-weight: bold;
@@ -44,7 +43,6 @@
     position: relative;
 
     display: flex;
-
     justify-content: center;
     align-items: center;
 
@@ -54,6 +52,20 @@
       text-align: center;
       word-wrap: break-word;
       hyphens: auto;
+    }
+  }
+}
+
+.filter {
+  display: flex;
+  margin-top: var(--space-6);
+
+  .c-btn {
+    flex: 1 1 50%;
+    font-size: var(--text-md);
+
+    &:not(:first-child) {
+      margin-left: var(--space-4);
     }
   }
 }

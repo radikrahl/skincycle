@@ -24,15 +24,14 @@ export class ListComponent
     callback: this.headerCallback,
   };
 
+  public isFiltered = false;
+
   products$?: Observable<Product[]>;
 
   @Select(CategoriesState.entities())
   categories$?: Observable<Category[]>;
 
-  constructor(
-    store: Store,
-    renderer: Renderer2,
-  ) {
+  constructor(store: Store, renderer: Renderer2) {
     super(store, renderer);
   }
 
@@ -45,6 +44,12 @@ export class ListComponent
     this.products$ = this.store.select(
       ProductsQueries.getProductsByCategory(label)
     );
+    this.isFiltered = true;
+  }
+
+  clear() {
+    this.products$ = this.store.select(ProductsQueries.getProducts);
+    this.isFiltered = false;
   }
 
   headerCallback() {

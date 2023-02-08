@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgxsModule } from '@ngxs/store';
-import { ContentLayoutModule } from '../layout/content-layout.module';
-import { HeaderState } from '../layout/header/state/header.state';
+import { ContentLayoutModule } from 'src/app/layout/content-layout.module';
+import { HeaderState } from 'src/app/layout/header/state/header.state';
 
 import { MenuComponent } from './menu.component';
 
