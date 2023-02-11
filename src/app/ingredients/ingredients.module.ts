@@ -17,7 +17,6 @@ const routes: Route[] = [{ path: '', component: IngredientsComponent }];
   imports: [
     SharedModule,
     RouterModule.forChild(routes),
-    NgxsModule.forFeature([IngredientsState]),
   ],
   exports: [],
   providers: [ApiDataService],

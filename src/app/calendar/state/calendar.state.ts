@@ -55,7 +55,18 @@ export class CalendarState implements NgxsOnInit {
 
   @Action(SetCalendarModel)
   setModel(ctx: StateContext<CalendarStateModel>, payload: SetCalendarModel) {
-    ctx.patchState(payload);
+    this.store
+      .select(RoutinesState.entities<Routine>())
+      .subscribe((routines) => {
+        const state = ctx.getState();
+        const routine = this.extractRoutine(
+          routines,
+          payload.isEvening,
+          state.visibleDays[1].date
+        );
+
+        ctx.patchState({ routine, isEvening: payload.isEvening });
+      });
   }
 
   private getVisibleDates(date: Date = new Date()): VisibleDay[] {

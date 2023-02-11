@@ -9,7 +9,7 @@ export class SetVisibleDays {
 export class SetCalendarModel {
   static readonly type = '[Calendar] Sets the calendar model.';
 
-  constructor(public isEvening?: boolean) {}
+  constructor(public isEvening: boolean) {}
 }
 
 export class SetRoutine {

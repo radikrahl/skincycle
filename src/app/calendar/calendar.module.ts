@@ -9,6 +9,7 @@ import { CalendarComponent } from './pages/calendar/calendar.component';
 import { CalendarState } from './state/calendar.state';
 import { RoutinesState } from '../shared/routines/state/routines.state';
 import { IngredientsModule } from '../ingredients/ingredients.module';
+import { IngredientsState } from '../ingredients/state/ingredients.state';
 
 @NgModule({
   declarations: [CalendarComponent],
@@ -17,7 +18,7 @@ import { IngredientsModule } from '../ingredients/ingredients.module';
     IngredientsModule,
     ProductsModule,
     SharedModule,
-    NgxsModule.forFeature([RoutinesState, CalendarState]),
+    NgxsModule.forFeature([RoutinesState,IngredientsState, CalendarState]),
   ],
   exports: [],
   providers: [ApiDataService, DateService],

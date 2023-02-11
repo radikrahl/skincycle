@@ -32,6 +32,10 @@ export class CategoriesState extends EntitiesState implements NgxsOnInit {
 
   @Action(GetCategories)
   protected getAll(ctx: StateContext<CategoryStateModel>) {
+    if(ctx.getState().entities.length > 0) {
+      return;
+    }
+
     return this.dataService
       .getAll('/api/categories')
       .subscribe((categories) => {

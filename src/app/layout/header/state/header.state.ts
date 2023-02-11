@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Action, State, StateContext } from '@ngxs/store';
 import { HeaderOptions } from '../models/options.model';
-import { IconClick, SetHeader, SetHeaderIcon } from './actions';
+import { IconClick, SetHeader, SetHeaderIcon, SetSubtitle } from './actions';
 
 @State<HeaderOptions>({
   name: 'header',
@@ -28,5 +28,10 @@ export class HeaderState {
   @Action(SetHeaderIcon)
   setHeaderIcon(ctx: StateContext<HeaderOptions>, payload: SetHeaderIcon) {
     ctx.patchState({ iconClass: payload.iconClass });
+  }
+
+  @Action(SetSubtitle)
+  setSubtitle(ctx: StateContext<HeaderOptions>, payload: SetSubtitle) {
+    ctx.patchState({ subtitle: payload.subtitle });
   }
 }

@@ -6,7 +6,11 @@ import { DateService } from 'src/app/shared/services/date.service';
 import { CalendarViewQueries } from '../../selectors/calendar-view.queries';
 import { SetCalendarModel, SetVisibleDays } from '../../state/actions';
 import { FrontendBaseComponent } from 'src/app/core/components/base.component';
-import { SetHeaderIcon } from 'src/app/layout/header/state/actions';
+import {
+  SetHeader,
+  SetHeaderIcon,
+  SetSubtitle,
+} from 'src/app/layout/header/state/actions';
 import { HeaderOptions } from 'src/app/layout/header/models/options.model';
 import { Observable } from 'rxjs';
 
@@ -20,6 +24,7 @@ export class CalendarComponent
   extends FrontendBaseComponent
   implements OnDestroy, OnInit
 {
+  public isToday = true;
   public isEvening;
   public themeClass: string;
   public headerOptions: HeaderOptions;
@@ -60,6 +65,12 @@ export class CalendarComponent
 
   selectDay(event: MouseEvent, date: Date) {
     this.store.dispatch(new SetVisibleDays(date));
+
+    this.store.dispatch(new SetSubtitle(this.moment.currentMonth(date)));
+
+    if (this.moment.compareDays(date, new Date()) !== 0)
+      this.isToday = false;
+
     this.clear();
   }
 
@@ -69,5 +80,10 @@ export class CalendarComponent
 
   clear() {
     this.viewModel$ = this.store.select(CalendarViewQueries.getViewModel2);
+  }
+
+  setToday() {
+    this.store.dispatch(new SetVisibleDays(new Date()));
+    this.isToday = true;
   }
 }
