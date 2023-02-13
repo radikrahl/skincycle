@@ -51,3 +51,7 @@ body.theme-orange {
     --color-bubbles: hsla(36, 76%, 46%, 1);
   }
 }
+
+body.theme-red {
+  --color-background: var(--color-brand-red);
+}

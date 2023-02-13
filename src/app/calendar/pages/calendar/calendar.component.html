@@ -1,0 +1,52 @@
+<ng-container *ngIf="(viewModel$ | async) as viewModel">
+
+  <div class="calendar">
+    <div class="calendar__today" *ngIf="!isToday">
+      <button (click)="setToday()" class="c-btn c-btn--small">Heute</button>
+    </div>
+    <div class="calendar__days">
+
+      <div class="calendar__bubbles" (click)="selectDay($event, item.date)"
+        *ngFor="let item of viewModel.days.visibleDays">
+        <div>{{item.label}}</div>
+        <div>{{item.day}}</div>
+      </div>
+
+    </div>
+
+    <ng-container *ngIf="viewModel.routine?.base">
+      <div class="calendar__base">
+        <div class="text-lg font-primary--bold align-center">
+          {{viewModel.routine?.base}}
+        </div>
+      </div>
+    </ng-container>
+    <ng-container>
+      <div class="calendar__filter">
+        <button (click)="clear()" class="c-btn">Clear</button>
+        <button (click)="apply()" class="c-btn">Apply</button>
+      </div>
+    </ng-container>
+    <sc-accordion class="calendar__categories">
+      <div class="calendar__category sc-accordion__item" scAccordionItem *ngFor="let step of viewModel?.steps">
+        <div class="sc-accordion__header text-xl font-primary--bold" scAccordionHeader>
+          <span class="sc-icon-arrow"></span>
+          <span>{{step.category.name}}</span>
+          <span style="margin-left: var(--space-2)">{{step.products.length}}</span>
+        </div>
+        <div class="sc-accordion__content u-hidden" scAccordionContent>
+          <div class="">
+            <sc-card [product]="product" *ngFor="let product of step.products">
+              <span class="font-secondary--bold">
+                {{step.relations?.label}}
+              </span>
+              <ng-container *ngFor="let ingredient of step.relations?.ingredients">{{ingredient}};
+              </ng-container>
+              <span style="float:right">Prio: {{step.relations?.prio}}</span>
+            </sc-card>
+          </div>
+        </div>
+      </div>
+    </sc-accordion>
+  </div>
+</ng-container>

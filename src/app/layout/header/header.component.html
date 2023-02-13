@@ -4,14 +4,14 @@
     <div class="logo" [routerLink]="['/']">
       <img src="{{logo.url}}" alt="">
     </div>
-    <div class="page-title">
-      {{options?.title}}
-    </div>
-    <div class="page-action">
-      <span class="sc-icon {{options?.iconClass}}" (click)="iconClick()"></span>
-    </div>
+    <ng-container *ngIf="(options$ | async) as options">
+      <div class="page-title">
+        {{options?.title}}
+        <div class="page-subtitle" *ngIf="options?.subtitle">{{options?.subtitle}}</div>
+      </div>
+      <div class="page-action">
+        <span class="sc-icon {{options?.iconClass}}" (click)="iconClick()"></span>
+      </div>
+    </ng-container>
   </nav>
-
-
-  <sc-menu class="l-grid" *ngIf="menu.open"></sc-menu>
 </header>

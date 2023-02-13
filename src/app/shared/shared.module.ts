@@ -1,30 +1,11 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { InputBaseDirective } from './components/base/input-base.directive';
-import { FixedBackgroundComponent } from './components/fixed-background/fixed-background.component';
+import { NgModule } from '@angular/core';
+import { AccordionModule } from './components/accordion/accordion.module';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    RouterModule,
-    HttpClientModule
-  ],
-  declarations: [
-    InputBaseDirective,
-    FixedBackgroundComponent
-  ],
-  exports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    RouterModule,
-    HttpClientModule,
-    FixedBackgroundComponent
-  ]
+  imports: [CommonModule, HttpClientModule, AccordionModule],
+  declarations: [],
+  exports: [CommonModule, HttpClientModule, AccordionModule],
 })
 export class SharedModule {}

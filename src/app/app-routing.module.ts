@@ -5,18 +5,37 @@ import { PageNotFoundComponent } from './layout/page-not-found/page-not-found.co
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'list',
     component: ContentLayoutComponent,
     loadChildren: () =>
-      import('./modules/frontend/frontend.module').then(
-        (m) => m.FrontendModule
-      ),
+      import('./products/products.module').then((m) => m.ProductsModule),
+  },
+  {
+    path: 'calendar',
+    component: ContentLayoutComponent,
+    loadChildren: () =>
+      import('./calendar/calendar.module').then((m) => m.CalendarModule),
+  },
+  {
+    path: 'ingredients',
+    component: ContentLayoutComponent,
+    loadChildren: () => import('./ingredients/ingredients.module').then(m => m.IngredientsModule)
   },
   {
     path: 'login',
     component: ContentLayoutComponent,
     loadChildren: () =>
-      import('./modules/authentication/auth.module').then((m) => m.AuthModule),
+      import('./authentication/auth.module').then((m) => m.AuthModule),
+  },
+  {
+    path: '',
+    component: ContentLayoutComponent,
+    loadChildren: () => import('./menu/menu.module').then((m) => m.MenuModule),
+  },
+  {
+    path: '',
+    redirectTo: '/login',
+    pathMatch: 'full',
   },
   { path: '**', component: PageNotFoundComponent },
 ];
@@ -25,7 +44,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes, {
       initialNavigation: 'enabledBlocking',
-      onSameUrlNavigation: 'reload'
+      onSameUrlNavigation: 'reload',
     }),
   ],
   exports: [RouterModule],

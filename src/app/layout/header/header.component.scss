@@ -37,6 +37,14 @@ header {
   font-weight: bold;
 }
 
+.page-subtitle {
+  margin-top: 0;
+  font-size: 0.5em;
+  text-align: center;
+  line-height: 1;
+  padding-bottom: var(--space-2)
+}
+
 .sc-icon {
   width: var(--space-13);
   height: var(--space-13);
